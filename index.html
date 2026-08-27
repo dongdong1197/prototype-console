@@ -35,7 +35,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 .layout{display:flex;gap:16px;padding:16px 24px;align-items:flex-start;}
 
 /* 侧边栏 */
-.sidebar{width:var(--sidebar-w);flex:none;background:var(--card);border-radius:var(--radius);padding:8px;position:sticky;top:72px;max-height:calc(100vh - 88px);overflow-y:auto;}
+.sidebar{width:var(--sidebar-w);flex:none;background:var(--card);border-radius:var(--radius);padding:8px;position:sticky;top:124px;max-height:calc(100vh - 140px);overflow-y:auto;}
 .nav-group{margin-bottom:2px;}
 .nav-group-title{font-size:11px;color:var(--t3);padding:10px 12px 4px;letter-spacing:.5px;font-weight:500;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;}
 .nav-group-title .arrow{font-size:10px;transition:transform .2s;color:var(--t3);}
@@ -319,6 +319,19 @@ td .link:hover{text-decoration:underline;}
 .confirm-body .cb-text{font-size:14px;color:var(--t1);margin-bottom:8px;}
 .confirm-body .cb-sub{font-size:12px;color:var(--t3);}
 
+
+/* === 三级导航：一级顶部 + 二三级侧边 === */
+.topnav{position:sticky;top:var(--topbar-h);z-index:150;background:var(--card);border-bottom:1px solid var(--border);display:flex;align-items:stretch;padding:0 16px;overflow-x:auto;scrollbar-width:none;}
+.topnav::-webkit-scrollbar{display:none;}
+.tn-item{display:flex;align-items:center;gap:6px;padding:0 16px;font-size:14px;color:var(--t2);cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .15s;flex:none;}
+.tn-item:hover{color:var(--primary);background:var(--border2);}
+.tn-item.active{color:var(--primary);font-weight:600;border-bottom-color:var(--primary);background:var(--primary-light);}
+.tn-item .tn-ico{width:15px;height:15px;display:flex;align-items:center;justify-content:center;color:var(--t3);flex:none;}
+.tn-item.active .tn-ico{color:var(--primary);}
+.tn-item .tn-ico svg{width:15px;height:15px;}
+.nav-center{display:none;}
+.nav-center.active{display:block;}
+
 @media(max-width:1100px){.sidebar{display:none;}.layout{padding:12px;}}
 
 /* === 订单列表扩展样式 === */
@@ -338,219 +351,20 @@ td .link:hover{text-decoration:underline;}
 
 <!-- 顶部栏 -->
 <div class="topbar">
-  <div class="brand"><span class="logo">租</span> 八戒租 · 租赁业务管理系统</div>
+  <div class="brand"><span class="logo">租</span> 八戒租 租赁业务管理系统</div>
   <div style="display:flex;align-items:center;gap:16px;">
     <span style="font-size:13px;color:var(--t3)">统一原型 v1</span>
     <div class="user"><span class="avatar">老</span> 马先生 · 产品经理 <span class="badge">12</span></div>
   </div>
 </div>
 
+<!-- 一级导航（10中心） -->
+<div class="topnav" id="topNav"></div>
+
 <div class="layout">
 <!-- 侧边栏 -->
 <aside class="sidebar" id="sidebar">
-  <div class="nav-group">
-    <div class="nav-group-title">首页概览</div>
-    <div class="nav-item active" onclick="showPage('dashboard')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><path d="M2 7L8 2l6 5v7H10V10H6v4H2z" fill="currentColor"/></svg></span> 首页概览</div>
-  </div>
-  <div class="nav-group">
-    <div class="nav-group-title">交易中心</div>
-    <div class="nav-item" onclick="showPage('order-list')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M2 6h12" stroke="currentColor" stroke-width="1.3"/></svg></span> 订单列表</div>
-    <div class="nav-item" onclick="showPage('overdue-board')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M8 4v5l3 2" stroke="currentColor" stroke-width="1.3"/></svg></span> 逾期处置</div>
-    <div class="nav-item" onclick="showPage('bill-list')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="3" y="2" width="10" height="12" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 6h6M5 9h6" stroke="currentColor" stroke-width="1.3"/></svg></span> 应收账单</div>
-    <div class="nav-item" onclick="showPage('bill-age-board')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="5" height="12" rx="1" fill="currentColor" opacity=".3"/><rect x="8" y="6" width="5" height="8" rx="1" fill="currentColor" opacity=".6"/></svg></span> 逾期账龄看板</div>
-    <div class="nav-item" onclick="showPage('penalty-mgmt')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><path d="M8 2l6 12H2z" stroke="currentColor" stroke-width="1.3"/><path d="M8 7v3M8 12h0" stroke="currentColor" stroke-width="2"/></svg></span> 罚金管理</div>
-    <div class="nav-item" onclick="showPage('supplement-bill')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="4" width="12" height="8" rx="1" stroke="currentColor" stroke-width="1.3"/><path d="M6 8h4" stroke="currentColor" stroke-width="1.3"/></svg></span> 补缴管理</div>
-    <div class="nav-item" onclick="showPage('judicial-bill')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 5l6 6M11 5l-6 6" stroke="currentColor" stroke-width="1.3"/></svg></span> 司法追偿</div>
-  </div>
-  <div class="nav-group">
-    <div class="nav-group-title">支付管理</div>
-    <div class="nav-item" onclick="showPage('pay-flow')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.3"/></svg></span> 支付流水</div>
-    <div class="nav-item" onclick="showPage('deduct-mgmt')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M8 5v6M5 8h6" stroke="currentColor" stroke-width="1.3"/></svg></span> 代扣管理</div>
-    <div class="nav-item" onclick="showPage('split-config')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="6" width="4" height="7" rx="0.5" stroke="currentColor" stroke-width="1.3"/><rect x="6" y="4" width="4" height="9" rx="0.5" stroke="currentColor" stroke-width="1.3"/><rect x="10" y="2" width="4" height="11" rx="0.5" stroke="currentColor" stroke-width="1.3"/></svg></span> 分账配置</div>
-    <div class="nav-item" onclick="showPage('refund-list')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8a5 5 0 0110 0" stroke="currentColor" stroke-width="1.3"/><path d="M13 4v4h-4" stroke="currentColor" stroke-width="1.3"/></svg></span> 退款审批</div>
-    <div class="nav-item" onclick="showPage('deposit-mgmt')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="4" width="12" height="8" rx="1" stroke="currentColor" stroke-width="1.3"/><path d="M5 8h6" stroke="currentColor" stroke-width="1.3"/></svg></span> 押金管理</div>
-  </div>
-  <div class="nav-group">
-    <div class="nav-group-title">客服工单</div>
-    <div class="nav-item" onclick="showPage('ticket-list')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M6 6h4M6 9h3" stroke="currentColor" stroke-width="1.3"/></svg></span> 工单列表</div>
-  </div>
-  <div class="nav-group">
-    <div class="nav-group-title">分流规则</div>
-    <div class="nav-item" onclick="showPage('split-rule')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><path d="M3 12V4l4-2v8l-4 2zM9 12V4l4-2v8l-4 2z" stroke="currentColor" stroke-width="1.3"/></svg></span> 分流规则</div>
-  </div>
-  <div class="nav-group">
-    <div class="nav-group-title">商品中心</div>
-    <div class="nav-item" onclick="showPage('gc-dashboard')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="9" y="1" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="1" y="9" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="9" y="9" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.3"/></svg></span> 首页概览</div>
-  </div>
-  <div class="nav-group">
-    <div class="nav-group-title">商品管理</div>
-    <div class="nav-item" onclick="showPage('spu-list')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 7h6M5 9h4" stroke="currentColor" stroke-width="1.3"/></svg></span> 商品库</div>
-    <div class="nav-item" onclick="showPage('spu-detail')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="7" r="2" stroke="currentColor" stroke-width="1.3"/><path d="M4 13c0-2 2-3 4-3s4 1 4 3" stroke="currentColor" stroke-width="1.3"/></svg></span> 商品详情</div>
-    <div class="nav-item" onclick="showPage('category-tree')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><path d="M2 4h4M8 4h6M2 8h4M8 8h6M2 12h4M8 12h6" stroke="currentColor" stroke-width="1.3"/></svg></span> 商品分类</div>
-  </div>
-  <div class="nav-group">
-    <div class="nav-group-title">方案管理</div>
-    <div class="nav-item" onclick="showPage('rent-plan')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M4 8h2v3H4zM8 6h2v5H8zM12 4h2v7h-2z" stroke="currentColor" stroke-width="1"/></svg></span> 租赁方案</div>
-    <div class="nav-item" onclick="showPage('buy-plan')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.3"/></svg></span> 购买方案</div>
-  </div>
-  <div class="nav-group">
-    <div class="nav-group-title">增值服务</div>
-    <div class="nav-item" onclick="showPage('svc-pkg')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 6h6M5 8h6M5 10h3" stroke="currentColor" stroke-width="1.3"/></svg></span> 增值服务</div>
-  </div>
-  <div class="nav-group">
-    <div class="nav-group-title">报价工具</div>
-    <div class="nav-item" onclick="showPage('quote-test')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><path d="M3 3l4 4M7 7l4-4M7 7v6" stroke="currentColor" stroke-width="1.3"/><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.3"/></svg></span> 报价测试</div>
-  </div>
-  <div class="nav-group"><div class="nav-group-title">供销中心<span class="arrow">▼</span></div>
-    <div class="nav-item" onclick="showPage('sc-dashboard')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 8h6" stroke="currentColor" stroke-width="1.3"/></svg></span> 首页概览</div>
-  </div>
-  <div class="nav-group"><div class="nav-group-title">供应管理<span class="arrow">▼</span></div>
-    <div class="nav-item" onclick="showPage('order-assign')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="6" width="12" height="6" rx="1" stroke="currentColor" stroke-width="1.3"/><path d="M5 9h6" stroke="currentColor" stroke-width="1"/></svg></span> 订单分配</div>
-    <div class="nav-item" onclick="showPage('ship-board')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="8" rx="1" stroke="currentColor" stroke-width="1.3"/><path d="M3 10h10" stroke="currentColor" stroke-width="1"/></svg></span> 发货看板</div>
-    <div class="nav-item" onclick="showPage('imei-manage')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="3" y="2" width="10" height="12" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M6 5h4M6 8h4" stroke="currentColor" stroke-width="1"/></svg></span> 序列号管理</div>
-    <div class="nav-item" onclick="showPage('sf-config')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="6" width="12" height="6" rx="1" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="9" r="2" fill="currentColor"/></svg></span> 物流配置</div>
-  </div>
-  <div class="nav-group"><div class="nav-group-title">合作商管理<span class="arrow">▼</span></div>
-    <div class="nav-item" onclick="showPage('supplier-list')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 6h6M5 9h3" stroke="currentColor" stroke-width="1"/></svg></span> 供货商</div>
-    <div class="nav-item" onclick="showPage('merchant-list')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="6" r="2" fill="currentColor"/><path d="M4 13c0-2.5 2-4 4-4s4 1.5 4 4" stroke="currentColor" stroke-width="1"/></svg></span> 商户管理</div>
-  </div>
-  <div class="nav-group"><div class="nav-group-title">归还与再分配<span class="arrow">▼</span></div>
-    <div class="nav-item" onclick="showPage('return-accept')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M10 5l3 3-3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="4" cy="8" r="2" stroke="currentColor" stroke-width="1"/></svg></span> 归还验收</div>
-    <div class="nav-item" onclick="showPage('warehouse-list')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="4" width="12" height="8" rx="1" stroke="currentColor" stroke-width="1.3"/><path d="M5 4v8M9 4v8" stroke="currentColor" stroke-width="1"/></svg></span> 仓库管理</div>
-    <div class="nav-item" onclick="showPage('price-review')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><path d="M3 3l4 4M7 7l4-4" stroke="currentColor" stroke-width="1.3"/><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.3"/></svg></span> 报价审核</div>
-    <div class="nav-item" onclick="showPage('inventory-transfer')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M10 5l3 3-3 3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></span> 库存调拨</div>
-    <div class="nav-item" onclick="showPage('device-reallocate')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="5" height="10" rx="1" stroke="currentColor" stroke-width="1"/><path d="M8 8h5M11 6l2 2-2 2" stroke="currentColor" stroke-width="1.3"/></svg></span> 设备再分配</div>
-  </div>
-  <div class="nav-group"><div class="nav-group-title">合同中心</div><div class="nav-item" onclick="showPage('cc-dashboard')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 6h6M5 9h4" stroke="currentColor" stroke-width="1"/></svg></span> 首页概览</div></div>
-  <div class="nav-group"><div class="nav-group-title">合同管理</div>
-    <div class="nav-item" onclick="showPage('tpl-list')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="3" y="2" width="10" height="12" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M6 5h4M6 8h4M6 11h2" stroke="currentColor" stroke-width="1"/></svg></span> 合同模板</div>
-    <div class="nav-item" onclick="showPage('contract-list')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 6h6M5 9h3" stroke="currentColor" stroke-width="1"/></svg></span> 合同列表</div>
-    <div class="nav-item" onclick="showPage('contract-detail')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="7" r="2" stroke="currentColor" stroke-width="1"/><path d="M8 10v2" stroke="currentColor" stroke-width="1.3"/></svg></span> 合同详情</div>
-    <div class="nav-item" onclick="showPage('tpl-variable')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><path d="M4 4l3 4M7 8l3-4M7 8v4" stroke="currentColor" stroke-width="1.3"/><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.3"/></svg></span> 合同变量</div>
-    <div class="nav-item" onclick="showPage('sign-monitor')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 7l2 2 4-4" stroke="currentColor" stroke-width="1.3"/></svg></span> 签署监控</div>
-  </div>
-  <div class="nav-group"><div class="nav-group-title">变更与协议</div>
-    <div class="nav-item" onclick="showPage('resign-task')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 5h6v6H5z" stroke="currentColor" stroke-width="1"/><path d="M8 1v2M12 8h2" stroke="currentColor" stroke-width="1.3"/></svg></span> 合同变更</div>
-    <div class="nav-item" onclick="showPage('agreement-list')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="5" height="12" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="8" y="2" width="5" height="12" rx="1" stroke="currentColor" stroke-width="1.3"/></svg></span> 协议管理</div>
-  </div>
-  <div class="nav-group"><div class="nav-group-title">营销中心</div><div class="nav-item" onclick="showPage('mkt-dashboard')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.3"/></svg></span> 首页概览</div></div>
-  <div class="nav-group"><div class="nav-group-title">优惠券管理</div>
-    <div class="nav-item" onclick="showPage('coupon-list')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M8 3v10" stroke="currentColor" stroke-width="1.3"/><path d="M5 7h2" stroke="currentColor" stroke-width="1"/></svg></span> 优惠券</div>
-    <div class="nav-item" onclick="showPage('coupon-mutex')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><circle cx="6" cy="6" r="4" stroke="currentColor" stroke-width="1.3"/><circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="1.3"/></svg></span> 互斥规则</div>
-  </div>
-  <div class="nav-group"><div class="nav-group-title">会员与积分</div>
-    <div class="nav-item" onclick="showPage('member-config')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M6 6h4v4H6z" fill="currentColor" opacity=".3"/></svg></span> 会员配置</div>
-    <div class="nav-item" onclick="showPage('points-config')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M8 4v8M4 8h8" stroke="currentColor" stroke-width="1.3"/></svg></span> 积分配置</div>
-  </div>
-  <div class="nav-group"><div class="nav-group-title">到期营销</div>
-    <div class="nav-item" onclick="showPage('expiry-strategy')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><path d="M2 4h6l5 4-5 4H2z" stroke="currentColor" stroke-width="1.3"/></svg></span> 策略配置</div>
-    <div class="nav-item" onclick="showPage('expiry-board')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.3"/></svg></span> 执行看板</div>
-  </div>
-  <div class="nav-group"><div class="nav-group-title">营销分析</div>
-    <div class="nav-item" onclick="showPage('mkt-analysis')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="5" height="12" rx="1" fill="currentColor" opacity=".3"/><rect x="8" y="6" width="5" height="8" rx="1" fill="currentColor" opacity=".6"/></svg></span> 营销分析</div>
-  </div>
-  <div class="nav-group"><div class="nav-group-title">营销活动</div>
-    <div class="nav-item" onclick="showPage('activity-list')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><path d="M3 2h10v12H3z" stroke="currentColor" stroke-width="1.3"/><path d="M5 6h6M5 9h4" stroke="currentColor" stroke-width="1"/></svg></span> 活动管理</div>
-  </div>
-  <div class="nav-group"><div class="nav-group-title">小程序装修</div>
-    <div class="nav-item" onclick="showPage('page-decorate')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="1.5" width="12" height="13" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M2 5h12M6 5v9.5" stroke="currentColor" stroke-width="1"/></svg></span> 页面装修</div>
-    <div class="nav-item" onclick="showPage('component-lib')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="9" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="2" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="9" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/></svg></span> 组件库</div>
-  </div>
-  <div class="nav-group"><div class="nav-group-title">资管中心</div><div class="nav-item" onclick="showPage('am-dashboard')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 8h6" stroke="currentColor" stroke-width="1"/></svg></span> 首页概览</div></div>
-  <div class="nav-group"><div class="nav-group-title">设备管理</div>
-    <div class="nav-item" onclick="showPage('device-list')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 6h6M5 9h4" stroke="currentColor" stroke-width="1"/></svg></span> 设备台账</div>
-    <div class="nav-item" onclick="showPage('device-in')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><path d="M8 2v12M3 8l5 5 5-5" stroke="currentColor" stroke-width="1.3"/></svg></span> 设备入库</div>
-    <div class="nav-item" onclick="showPage('depreciation')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><path d="M2 14l4-4 3 3 5-7" stroke="currentColor" stroke-width="1.3"/></svg></span> 折旧管理</div>
-    <div class="nav-item" onclick="showPage('damage-manage')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><path d="M8 2l6 12H2z" stroke="currentColor" stroke-width="1.3"/><path d="M8 7v3M8 12h0" stroke="currentColor" stroke-width="2"/></svg></span> 定损管理</div>
-    <div class="nav-item" onclick="showPage('device-disposal')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.3"/></svg></span> 设备处置</div>
-  </div>
-  <div class="nav-group"><div class="nav-group-title">催收管理</div>
-    <div class="nav-item" onclick="showPage('collection-desk')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 6h6M5 9h3" stroke="currentColor" stroke-width="1"/></svg></span> 催收工作台</div>
-    <div class="nav-item" onclick="showPage('collection-strategy')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="3" y="2" width="10" height="12" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M6 5h4M6 8h4" stroke="currentColor" stroke-width="1"/></svg></span> 催收策略</div>
-    <div class="nav-item" onclick="showPage('aging-board')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M8 4v5l3 2" stroke="currentColor" stroke-width="1.3"/></svg></span> 逾期账龄看板</div>
-    <div class="nav-item" onclick="showPage('judicial-config')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M4 8h8" stroke="currentColor" stroke-width="1"/></svg></span> 转司法配置</div>
-  </div>
-  <div class="nav-group"><div class="nav-group-title">司法管理</div>
-    <div class="nav-item" onclick="showPage('judicial-desk')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="3" y="2" width="10" height="12" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M6 5h4M6 8h2" stroke="currentColor" stroke-width="1"/></svg></span> 司法工作台</div>
-  </div>
-  <div class="nav-group">
-    <div class="nav-group-title">用户中心</div>
-    <div class="nav-item" onclick="showPage('uc-dashboard')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5" r="3" stroke="currentColor" stroke-width="1.3"/><path d="M2 14c0-3 3-5 6-5s6 2 6 5" stroke="currentColor" stroke-width="1.3"/></svg></span> 首页概览</div>
-  </div>
-  <div class="nav-group">
-    <div class="nav-group-title">用户管理</div>
-    <div class="nav-item" onclick="showPage('user-list')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M2 6h12" stroke="currentColor" stroke-width="1.3"/></svg></span> 用户列表</div>
-    <div class="nav-item" onclick="showPage('user-profile')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5" r="3" stroke="currentColor" stroke-width="1.3"/><rect x="3" y="10" width="10" height="4" rx="1" stroke="currentColor" stroke-width="1.3"/></svg></span> 用户档案</div>
-    <div class="nav-item" onclick="showPage('honey-pot')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><path d="M8 2l6 12H2z" stroke="currentColor" stroke-width="1.3"/><path d="M8 7v3M8 12h0" stroke="currentColor" stroke-width="2"/></svg></span> 蜜罐标记</div>
-    <div class="nav-item" onclick="showPage('verify-record')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="3" y="2" width="10" height="12" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M6 6l2 2 3-3" stroke="currentColor" stroke-width="1.3"/></svg></span> 身份核验</div>
-  </div>
-  <div class="nav-group">
-    <div class="nav-group-title">用户标签</div>
-    <div class="nav-item" onclick="showPage('user-tag')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><path d="M2 4h6l5 4-5 4H2z" stroke="currentColor" stroke-width="1.3"/></svg></span> 用户标签</div>
-  </div>
-  <div class="nav-group">
-    <div class="nav-group-title">信用与行为</div>
-    <div class="nav-item" onclick="showPage('zhima-config')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><path d="M4 8l3 3 5-6" stroke="currentColor" stroke-width="2"/><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/></svg></span> 芝麻信用</div>
-    <div class="nav-item" onclick="showPage('user-behavior')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="5" height="12" rx="1" fill="currentColor" opacity=".3"/><rect x="8" y="6" width="5" height="8" rx="1" fill="currentColor" opacity=".6"/></svg></span> 行为日志</div>
-  </div>
-  <div class="nav-group"><div class="nav-group-title">财务中心</div><div class="nav-item" onclick="showPage('fin-dashboard')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 8h6" stroke="currentColor" stroke-width="1"/></svg></span> 首页概览</div></div>
-  <div class="nav-group"><div class="nav-group-title">应收实收</div>
-    <div class="nav-item" onclick="showPage('recv-ledger')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="3" y="2" width="10" height="12" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 6h6M5 9h4" stroke="currentColor" stroke-width="1"/></svg></span> 应收实收台账</div>
-    <div class="nav-item" onclick="showPage('recv-check')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.3"/></svg></span> 应收实收核对</div>
-    <div class="nav-item" onclick="showPage('overdue-receivable')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M8 4v5l3 2" stroke="currentColor" stroke-width="1.3"/></svg></span> 逾期应收看板</div>
-  </div>
-  <div class="nav-group"><div class="nav-group-title">退款与核销</div>
-    <div class="nav-item" onclick="showPage('refund-approval')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8a5 5 0 0110 0" stroke="currentColor" stroke-width="1.3"/><path d="M13 4v4h-4" stroke="currentColor" stroke-width="1.3"/></svg></span> 退款审批</div>
-    <div class="nav-item" onclick="showPage('refund-flow')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1"/></svg></span> 退款流水</div>
-    <div class="nav-item" onclick="showPage('bad-debt')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><path d="M8 2l6 12H2z" stroke="currentColor" stroke-width="1.3"/><path d="M8 7v3M8 12h0" stroke="currentColor" stroke-width="2"/></svg></span> 坏账核销</div>
-  </div>
-  <div class="nav-group"><div class="nav-group-title">结算与对账</div>
-    <div class="nav-item" onclick="showPage('fund-flow')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 8h6" stroke="currentColor" stroke-width="1"/></svg></span> 资金流水</div>
-    <div class="nav-item" onclick="showPage('merchant-settle')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 6h6M5 9h3" stroke="currentColor" stroke-width="1"/></svg></span> 商户结算</div>
-    <div class="nav-item" onclick="showPage('capital-recon')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="4" width="12" height="8" rx="1" stroke="currentColor" stroke-width="1.3"/><path d="M5 8h6" stroke="currentColor" stroke-width="1"/></svg></span> 资方对账</div>
-    <div class="nav-item" onclick="showPage('invoice-mgmt')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="3" y="2" width="10" height="12" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M6 5h4M6 8h4" stroke="currentColor" stroke-width="1"/></svg></span> 发票管理</div>
-  </div>
-  <div class="nav-group"><div class="nav-group-title">财务统计</div>
-    <div class="nav-item" onclick="showPage('fin-stats')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="5" height="12" rx="1" fill="currentColor" opacity=".3"/><rect x="8" y="6" width="5" height="8" rx="1" fill="currentColor" opacity=".6"/></svg></span> 财务统计</div>
-  </div>
-  <div class="nav-group"><div class="nav-group-title">消息中心</div>
-    <div class="nav-item" onclick="showPage('msg-dashboard')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 7l2 2 4-4" stroke="currentColor" stroke-width="1.3"/></svg></span> 概览</div>
-  </div>
-  <div class="nav-group"><div class="nav-group-title">消息管理</div>
-    <div class="nav-item" onclick="showPage('msg-template')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="3" y="2" width="10" height="12" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M6 5h4M6 8h4M6 11h2" stroke="currentColor" stroke-width="1"/></svg></span> 消息模板</div>
-    <div class="nav-item" onclick="showPage('msg-strategy')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 6h6M5 9h3" stroke="currentColor" stroke-width="1"/></svg></span> 触达配置</div>
-    <div class="nav-item" onclick="showPage('msg-send-log')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.3"/></svg></span> 发送记录</div>
-  </div>
-  <div class="nav-group"><div class="nav-group-title">渠道管理</div>
-    <div class="nav-item" onclick="showPage('msg-sms')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="4" width="12" height="8" rx="1" stroke="currentColor" stroke-width="1.3"/><path d="M5 8h6" stroke="currentColor" stroke-width="1.3"/></svg></span> 短信管理</div>
-  </div>
-  <div class="nav-group"><div class="nav-group-title">消息统计</div>
-    <div class="nav-item" onclick="showPage('msg-stats')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="5" height="12" rx="1" fill="currentColor" opacity=".3"/><rect x="8" y="6" width="5" height="8" rx="1" fill="currentColor" opacity=".6"/></svg></span> 统计看板</div>
-  </div>
-  <div class="nav-group"><div class="nav-group-title">系统中心</div>
-    <div class="nav-item" onclick="showPage('sys-dashboard')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 6h6M5 9h4" stroke="currentColor" stroke-width="1"/></svg></span> 概览</div>
-  </div>
-  <div class="nav-group"><div class="nav-group-title">标签服务</div>
-    <div class="nav-item" onclick="showPage('tag-manage')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><path d="M2 4h6l5 4-5 4H2z" stroke="currentColor" stroke-width="1.3"/></svg></span> 标签管理</div>
-    <div class="nav-item" onclick="showPage('tag-search')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.3"/><path d="M11 11l3 3" stroke="currentColor" stroke-width="1.3"/></svg></span> 标签查询</div>
-    <div class="nav-item" onclick="showPage('tag-manual')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M8 6v4M6 8h4" stroke="currentColor" stroke-width="1.3"/></svg></span> 手动打标</div>
-  </div>
-  <div class="nav-group"><div class="nav-group-title">审批引擎</div>
-    <div class="nav-item" onclick="showPage('approval-manage')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.3"/></svg></span> 审批配置</div>
-    <div class="nav-item" onclick="showPage('approval-todo')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 7l2 2 4-4" stroke="currentColor" stroke-width="1.3"/></svg></span> 审批待办</div>
-  </div>
-  <div class="nav-group"><div class="nav-group-title">风控适配</div>
-    <div class="nav-item" onclick="showPage('risk-manage')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 8h6" stroke="currentColor" stroke-width="1"/></svg></span> 风控配置</div>
-    <div class="nav-item" onclick="showPage('risk-log')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="3" y="2" width="10" height="12" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M6 5h4M6 8h4" stroke="currentColor" stroke-width="1"/></svg></span> 风控日志</div>
-    <div class="nav-item" onclick="showPage('risk-result')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M5 8l2 2 4-4" stroke="currentColor" stroke-width="1.3"/></svg></span> 风控结果</div>
-  </div>
-  <div class="nav-group"><div class="nav-group-title">基础配置</div>
-    <div class="nav-item" onclick="showPage('sys-role')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5" r="3" stroke="currentColor" stroke-width="1.3"/><path d="M2 14c0-3 3-5 6-5s6 2 6 5" stroke="currentColor" stroke-width="1.3"/></svg></span> 权限管理</div>
-    <div class="nav-item" onclick="showPage('sys-log')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 6h6M5 9h3" stroke="currentColor" stroke-width="1"/></svg></span> 操作日志</div>
-    <div class="nav-item" onclick="showPage('sys-config')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 8h6" stroke="currentColor" stroke-width="1"/></svg></span> 系统配置</div>
-    <div class="nav-item" onclick="showPage('sys-dict')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><rect x="3" y="2" width="10" height="12" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M6 5h4M6 8h4M6 11h2" stroke="currentColor" stroke-width="1"/></svg></span> 数据字典</div>
-    <div class="nav-item" onclick="showPage('sys-task')"><span class="ico"><svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M8 4v5l3 2" stroke="currentColor" stroke-width="1.3"/></svg></span> 定时任务</div>
-  </div>
+  <div id="sideNav"></div>
 </aside>
 
 <!-- 主内容 -->
@@ -569,120 +383,72 @@ td .link:hover{text-decoration:underline;}
 <script>
 // ===== 页面切换 =====
 var pages = {};
-var menuBreadcrumb = {
-  'dashboard': ['首页概览'],
-  'order-list': ['交易中心', '订单列表'],
-  'order-detail': ['交易中心', '订单列表', 'OD20260722002'],
-  'overdue-board': ['交易中心', '逾期处置'],
-  'bill-list': ['交易中心', '应收账单'],
-  'bill-age-board': ['交易中心', '逾期账龄看板'],
-  'penalty-mgmt': ['交易中心', '罚金管理'],
-  'supplement-bill': ['交易中心', '补缴管理'],
-  'judicial-bill': ['交易中心', '司法追偿'],
-  'pay-flow': ['支付管理', '支付流水'],
-  'deduct-mgmt': ['支付管理', '代扣管理'],
-  'split-config': ['支付管理', '分账配置'],
-  'refund-list': ['支付管理', '退款审批'],
-  'deposit-mgmt': ['支付管理', '押金管理'],
-  'ticket-list': ['客服工单', '工单列表'],
-  'split-rule': ['分流规则', '分流规则'],
-  'coming': ['后续批次'],
-  // 商品中心
-  'gc-dashboard': ['商品中心', '首页概览'],
-  'spu-list': ['商品管理', '商品库'],
-  'spu-detail': ['商品管理', '商品库', 'iPhone 16 Pro Max'],
-  'category-tree': ['商品管理', '商品分类'],
-  'rent-plan': ['方案管理', '租赁方案'],
-  'buy-plan': ['方案管理', '购买方案'],
-  'svc-pkg': ['增值服务', '增值服务'],
-  'quote-test': ['报价工具', '报价测试'],
-  'uc-dashboard': ['用户中心', '首页概览'],
-  'user-list': ['用户管理', '用户列表'],
-  'user-profile': ['用户管理', '用户档案'],
-  'honey-pot': ['用户管理', '蜜罐标记'],
-  'verify-record': ['用户管理', '身份核验'],
-  'user-tag': ['用户标签', '用户标签'],
-  'zhima-config': ['信用与行为', '芝麻信用'],
-  'user-behavior': ['信用与行为', '行为日志'],
-  'sc-dashboard': ['供销中心', '首页概览'],
-  'order-assign': ['供应管理', '订单分配'],
-  'ship-board': ['供应管理', '发货看板'],
-  'imei-manage': ['供应管理', '序列号管理'],
-  'sf-config': ['供应管理', '物流配置'],
-  'supplier-list': ['合作商管理', '供货商'],
-  'merchant-list': ['合作商管理', '商户管理'],
-  'return-accept': ['归还与再分配', '归还验收'],
-  'warehouse-list': ['归还与再分配', '仓库管理'],
-  'price-review': ['归还与再分配', '报价审核'],
-  'inventory-transfer': ['归还与再分配', '库存调拨'],
-  'device-reallocate': ['归还与再分配', '设备再分配'],
-  'cc-dashboard': ['合同中心', '首页概览'],
-  'tpl-list': ['合同管理', '合同模板'],
-  'contract-list': ['合同管理', '合同列表'],
-  'contract-detail': ['合同管理', '合同详情'],
-  'tpl-variable': ['合同管理', '合同变量'],
-  'sign-monitor': ['合同管理', '签署监控'],
-  'resign-task': ['变更与协议', '合同变更'],
-  'agreement-list': ['变更与协议', '协议管理'],
-  'fin-dashboard': ['财务中心', '首页概览'],
-  'recv-ledger': ['应收实收', '应收实收台账'],
-  'recv-check': ['应收实收', '应收实收核对'],
-  'overdue-receivable': ['应收实收', '逾期应收看板'],
-  'refund-approval': ['退款与核销', '退款审批'],
-  'refund-flow': ['退款与核销', '退款流水'],
-  'bad-debt': ['退款与核销', '坏账核销'],
-  'fund-flow': ['结算与对账', '资金流水'],
-  'merchant-settle': ['结算与对账', '商户结算'],
-  'capital-recon': ['结算与对账', '资方对账'],
-  'invoice-mgmt': ['结算与对账', '发票管理'],
-  'fin-stats': ['财务统计', '财务统计'],
-  'mkt-dashboard': ['营销中心', '首页概览'],
-  'coupon-list': ['优惠券管理', '优惠券'],
-  'coupon-mutex': ['优惠券管理', '互斥规则'],
-  'member-config': ['会员与积分', '会员配置'],
-  'points-config': ['会员与积分', '积分配置'],
-  'expiry-strategy': ['到期营销', '策略配置'],
-  'expiry-board': ['到期营销', '执行看板'],
-  'mkt-analysis': ['营销分析', '营销分析'],
-  'activity-list': ['营销活动', '活动管理'],
-  'page-decorate': ['小程序装修', '页面装修'],
-  'component-lib': ['小程序装修', '组件库'],
-  'am-dashboard': ['资管中心', '首页概览'],
-  'device-list': ['设备管理', '设备台账'],
-  'device-in': ['设备管理', '设备入库'],
-  'depreciation': ['设备管理', '折旧管理'],
-  'damage-manage': ['设备管理', '定损管理'],
-  'device-disposal': ['设备管理', '设备处置'],
-  'collection-desk': ['催收管理', '催收工作台'],
-  'collection-strategy': ['催收管理', '催收策略'],
-  'aging-board': ['催收管理', '逾期账龄看板'],
-  'judicial-config': ['催收管理', '转司法配置'],
-  'judicial-desk': ['司法管理', '司法工作台'],
-  // 消息中心
-  'msg-dashboard': ['消息中心', '概览'],
-  'msg-template': ['消息管理', '消息模板'],
-  'msg-strategy': ['消息管理', '触达配置'],
-  'msg-send-log': ['消息管理', '发送记录'],
-  'msg-sms': ['渠道管理', '短信管理'],
-  'msg-stats': ['消息统计', '统计看板'],
-  // 系统中心
-  'sys-dashboard': ['系统中心', '概览'],
-  'tag-manage': ['标签服务', '标签管理'],
-  'tag-search': ['标签服务', '标签查询'],
-  'tag-manual': ['标签服务', '手动打标'],
-  'approval-manage': ['审批引擎', '审批配置'],
-  'approval-todo': ['审批引擎', '审批待办'],
-  'risk-manage': ['风控适配', '风控配置'],
-  'risk-log': ['风控适配', '风控日志'],
-  'risk-result': ['风控适配', '风控结果'],
-  'sys-role': ['基础配置', '权限管理'],
-  'sys-log': ['基础配置', '操作日志'],
-  'sys-config': ['基础配置', '系统配置'],
-  'sys-dict': ['基础配置', '数据字典'],
-  'sys-task': ['基础配置', '定时任务']
-};
+// ===== 三级导航：一级中心(顶部) + 二级模块 + 三级页面(侧边) =====
+var CENTERS = [{"id":"trade","name":"交易中心","ico":"order-list","modules":[{"name":"中心概览","items":[["dashboard","首页概览"]]},{"name":"订单管理","items":[["order-list","订单列表"]]},{"name":"逾期处置","items":[["overdue-board","逾期处置"],["penalty-mgmt","罚金管理"],["supplement-bill","补缴管理"],["judicial-bill","司法追偿"]]},{"name":"账单管理","items":[["bill-list","应收账单"],["bill-age-board","逾期账龄看板"]]},{"name":"支付管理","items":[["pay-flow","支付流水"],["deduct-mgmt","代扣管理"],["split-config","分账配置"],["refund-list","退款审批"],["deposit-mgmt","押金管理"]]}]},{"id":"goods","name":"商品中心","ico":"spu-list","modules":[{"name":"中心概览","items":[["gc-dashboard","概览"]]},{"name":"商品管理","items":[["spu-list","商品库"],["spu-detail","商品详情"],["category-tree","商品分类"]]},{"name":"方案管理","items":[["rent-plan","租赁方案"],["buy-plan","购买方案"]]},{"name":"增值服务","items":[["svc-pkg","增值服务"]]},{"name":"报价工具","items":[["quote-test","报价测试"]]}]},{"id":"mkt","name":"营销中心","ico":"coupon-list","modules":[{"name":"中心概览","items":[["mkt-dashboard","概览"]]},{"name":"优惠券管理","items":[["coupon-list","优惠券"],["coupon-mutex","互斥规则"]]},{"name":"会员与积分","items":[["member-config","会员配置"],["points-config","积分配置"]]},{"name":"到期营销","items":[["expiry-strategy","策略配置"],["expiry-board","执行看板"]]},{"name":"营销活动","items":[["activity-list","活动管理"]]},{"name":"营销分析","items":[["mkt-analysis","营销分析"]]},{"name":"小程序装修","items":[["page-decorate","页面装修"],["component-lib","组件库"]]}]},{"id":"contract","name":"合同中心","ico":"contract-list","modules":[{"name":"中心概览","items":[["cc-dashboard","概览"]]},{"name":"合同管理","items":[["tpl-list","合同模板"],["contract-detail","合同详情"],["contract-list","合同列表"],["tpl-variable","合同变量"],["sign-monitor","签署监控"]]},{"name":"变更与协议","items":[["resign-task","合同变更"],["agreement-list","协议管理"]]}]},{"id":"fin","name":"财务中心","ico":"recv-ledger","modules":[{"name":"中心概览","items":[["fin-dashboard","概览"]]},{"name":"应收实收","items":[["recv-ledger","应收实收台账"],["recv-check","应收实收核对"],["overdue-receivable","逾期应收看板"]]},{"name":"退款与核销","items":[["refund-approval","退款审批"],["refund-flow","退款流水"],["bad-debt","坏账核销"]]},{"name":"结算与对账","items":[["fund-flow","资金流水"],["merchant-settle","商户结算"],["capital-recon","资方对账"],["invoice-mgmt","发票管理"]]},{"name":"财务统计","items":[["fin-stats","财务统计"]]}]},{"id":"am","name":"资管中心","ico":"device-list","modules":[{"name":"中心概览","items":[["am-dashboard","概览"]]},{"name":"设备管理","items":[["device-list","设备台账"],["device-in","设备入库"],["depreciation","折旧管理"],["damage-manage","定损管理"],["device-disposal","设备处置"]]},{"name":"催收管理","items":[["collection-desk","催收工作台"],["collection-strategy","催收策略"],["aging-board","逾期账龄看板"],["judicial-config","转司法配置"]]},{"name":"司法管理","items":[["judicial-desk","司法工作台"]]}]},{"id":"uc","name":"用户中心","ico":"user-list","modules":[{"name":"中心概览","items":[["uc-dashboard","概览"]]},{"name":"用户管理","items":[["user-list","用户列表"],["user-profile","用户档案"],["honey-pot","蜜罐标记"],["verify-record","身份核验"]]},{"name":"用户标签","items":[["user-tag","用户标签"]]},{"name":"信用与行为","items":[["zhima-config","芝麻信用"],["user-behavior","行为日志"]]},{"name":"商户管理","items":[["merchant-list","商户管理"]]}]},{"id":"supply","name":"供销中心","ico":"supplier-list","modules":[{"name":"中心概览","items":[["sc-dashboard","概览"]]},{"name":"订单履约","items":[["order-assign","订单分配"],["ship-board","发货看板"],["return-accept","设备归还验收"]]},{"name":"履约服务","items":[["ticket-list","客服工单"],["split-rule","分流规则"]]},{"name":"设备流转","items":[["imei-manage","序列号/IMEI"],["inventory-transfer","库存调拨"],["device-reallocate","设备再分配"]]},{"name":"供应商管理","items":[["supplier-list","供货商管理"]]},{"name":"仓储物流","items":[["warehouse-list","仓库管理"],["sf-config","顺丰月结配置"]]},{"name":"报价审核","items":[["price-review","报价审核"]]}]},{"id":"msg","name":"消息中心","ico":"msg-template","modules":[{"name":"中心概览","items":[["msg-dashboard","概览"]]},{"name":"消息管理","items":[["msg-template","消息模板"],["msg-strategy","触达配置"],["msg-send-log","发送记录"]]},{"name":"渠道管理","items":[["msg-sms","短信管理"]]},{"name":"消息统计","items":[["msg-stats","统计看板"]]}]},{"id":"sys","name":"系统中心","ico":"sys-role","modules":[{"name":"中心概览","items":[["sys-dashboard","概览"]]},{"name":"标签服务","items":[["tag-manage","标签管理"],["tag-search","标签查询"],["tag-manual","手动打标"]]},{"name":"审批引擎","items":[["approval-manage","审批配置"],["approval-todo","审批待办"]]},{"name":"风控适配","items":[["risk-manage","风控配置"],["risk-log","风控日志"],["risk-result","风控结果"]]},{"name":"基础配置","items":[["sys-role","权限管理"],["sys-log","操作日志"],["sys-config","系统配置"],["sys-dict","数据字典"],["sys-task","定时任务"]]}]}];
+var ICO = {"dashboard":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><path d=\"M2 7L8 2l6 5v7H10V10H6v4H2z\" fill=\"currentColor\"/></svg>","order-list":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"3\" width=\"12\" height=\"10\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M2 6h12\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","overdue-board":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><circle cx=\"8\" cy=\"8\" r=\"6\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M8 4v5l3 2\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","bill-list":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"3\" y=\"2\" width=\"10\" height=\"12\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 6h6M5 9h6\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","bill-age-board":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"2\" width=\"5\" height=\"12\" rx=\"1\" fill=\"currentColor\" opacity=\".3\"/><rect x=\"8\" y=\"6\" width=\"5\" height=\"8\" rx=\"1\" fill=\"currentColor\" opacity=\".6\"/></svg>","penalty-mgmt":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><path d=\"M8 2l6 12H2z\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M8 7v3M8 12h0\" stroke=\"currentColor\" stroke-width=\"2\"/></svg>","supplement-bill":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"4\" width=\"12\" height=\"8\" rx=\"1\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M6 8h4\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","judicial-bill":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"2\" width=\"12\" height=\"12\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 5l6 6M11 5l-6 6\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","pay-flow":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"3\" width=\"12\" height=\"10\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 8l2 2 4-4\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","deduct-mgmt":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><circle cx=\"8\" cy=\"8\" r=\"6\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M8 5v6M5 8h6\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","split-config":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"6\" width=\"4\" height=\"7\" rx=\"0.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><rect x=\"6\" y=\"4\" width=\"4\" height=\"9\" rx=\"0.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><rect x=\"10\" y=\"2\" width=\"4\" height=\"11\" rx=\"0.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","refund-list":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><path d=\"M3 8a5 5 0 0110 0\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M13 4v4h-4\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","deposit-mgmt":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"4\" width=\"12\" height=\"8\" rx=\"1\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 8h6\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","ticket-list":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"2\" width=\"12\" height=\"12\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M6 6h4M6 9h3\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","split-rule":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><path d=\"M3 12V4l4-2v8l-4 2zM9 12V4l4-2v8l-4 2z\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","gc-dashboard":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"1\" y=\"1\" width=\"6\" height=\"6\" rx=\"1\" stroke=\"currentColor\" stroke-width=\"1.3\"/><rect x=\"9\" y=\"1\" width=\"6\" height=\"6\" rx=\"1\" stroke=\"currentColor\" stroke-width=\"1.3\"/><rect x=\"1\" y=\"9\" width=\"6\" height=\"6\" rx=\"1\" stroke=\"currentColor\" stroke-width=\"1.3\"/><rect x=\"9\" y=\"9\" width=\"6\" height=\"6\" rx=\"1\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","spu-list":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"2\" width=\"12\" height=\"12\" rx=\"2\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 7h6M5 9h4\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","spu-detail":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"2\" width=\"12\" height=\"12\" rx=\"2\" stroke=\"currentColor\" stroke-width=\"1.3\"/><circle cx=\"8\" cy=\"7\" r=\"2\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M4 13c0-2 2-3 4-3s4 1 4 3\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","category-tree":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><path d=\"M2 4h4M8 4h6M2 8h4M8 8h6M2 12h4M8 12h6\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","rent-plan":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"1\" y=\"3\" width=\"14\" height=\"10\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M4 8h2v3H4zM8 6h2v5H8zM12 4h2v7h-2z\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","buy-plan":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><circle cx=\"8\" cy=\"8\" r=\"6\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 8l2 2 4-4\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","svc-pkg":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"2\" width=\"12\" height=\"12\" rx=\"2\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 6h6M5 8h6M5 10h3\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","quote-test":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><path d=\"M3 3l4 4M7 7l4-4M7 7v6\" stroke=\"currentColor\" stroke-width=\"1.3\"/><circle cx=\"7\" cy=\"7\" r=\"5\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","sc-dashboard":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"3\" width=\"12\" height=\"10\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 8h6\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","order-assign":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"6\" width=\"12\" height=\"6\" rx=\"1\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 9h6\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","ship-board":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"1\" y=\"2\" width=\"14\" height=\"8\" rx=\"1\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M3 10h10\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","imei-manage":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"3\" y=\"2\" width=\"10\" height=\"12\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M6 5h4M6 8h4\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","sf-config":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"6\" width=\"12\" height=\"6\" rx=\"1\" stroke=\"currentColor\" stroke-width=\"1.3\"/><circle cx=\"8\" cy=\"9\" r=\"2\" fill=\"currentColor\"/></svg>","supplier-list":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"2\" width=\"12\" height=\"12\" rx=\"2\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 6h6M5 9h3\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","merchant-list":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"2\" width=\"12\" height=\"12\" rx=\"2\" stroke=\"currentColor\" stroke-width=\"1.3\"/><circle cx=\"8\" cy=\"6\" r=\"2\" fill=\"currentColor\"/><path d=\"M4 13c0-2.5 2-4 4-4s4 1.5 4 4\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","return-accept":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><path d=\"M3 8h10M10 5l3 3-3 3\" stroke=\"currentColor\" stroke-width=\"1.3\" stroke-linecap=\"round\"/><circle cx=\"4\" cy=\"8\" r=\"2\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","warehouse-list":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"4\" width=\"12\" height=\"8\" rx=\"1\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 4v8M9 4v8\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","price-review":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><path d=\"M3 3l4 4M7 7l4-4\" stroke=\"currentColor\" stroke-width=\"1.3\"/><circle cx=\"7\" cy=\"7\" r=\"5\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","inventory-transfer":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><path d=\"M3 8h10M10 5l3 3-3 3\" stroke=\"currentColor\" stroke-width=\"1.3\" stroke-linecap=\"round\"/></svg>","device-reallocate":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"3\" width=\"5\" height=\"10\" rx=\"1\" stroke=\"currentColor\" stroke-width=\"1\"/><path d=\"M8 8h5M11 6l2 2-2 2\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","cc-dashboard":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"2\" width=\"12\" height=\"12\" rx=\"2\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 6h6M5 9h4\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","tpl-list":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"3\" y=\"2\" width=\"10\" height=\"12\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M6 5h4M6 8h4M6 11h2\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","contract-list":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"3\" width=\"12\" height=\"10\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 6h6M5 9h3\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","contract-detail":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"2\" width=\"12\" height=\"12\" rx=\"2\" stroke=\"currentColor\" stroke-width=\"1.3\"/><circle cx=\"8\" cy=\"7\" r=\"2\" stroke=\"currentColor\" stroke-width=\"1\"/><path d=\"M8 10v2\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","tpl-variable":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><path d=\"M4 4l3 4M7 8l3-4M7 8v4\" stroke=\"currentColor\" stroke-width=\"1.3\"/><circle cx=\"7\" cy=\"7\" r=\"5\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","sign-monitor":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"2\" width=\"12\" height=\"12\" rx=\"2\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 7l2 2 4-4\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","resign-task":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"2\" width=\"12\" height=\"12\" rx=\"2\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 5h6v6H5z\" stroke=\"currentColor\" stroke-width=\"1\"/><path d=\"M8 1v2M12 8h2\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","agreement-list":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"2\" width=\"5\" height=\"12\" rx=\"1\" stroke=\"currentColor\" stroke-width=\"1.3\"/><rect x=\"8\" y=\"2\" width=\"5\" height=\"12\" rx=\"1\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","mkt-dashboard":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><circle cx=\"8\" cy=\"8\" r=\"6\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 8l2 2 4-4\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","coupon-list":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"3\" width=\"12\" height=\"10\" rx=\"2\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M8 3v10\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 7h2\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","coupon-mutex":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><circle cx=\"6\" cy=\"6\" r=\"4\" stroke=\"currentColor\" stroke-width=\"1.3\"/><circle cx=\"10\" cy=\"10\" r=\"4\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","member-config":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"2\" width=\"12\" height=\"12\" rx=\"2\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M6 6h4v4H6z\" fill=\"currentColor\" opacity=\".3\"/></svg>","points-config":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><circle cx=\"8\" cy=\"8\" r=\"6\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M8 4v8M4 8h8\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","expiry-strategy":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><path d=\"M2 4h6l5 4-5 4H2z\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","expiry-board":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"2\" width=\"12\" height=\"12\" rx=\"2\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 8l2 2 4-4\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","mkt-analysis":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"2\" width=\"5\" height=\"12\" rx=\"1\" fill=\"currentColor\" opacity=\".3\"/><rect x=\"8\" y=\"6\" width=\"5\" height=\"8\" rx=\"1\" fill=\"currentColor\" opacity=\".6\"/></svg>","activity-list":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><path d=\"M3 2h10v12H3z\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 6h6M5 9h4\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","page-decorate":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"1.5\" width=\"12\" height=\"13\" rx=\"2\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M2 5h12M6 5v9.5\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","component-lib":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"2\" width=\"5\" height=\"5\" rx=\"1\" stroke=\"currentColor\" stroke-width=\"1.3\"/><rect x=\"9\" y=\"2\" width=\"5\" height=\"5\" rx=\"1\" stroke=\"currentColor\" stroke-width=\"1.3\"/><rect x=\"2\" y=\"9\" width=\"5\" height=\"5\" rx=\"1\" stroke=\"currentColor\" stroke-width=\"1.3\"/><rect x=\"9\" y=\"9\" width=\"5\" height=\"5\" rx=\"1\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","am-dashboard":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"3\" width=\"12\" height=\"10\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 8h6\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","device-list":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"3\" width=\"12\" height=\"10\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 6h6M5 9h4\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","device-in":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><path d=\"M8 2v12M3 8l5 5 5-5\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","depreciation":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><path d=\"M2 14l4-4 3 3 5-7\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","damage-manage":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><path d=\"M8 2l6 12H2z\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M8 7v3M8 12h0\" stroke=\"currentColor\" stroke-width=\"2\"/></svg>","device-disposal":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"2\" width=\"12\" height=\"12\" rx=\"2\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M4 4l8 8M12 4l-8 8\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","collection-desk":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"3\" width=\"12\" height=\"10\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 6h6M5 9h3\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","collection-strategy":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"3\" y=\"2\" width=\"10\" height=\"12\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M6 5h4M6 8h4\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","aging-board":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><circle cx=\"8\" cy=\"8\" r=\"6\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M8 4v5l3 2\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","judicial-config":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"3\" width=\"12\" height=\"10\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M4 8h8\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","judicial-desk":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"3\" y=\"2\" width=\"10\" height=\"12\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M6 5h4M6 8h2\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","uc-dashboard":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><circle cx=\"8\" cy=\"5\" r=\"3\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M2 14c0-3 3-5 6-5s6 2 6 5\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","user-list":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"3\" width=\"12\" height=\"10\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M2 6h12\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","user-profile":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><circle cx=\"8\" cy=\"5\" r=\"3\" stroke=\"currentColor\" stroke-width=\"1.3\"/><rect x=\"3\" y=\"10\" width=\"10\" height=\"4\" rx=\"1\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","honey-pot":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><path d=\"M8 2l6 12H2z\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M8 7v3M8 12h0\" stroke=\"currentColor\" stroke-width=\"2\"/></svg>","verify-record":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"3\" y=\"2\" width=\"10\" height=\"12\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M6 6l2 2 3-3\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","user-tag":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><path d=\"M2 4h6l5 4-5 4H2z\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","zhima-config":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><path d=\"M4 8l3 3 5-6\" stroke=\"currentColor\" stroke-width=\"2\"/><circle cx=\"8\" cy=\"8\" r=\"6\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","user-behavior":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"2\" width=\"5\" height=\"12\" rx=\"1\" fill=\"currentColor\" opacity=\".3\"/><rect x=\"8\" y=\"6\" width=\"5\" height=\"8\" rx=\"1\" fill=\"currentColor\" opacity=\".6\"/></svg>","fin-dashboard":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"3\" width=\"12\" height=\"10\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 8h6\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","recv-ledger":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"3\" y=\"2\" width=\"10\" height=\"12\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 6h6M5 9h4\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","recv-check":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><circle cx=\"8\" cy=\"8\" r=\"6\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 8l2 2 4-4\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","overdue-receivable":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><circle cx=\"8\" cy=\"8\" r=\"6\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M8 4v5l3 2\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","refund-approval":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><path d=\"M3 8a5 5 0 0110 0\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M13 4v4h-4\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","refund-flow":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"3\" width=\"12\" height=\"10\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 8l2 2 4-4\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","bad-debt":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><path d=\"M8 2l6 12H2z\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M8 7v3M8 12h0\" stroke=\"currentColor\" stroke-width=\"2\"/></svg>","fund-flow":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"3\" width=\"12\" height=\"10\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 8h6\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","merchant-settle":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"2\" width=\"12\" height=\"12\" rx=\"2\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 6h6M5 9h3\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","capital-recon":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"4\" width=\"12\" height=\"8\" rx=\"1\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 8h6\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","invoice-mgmt":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"3\" y=\"2\" width=\"10\" height=\"12\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M6 5h4M6 8h4\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","fin-stats":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"2\" width=\"5\" height=\"12\" rx=\"1\" fill=\"currentColor\" opacity=\".3\"/><rect x=\"8\" y=\"6\" width=\"5\" height=\"8\" rx=\"1\" fill=\"currentColor\" opacity=\".6\"/></svg>","msg-dashboard":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"2\" width=\"12\" height=\"12\" rx=\"2\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 7l2 2 4-4\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","msg-template":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"3\" y=\"2\" width=\"10\" height=\"12\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M6 5h4M6 8h4M6 11h2\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","msg-strategy":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"3\" width=\"12\" height=\"10\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 6h6M5 9h3\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","msg-send-log":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"3\" width=\"12\" height=\"10\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 8l2 2 4-4\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","msg-sms":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"4\" width=\"12\" height=\"8\" rx=\"1\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 8h6\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","msg-stats":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"2\" width=\"5\" height=\"12\" rx=\"1\" fill=\"currentColor\" opacity=\".3\"/><rect x=\"8\" y=\"6\" width=\"5\" height=\"8\" rx=\"1\" fill=\"currentColor\" opacity=\".6\"/></svg>","sys-dashboard":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"2\" width=\"12\" height=\"12\" rx=\"2\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 6h6M5 9h4\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","tag-manage":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><path d=\"M2 4h6l5 4-5 4H2z\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","tag-search":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><circle cx=\"7\" cy=\"7\" r=\"5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M11 11l3 3\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","tag-manual":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"3\" width=\"12\" height=\"10\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M8 6v4M6 8h4\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","approval-manage":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"3\" width=\"12\" height=\"10\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 8l2 2 4-4\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","approval-todo":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"2\" width=\"12\" height=\"12\" rx=\"2\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 7l2 2 4-4\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","risk-manage":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"3\" width=\"12\" height=\"10\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 8h6\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","risk-log":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"3\" y=\"2\" width=\"10\" height=\"12\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M6 5h4M6 8h4\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","risk-result":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><circle cx=\"8\" cy=\"8\" r=\"6\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 8l2 2 4-4\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","sys-role":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><circle cx=\"8\" cy=\"5\" r=\"3\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M2 14c0-3 3-5 6-5s6 2 6 5\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>","sys-log":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"2\" width=\"12\" height=\"12\" rx=\"2\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 6h6M5 9h3\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","sys-config":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"2\" y=\"3\" width=\"12\" height=\"10\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M5 8h6\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","sys-dict":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><rect x=\"3\" y=\"2\" width=\"10\" height=\"12\" rx=\"1.5\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M6 5h4M6 8h4M6 11h2\" stroke=\"currentColor\" stroke-width=\"1\"/></svg>","sys-task":"<svg viewBox=\"0 0 16 16\" fill=\"none\"><circle cx=\"8\" cy=\"8\" r=\"6\" stroke=\"currentColor\" stroke-width=\"1.3\"/><path d=\"M8 4v5l3 2\" stroke=\"currentColor\" stroke-width=\"1.3\"/></svg>"};
+
+// 页面 → 中心 映射 + 三级面包屑（由 CENTERS 自动生成）
+var PAGE_CENTER = {};
+var menuBreadcrumb = {};
+CENTERS.forEach(function(c){c.modules.forEach(function(m){m.items.forEach(function(it){
+  PAGE_CENTER[it[0]] = c.id;
+  menuBreadcrumb[it[0]] = [c.name, m.name, it[1]];
+});});});
+// 详情页特例
+PAGE_CENTER['order-detail']='trade';
+menuBreadcrumb['order-detail']=['交易中心','订单管理','订单列表','OD20260722002'];
+menuBreadcrumb['coming']=['后续批次'];
+
+// 渲染顶部一级导航 + 侧边二三级导航
+function renderNav(){
+  var topNav = document.getElementById('topNav');
+  var sideNav = document.getElementById('sideNav');
+  if(!topNav || !sideNav) return;
+  var tn = '';
+  CENTERS.forEach(function(c,i){
+    var ic = ICO[c.ico] || '';
+    tn += '<div class="tn-item'+(i===0?' active':'')+'" data-c="'+c.id+'" onclick="goCenter(\''+c.id+'\')">'
+      + (ic?'<span class="tn-ico">'+ic+'</span>':'') + '<span>'+c.name+'</span></div>';
+  });
+  topNav.innerHTML = tn;
+  var sn = '';
+  CENTERS.forEach(function(c,i){
+    sn += '<div class="nav-center'+(i===0?' active':'')+'" id="navc-'+c.id+'">';
+    c.modules.forEach(function(m){
+      sn += '<div class="nav-group"><div class="nav-group-title">'+m.name+'</div>';
+      m.items.forEach(function(it){
+        var ic2 = ICO[it[0]] || '';
+        sn += '<div class="nav-item" onclick="showPage(\''+it[0]+'\')"><span class="ico">'+ic2+'</span>'+it[1]+'</div>';
+      });
+      sn += '</div>';
+    });
+    sn += '</div>';
+  });
+  sideNav.innerHTML = sn;
+}
+
+// 切换中心（仅切换顶部tab + 侧边栏显示）
+function switchCenter(cid){
+  document.querySelectorAll('.tn-item').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('.nav-center').forEach(function(n){n.classList.remove('active');});
+  var t = document.querySelector('.tn-item[data-c="'+cid+'"]');
+  var s = document.getElementById('navc-'+cid);
+  if(t) t.classList.add('active');
+  if(s) s.classList.add('active');
+}
+
+// 点击顶部中心：切换并进入该中心概览页
+function goCenter(cid){
+  switchCenter(cid);
+  var first = null;
+  CENTERS.forEach(function(c){ if(c.id===cid && c.modules.length && c.modules[0].items.length) first = c.modules[0].items[0][0]; });
+  if(first) showPage(first);
+}
+
 
 function showPage(id) {
+  var cid = PAGE_CENTER[id];
+  if(cid) switchCenter(cid);
   document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active');});
   var clicked = document.querySelector('.nav-item[onclick="showPage(\''+id+'\')"]');
   if(clicked) clicked.classList.add('active');
@@ -698,7 +464,7 @@ function showPage(id) {
     if(i===bc.length-1) bcHtml += '<span class="bc-current">'+item+'</span>';
     else {
       // 订单详情面包屑中间项可点击跳转
-      if(id==='order-detail' && i===1) bcHtml += '<span class="bc-item" onclick="showPage(\'order-list\')">'+item+'</span><span class="bc-sep">/</span>';
+      if(id==='order-detail' && item==='订单列表') bcHtml += '<span class="bc-item" onclick="showPage(\'order-list\')">'+item+'</span><span class="bc-sep">/</span>';
       else bcHtml += '<span class="bc-item">'+item+'</span><span class="bc-sep">/</span>';
     }
   });
@@ -1659,6 +1425,7 @@ pages['sys-dict'] = function(){return '<section class="card"><div class="card-he
 pages['sys-task'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">定时任务</div></div>'+ab([{t:'新建任务',c:'primary'}])+dt(['任务名称','Cron','状态','最后执行时间','结果','操作'],[{c:['代扣定时任务','0 0 8 * * ?',tg('green','运行中'),'2026-07-23 08:00',tg('green','成功')],o:'<span class="link">编辑</span> <span class="link">日志</span>'},{c:['逾期账单生成','0 0 0 * * ?',tg('green','运行中'),'2026-07-23 00:00',tg('green','成功')],o:'<span class="link">编辑</span> <span class="link">日志</span>'},{c:['逾期等级升级','0 30 0 * * ?',tg('green','运行中'),'2026-07-23 00:30',tg('green','成功')],o:'<span class="link">编辑</span> <span class="link">日志</span>'},{c:['催收策略执行','0 0 9 * * ?',tg('green','运行中'),'2026-07-23 09:00',tg('green','成功')],o:'<span class="link">编辑</span> <span class="link">日志</span>'},{c:['到期提醒推送','0 0 10 * * ?',tg('green','运行中'),'2026-07-23 10:00',tg('green','成功')],o:'<span class="link">编辑</span> <span class="link">日志</span>'},{c:['折旧计算任务','0 0 1 1 * ?',tg('green','运行中'),'2026-07-01 01:00',tg('green','成功')],o:'<span class="link">编辑</span> <span class="link">日志</span>'},{c:['对账数据同步','0 0 2 * * ?',tg('green','运行中'),'2026-07-23 02:00',tg('green','成功')],o:'<span class="link">编辑</span> <span class="link">日志</span>'},{c:['风控缓存清理','0 0 3 * * ?',tg('green','运行中'),'2026-07-23 03:00',tg('green','成功')],o:'<span class="link">编辑</span> <span class="link">日志</span>'},{c:['设备状态同步','0 15 * * * ?',tg('orange','暂停'),'2026-07-22 15:00',tg('gray','—')],o:'<span class="link">编辑</span> <span class="link">启用</span>'}])+'</section>';};
 
 // ===== 初始化 =====
+renderNav();
 showPage('dashboard');
 
 function toggleSubOrders(id){
