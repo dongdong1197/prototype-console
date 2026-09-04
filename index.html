@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="zh-CN" data-page-node-id="xNQXxMejXP7QxdkEneDjWq">
+<head data-page-node-id="w4HYnVH7cESHcJFodtGjG2">
+<meta charset="UTF-8" data-page-node-id="5DDDKMOcODq0MFC4ivSnGD">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="No4PpR9xwbJUu7HPRZgEEL">
 <title>八戒租 | 租赁业务管理系统 · 统一原型</title>
 <style>
 :root {
@@ -36,6 +36,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 
 /* 侧边栏 */
 .sidebar{width:var(--sidebar-w);flex:none;background:var(--card);border-radius:var(--radius);padding:8px;position:sticky;top:72px;max-height:calc(100vh - 88px);overflow-y:auto;}
+.layout.home-mode .sidebar{display:none;}
+.layout.home-mode{padding:16px 24px;}
 .nav-group{margin-bottom:2px;}
 .nav-group-title{font-size:11px;color:var(--t3);padding:10px 12px 4px;letter-spacing:.5px;font-weight:500;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;}
 .nav-group-title .arrow{font-size:10px;transition:transform .2s;color:var(--t3);}
@@ -245,7 +247,7 @@ td .link:hover{text-decoration:underline;}
 .bill-actions-bar{display:flex;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--border2);}
 
 /* 订单详情页专用 */
-.order-detail-header{display:flex;align-items:center;justify-content:space-between;padding-bottom:16px;border-bottom:1px solid var(--border);}
+.order-detail-header{display:flex;align-items:center;justify-content:space-between;padding-bottom:16px;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:8px;}
 .order-detail-header .order-no{font-size:20px;font-weight:700;}
 .order-detail-header .back-btn{cursor:pointer;color:var(--primary);font-size:14px;}
 .order-info-grid{display:grid;grid-template-columns:2fr 1fr;gap:24px;}
@@ -257,7 +259,20 @@ td .link:hover{text-decoration:underline;}
 
 /* 两栏布局 */
 .split2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.split2>*{min-width:0;}
+.split2.asym{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);}
+.cat-tree-wrap{max-height:calc(100vh - 300px);overflow-y:auto;padding-right:4px;}
+.brand-table-wrap{max-height:calc(100vh - 340px);overflow:auto;}
+.cat-tree-wrap::-webkit-scrollbar,.brand-table-wrap::-webkit-scrollbar{width:5px;height:5px;}
+.cat-tree-wrap::-webkit-scrollbar-thumb,.brand-table-wrap::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
 .split3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+.split3>*{min-width:0;}
+.grid>*{min-width:0;}
+.form-row>*{min-width:0;}
+.stat-cards>*{min-width:0;}
+.age-group-stats>*{min-width:0;}
+.related-cards>*{min-width:0;}
+.order-info-grid>*{min-width:0;}
 
 /* 配置卡片 */
 .config-card{border:1px solid var(--border);border-radius:8px;padding:16px;}
@@ -277,6 +292,76 @@ td .link:hover{text-decoration:underline;}
 .tree-children{padding-left:20px;display:none;}
 .tree-children.open{display:block;}
 .tree-node .count{font-size:11px;color:var(--t3);margin-left:4px;}
+.tree-node.l1{font-weight:700;color:var(--t1);}
+.tree-node.leaf{font-size:12px;color:var(--t3);}
+.tree-node.leaf .count{font-size:10px;}
+
+/* 分类映射图 */
+.map-diagram{display:flex;gap:0;align-items:stretch;}
+.map-panel{background:var(--card);border-radius:10px;padding:20px;flex:1;min-width:0;}
+.map-panel.center{background:#EEF2FF;flex:0.8;}
+.map-panel-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.map-panel-title{font-size:15px;font-weight:700;}
+.map-panel-desc{font-size:12px;color:var(--t3);line-height:1.6;margin-bottom:14px;}
+.map-tree-node{padding:7px 12px;border-radius:6px;font-size:13px;display:flex;align-items:center;justify-content:space-between;margin:3px 0;gap:8px;}
+.map-tree-node.l1{font-weight:700;color:#fff;}
+.map-tree-node.l1.bp{background:var(--info);}
+.map-tree-node.l1.cp{background:var(--purple);}
+.map-tree-node.l2{background:var(--info-bg);color:#1E40AF;font-weight:600;padding-left:24px;}
+.map-tree-node.l3{background:var(--card);border:1px solid #C7D2FE;padding-left:36px;font-weight:500;color:var(--t2);}
+.map-tree-node.l4{background:#F9FAFB;padding-left:48px;font-size:12px;color:var(--t3);}
+.map-tree-node .node-tag{font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;white-space:nowrap;}
+.map-tree-node .node-tag.n1{background:#FFF3E8;color:var(--warning);}
+.map-tree-node .node-tag.n11{background:#E8F3FF;color:var(--info);}
+.map-tree-node .node-tag.nn{background:var(--success-bg);color:var(--success);}
+.map-card{background:var(--card);border-radius:8px;padding:12px 14px;margin-bottom:8px;border-left:3px solid var(--border);}
+.map-card .mc-type{font-size:13px;font-weight:700;margin-bottom:4px;}
+.map-card .mc-desc{font-size:11px;color:var(--t3);line-height:1.6;}
+.map-card.n1{border-left-color:var(--warning);}
+.map-card.nn{border-left-color:var(--success);}
+.map-card.n11{border-left-color:var(--info);}
+.map-card.inherit{border-left-color:var(--t3);}
+
+/* 维护流程步骤 */
+.flow-steps{display:flex;align-items:stretch;gap:8px;}
+.flow-step{background:var(--card);border-radius:10px;padding:16px;flex:1;border:2px solid var(--border);}
+.flow-step .fs-num{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;font-weight:800;margin-bottom:8px;}
+.flow-step .fs-title{font-size:14px;font-weight:700;margin-bottom:6px;}
+.flow-step .fs-desc{font-size:11px;color:var(--t3);line-height:1.6;}
+.flow-arrow{display:flex;align-items:center;color:var(--border);font-size:20px;font-weight:700;}
+
+/* C端分类树节点 */
+.ctree-node{padding:8px 12px;border-radius:6px;font-size:13px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;margin:2px 0;gap:8px;}
+.ctree-node.l1{font-weight:700;}
+.ctree-node.l1.active{background:var(--purple-bg);color:var(--purple);}
+.ctree-node.l2{padding-left:28px;font-weight:500;color:var(--t2);}
+.ctree-node:hover{background:var(--border2);}
+.ctree-node .child-count{background:var(--border2);color:var(--t3);font-size:10px;padding:1px 6px;border-radius:10px;}
+.ctree-node .child-count.purple{background:var(--purple-bg);color:var(--purple);}
+
+/* 属性对照 */
+.attr-box{border-radius:8px;padding:14px 16px;}
+.attr-box.bp{background:var(--info-bg);}
+.attr-box.cp{background:var(--purple-bg);}
+.attr-box .ab-title{font-size:12px;font-weight:700;margin-bottom:8px;}
+.attr-box.bp .ab-title{color:var(--info);}
+.attr-box.cp .ab-title{color:var(--purple);}
+.attr-box .ab-item{font-size:12px;color:var(--t2);margin:4px 0;}
+
+/* 映射类型选择 */
+.map-type-btn{padding:6px 12px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--border);}
+.map-type-btn.active{color:#fff;border:none;}
+.map-type-btn.active.n1{background:var(--warning);}
+.map-type-btn.active.nn{background:var(--success);}
+.map-type-btn.active.n11{background:var(--info);}
+.map-type-btn:not(.active){background:var(--border2);color:var(--t3);}
+.map-picked{display:inline-flex;align-items:center;gap:6px;background:var(--info-bg);color:var(--info);padding:4px 10px;border-radius:6px;font-size:12px;font-weight:500;margin:3px 0;}
+
+/* 场景卡 */
+.scene-card{background:var(--card);border-radius:10px;padding:16px;flex:1;}
+.scene-card .sc-tag{font-size:10px;padding:2px 8px;border-radius:4px;font-weight:600;display:inline-block;margin-bottom:6px;}
+.scene-card .sc-title{font-size:14px;font-weight:700;margin-bottom:6px;}
+.scene-card .sc-desc{font-size:12px;color:var(--t3);line-height:1.6;}
 
 /* 价格预览区 */
 .price-preview{background:var(--primary-light);border:1px solid var(--primary);border-radius:8px;padding:16px;margin-top:16px;}
@@ -345,7 +430,8 @@ td .link:hover{text-decoration:underline;}
 .confirm-body .cb-text{font-size:14px;color:var(--t1);margin-bottom:8px;}
 .confirm-body .cb-sub{font-size:12px;color:var(--t3);}
 
-@media(max-width:1100px){.sidebar{display:none;}.layout{padding:12px;}}
+@media(max-width:1100px){.sidebar{display:none;}.layout{padding:12px;}.split2{grid-template-columns:1fr !important;}.split3{grid-template-columns:1fr 1fr !important;}.stat-cards{grid-template-columns:repeat(2,1fr);}.related-cards{grid-template-columns:repeat(2,1fr);}.grid{grid-template-columns:repeat(2,1fr);}.grid.col4{grid-template-columns:repeat(2,1fr);}.form-row{grid-template-columns:repeat(2,1fr);}.order-info-grid{grid-template-columns:1fr;}.cat-tree-wrap{max-height:none;}.brand-table-wrap{max-height:none;}}
+@media(max-width:640px){.stat-cards{grid-template-columns:1fr;}.related-cards{grid-template-columns:1fr;}.grid{grid-template-columns:1fr;}.grid.col4{grid-template-columns:1fr;}.form-row{grid-template-columns:1fr;}.age-group-stats{grid-template-columns:1fr;}.split3{grid-template-columns:1fr;}.order-info-grid{grid-template-columns:1fr;}.layout{padding:8px;}.main-nav{padding:0 8px;}.topbar-row{padding:0 12px;}.card{padding:14px;}.filter-bar{flex-direction:column;align-items:stretch;}.filter-bar input,.filter-bar select{width:100% !important;}div[style*="grid-template-columns"]{grid-template-columns:1fr !important;}.flow-steps{overflow-x:auto;}.flow-step{flex:1 0 140px;}.decorate{flex-direction:column;min-height:auto;}.decorate>div{width:100% !important;flex:none !important;border-right:none !important;padding-right:0 !important;padding-left:0 !important;}.decorate>div>div[style*="width:340px"]{width:100% !important;max-width:340px;}}
 
 /* === 订单列表扩展样式 === */
 .sub-orders-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px;margin:4px 0;}
@@ -372,6 +458,8 @@ td .link:hover{text-decoration:underline;}
 .mn-item.active{color:var(--primary);font-weight:600;}
 .mn-item.active .mn-ico{color:var(--primary);}
 .mn-item.active::after{content:'';position:absolute;left:12px;right:12px;bottom:0;height:2.5px;border-radius:2px 2px 0 0;background:var(--primary);}
+.mn-item.mn-home{color:var(--t1);font-weight:600;}
+.mn-sep{flex:0 0 1px;align-self:center;width:1px;height:20px;margin:0 8px;background:var(--bd2);}
 .sidebar{top:112px;max-height:calc(100vh - 128px);}
 .nav-group-title{font-size:12px;color:var(--t1);font-weight:600;padding:12px 12px 6px;}
 .nav-item.ov{font-weight:500;}
@@ -380,34 +468,34 @@ td .link:hover{text-decoration:underline;}
 .nav-item.sub.active::before{background:var(--primary);opacity:1;}
 </style>
 </head>
-<body>
+<body data-page-node-id="150fwKN9huq8xzp4lEt052">
 
 <!-- 顶部栏：一级中心导航 -->
-<header class="topbar">
-  <div class="topbar-row">
-    <div class="brand" style="cursor:pointer" onclick="goHome()" title="返回首页概览"><span class="logo">租</span> 八戒租 · 租赁业务管理系统</div>
-    <div style="display:flex;align-items:center;gap:16px;">
-      <span style="font-size:13px;color:var(--t3)">统一原型 v2 · 三级导航</span>
-      <div class="user"><span class="avatar">老</span> 马先生 · 产品经理 <span class="badge">12</span></div>
+<header class="topbar" data-page-node-id="hrbsEAEpRlxpuX4UZ6BRNR">
+  <div class="topbar-row" data-page-node-id="1GdOxQWAbtOGjSr3Tsc8ek">
+    <div class="brand" style="cursor:pointer" onclick="goHome()" title="返回首页概览" data-page-node-id="AUBOW5jMazLO0ZOOIBkHcL"><span class="logo" data-page-node-id="2K8y7bPn2mi6Q1Xf1Yrfwo">租</span> 八戒租 · 租赁业务管理系统</div>
+    <div style="display:flex;align-items:center;gap:16px;" data-page-node-id="fw1asmjTy4TZ5vxUPa0eHX">
+      <span style="font-size:13px;color:var(--t3)" data-page-node-id="KlCAk8LrjV6dlLwFLhCm7x">统一原型 v2 · 三级导航</span>
+      <div class="user" data-page-node-id="EwzTgsQZFarEc5KfQJ8Tc1"><span class="avatar" data-page-node-id="PIMoR0hkUnYhBAljMSnCW2">老</span> 马先生 · 产品经理 <span class="badge" data-page-node-id="PbY7kVwH2XlrKw9xvqdhgT">12</span></div>
     </div>
   </div>
-  <nav class="main-nav" id="mainNav"></nav>
+  <nav class="main-nav" id="mainNav" data-page-node-id="vbqOmb9UpYfYY8ad6sm4Sl"></nav>
 </header>
 
-<div class="layout">
+<div class="layout" data-page-node-id="RwB9P45nlxi8a3mSV6c4wL">
 <!-- 侧边栏：二级分组 + 三级菜单（按当前中心动态渲染） -->
-<aside class="sidebar" id="sidebar"></aside>
+<aside class="sidebar" id="sidebar" data-page-node-id="9DrvcsgyFCOZPoDyxkmrnS"></aside>
 
 <!-- 主内容 -->
-<main class="main" id="mainContent"></main>
+<main class="main" id="mainContent" data-page-node-id="vSZkYSWo8gNkrDDcK16KiV"></main>
 </div>
 
 <!-- 弹窗容器 -->
-<div class="mask" id="mask">
-  <div class="modal" id="modalBox">
-    <div class="mh"><span id="mTitle">详情</span><span class="x" onclick="closeModal()">×</span></div>
-    <div class="mb" id="mBody"></div>
-    <div class="mf" id="mFooter"></div>
+<div class="mask" id="mask" data-page-node-id="nCrXWByM5EMMd30GECWSsx">
+  <div class="modal" id="modalBox" data-page-node-id="rrvhsovrqrLfaoETPdNX67">
+    <div class="mh" data-page-node-id="lL4jjIp7iDg7qIIh4snKMX"><span id="mTitle" data-page-node-id="eHLN3plQuzJt5BurAGEQIH">详情</span><span class="x" onclick="closeModal()" data-page-node-id="HTErTr1g44X6O9vDN86DsR">×</span></div>
+    <div class="mb" id="mBody" data-page-node-id="ahQvpEzn4UZMOcU7295FRo"></div>
+    <div class="mf" id="mFooter" data-page-node-id="LDBSQa7oemEO9dxiy8qAaB"></div>
   </div>
 </div>
 
@@ -438,7 +526,7 @@ var NAV = [
     {name:'客服工单', items:[['ticket-list','工单列表'],['split-rule','分流规则']]}
   ]},
   {id:'sp', name:'商品中心', icon:ICO.goods, ov:'gc-dashboard', groups:[
-    {name:'商品管理', items:[['spu-list','商品库'],['spu-detail','商品详情'],['category-tree','商品分类']]},
+    {name:'商品管理', items:[['spu-list','商品库'],['spu-detail','商品详情'],['category-tree','后台分类'],['brand-manage','品牌管理'],['c-category','用户端分类'],['category-map','分类关联']]},
     {name:'方案管理', items:[['rent-plan','租赁方案'],['buy-plan','购买方案']]},
     {name:'增值服务', items:[['svc-pkg','增值服务']]},
     {name:'报价工具', items:[['quote-test','报价测试']]}
@@ -512,7 +600,7 @@ var BC_EXTRA = {
 var currentCenter = null;
 
 function renderTopNav(){
-  var h = '';
+  var h = '<div class="mn-item mn-home'+(currentCenter===null?' active':'')+'" onclick="goHome()" title="返回首页概览"><span class="mn-ico">'+ICO.home+'</span> 首页</div><span class="mn-sep"></span>';
   NAV.forEach(function(c){
     h += '<div class="mn-item'+(currentCenter===c.id?' active':'')+'" onclick="switchCenter(\''+c.id+'\')" title="'+c.name+'"><span class="mn-ico">'+c.icon+'</span>'+c.name+'</div>';
   });
@@ -522,9 +610,11 @@ function renderTopNav(){
 function renderSidebar(){
   var c = null;
   NAV.forEach(function(x){ if(x.id===currentCenter) c = x; });
+  var layout=document.querySelector('.layout');
+  if(layout){ layout.classList.toggle('home-mode', !c); }
   var h = '';
   if(!c){
-    h += '<div class="nav-item ov" onclick="goHome()"><span class="ico">'+ICO.home+'</span> 首页概览</div>';
+    /* 首页概览：全宽展示，侧边栏隐藏（home-mode），不渲染导航项 */
   } else {
     if(c.ov) h += '<div class="nav-item ov" onclick="showPage(\''+c.ov+'\')"><span class="ico">'+ICO.home+'</span> 概览</div>';
     c.groups.forEach(function(g){
@@ -611,7 +701,7 @@ function editModal(t,b,f){openModal(t,b,f||'<button class="btn" onclick="closeMo
 function sc(items){return '<div class="stat-cards">'+items.map(function(s){return '<div class="stat-card '+s.c+'"><div class="stat-v">'+s.v+'</div><div class="stat-k">'+s.k+'</div>'+((s.s)?'<div class="stat-sub">'+s.s+'</div>':'')+'</div>';}).join('')+'</div>';}
 function fb(fields){return '<div class="filter-bar">'+fields.map(function(f){if(f.t==='i')return '<input placeholder="'+f.p+'" style="width:'+f.w+'">';if(f.t==='s')return '<select>'+f.o.map(function(o){return '<option>'+o+'</option>';}).join('')+'</select>';if(f.t==='d')return '<input type="date" placeholder="'+f.p+'" style="width:'+f.w+'">';return '';}).join('')+'<button class="btn primary sm">查询</button><button class="btn sm">重置</button></div>';}
 function ab(btns){return '<div class="btn-group" style="margin-bottom:12px">'+btns.map(function(b){return '<button class="btn sm '+(b.c||'')+'" '+(b.fn?'onclick="'+b.fn+'"':'')+'>'+b.t+'</button>';}).join('')+'</div>';}
-function dt(hdrs,rows){var h='<table><thead><tr>';hdrs.forEach(function(hh){h+='<th>'+hh+'</th>';});h+='<th style="width:120px">操作</th></tr></thead><tbody>';rows.forEach(function(r){h+='<tr>';r.c.forEach(function(cc){h+='<td>'+cc+'</td>';});h+='<td>'+r.o+'</td></tr>';});h+='</tbody></table>';return h;}
+function dt(hdrs,rows){var h='<div style="overflow-x:auto"><table><thead><tr>';hdrs.forEach(function(hh){h+='<th>'+hh+'</th>';});h+='<th style="width:120px">操作</th></tr></thead><tbody>';rows.forEach(function(r){h+='<tr>';r.c.forEach(function(cc){h+='<td>'+cc+'</td>';});h+='<td>'+r.o+'</td></tr>';});h+='</tbody></table></div>';return h;}
 function pg(total){return '<div class="pager">总共 '+total+' 条 <span class="pg active">1</span> <span class="pg">2</span> <span class="pg">3</span> <span class="pg">…</span> <span>20条/页</span></div>';}
 function dl(fields){return '<div class="grid">'+fields.map(function(f){return '<div class="field"><div class="k">'+f.k+'</div><div class="v">'+f.v+'</div></div>';}).join('')+'</div>';}
 
@@ -640,9 +730,9 @@ var devInfo = {
   'dashboard': {prd:'首页概览', pri:'P1', mvp:'MVP-1', desc:'系统首页，统一待办+逾期概览'},
   'order-list': {prd:'交易中心 6.1', pri:'P1', mvp:'MVP-1', desc:'全部租赁订单多维度筛选，支持订单类型(首租/续租/购买/售卖)筛选'},
   'order-detail': {prd:'交易中心 6.2', pri:'P1', mvp:'MVP-1', desc:'订单全页面展示：基本信息+状态时间线+费项账单+关联信息', fields:[{n:'orderType',t:'enum',e:'first_rental/renewal/buyout/sales'},{n:'productType',t:'enum',e:'rental/sales'},{n:'parentOrderId',t:'string',e:'续租/购买/售卖订单关联首租订单ID'}]},
-  'overdue-board': {prd:'交易中心 6.5', pri:'P1', mvp:'MVP-1', desc:'6分区逾期看板：预提醒+M0+M1+M2++M3++恶意违约'},
+  'overdue-board': {prd:'交易中心 6.5', pri:'P1', mvp:'MVP-1', desc:'6分区逾期看板：预提醒+M1(四段)+M2+M3+M4++恶意违约'},
   'bill-list': {prd:'交易中心 6.3 / 账单子域', pri:'P1', mvp:'MVP-1', desc:'按费项设计的应收账单列表，逾期金附加在月租金账单上'},
-  'bill-age-board': {prd:'交易中心 6.4', pri:'P1', mvp:'MVP-1', desc:'逾期账龄分布看板，M0~M3+各阶段统计'},
+  'bill-age-board': {prd:'交易中心 6.4', pri:'P1', mvp:'MVP-1', desc:'逾期账龄分布看板，M1~M4+各阶段统计'},
   'penalty-mgmt': {prd:'交易中心 6.7', pri:'P1', mvp:'MVP-1', desc:'三Tab：逾期金规则(日费率万分之三)+违约金规则(日租金×逾期天数)+减免审批'},
   'supplement-bill': {prd:'交易中心 6.8', pri:'P1', mvp:'MVP-1', desc:'定损后保证金不足抵扣的差额追缴，7天时限'},
   'judicial-bill': {prd:'交易中心 6.9', pri:'P1', mvp:'MVP-1', desc:'司法追偿独立作业区，司法本金两种类型+司法违约金=逾期金+违约金'},
@@ -656,7 +746,10 @@ var devInfo = {
   'gc-dashboard': {prd:'商品中心 概览', pri:'P1', mvp:'MVP-1', desc:'商品中心首页，SPU/SKU/方案/服务包统计+异常监控'},
   'spu-list': {prd:'商品中心 2.1', pri:'P1', mvp:'MVP-1', desc:'标准商品库SPU列表'},
   'spu-detail': {prd:'商品中心 2.2', pri:'P1', mvp:'MVP-1', desc:'SPU详情+SKU管理+租用方案一览'},
-  'category-tree': {prd:'商品中心 1.1', pri:'P2', mvp:'MVP-2', desc:'商品分类树管理'},
+  'category-tree': {prd:'商品中心 1.1', pri:'P2', mvp:'MVP-2', desc:'后台商品分类树管理（统一四级：L1根分类→L2品类→L3品牌→L4 SPU系列，SPU只挂叶子）'},
+  'brand-manage': {prd:'商品中心 1.4', pri:'P2', mvp:'MVP-2', desc:'品牌库管理（97个品牌：Logo/编码/授权状态/涉及分类与SPU统计，与L3品牌节点联动）'},
+  'c-category': {prd:'商品中心 1.2', pri:'P2', mvp:'MVP-2', desc:'用户端分类管理（1-2级，链接自动生成不可改，展示样式+商品来源配置）'},
+  'category-map': {prd:'商品中心 1.3', pri:'P2', mvp:'MVP-2', desc:'用户端↔后台分类关联关系（合并展示/直接同步/多处展示/默认沿用上级）'},
   'rent-plan': {prd:'商品中心 4.1', pri:'P1', mvp:'MVP-1', desc:'租用方案配置：租期×系数→月租金/总租金/保证金'},
   'buy-plan': {prd:'商品中心 4.3', pri:'P1', mvp:'MVP-1', desc:'购买方案=折旧规则配置：等额折旧/差额折旧'},
   'svc-pkg': {prd:'商品中心 6.1', pri:'P2', mvp:'MVP-2', desc:'增值服务包配置：租期保障+归还保障'},
@@ -706,7 +799,7 @@ var devInfo = {
   'depreciation': {prd:'资管中心 3.1', pri:'P1', mvp:'MVP-1', desc:'折旧规则配置+折旧报表（按商品中心配置参数计算）'},
   'damage-manage': {prd:'资管中心 4.1', pri:'P1', mvp:'MVP-1', desc:'定损管理：18项检测+5级评定'},
   'device-disposal': {prd:'资管中心 5.1', pri:'P2', mvp:'MVP-2', desc:'设备处置：再入库/维修/汰换/报废'},
-  'collection-desk': {prd:'资管中心 6.1', pri:'P1', mvp:'MVP-1', desc:'催收工作台：按账龄M0-M3+分层作业'},
+  'collection-desk': {prd:'资管中心 6.1', pri:'P1', mvp:'MVP-1', desc:'催收工作台：按账龄M1-1~M4+分层作业'},
   'collection-strategy': {prd:'资管中心 6.2', pri:'P2', mvp:'MVP-2', desc:'催收策略配置'},
   'aging-board': {prd:'资管中心 6.3', pri:'P1', mvp:'MVP-1', desc:'逾期账龄看板（资管视角）'},
   'judicial-config': {prd:'资管中心 7.1', pri:'P2', mvp:'MVP-2', desc:'自动转司法配置'},
@@ -821,8 +914,8 @@ var S_TRANSFER=['全部状态','待审批','已驳回','已批准-待出库','�
 var S_PRICE=['全部状态','待审核','审核通过','审核驳回','已失效'];
 // 商品中心下拉选项
 var S_SPU_STATUS=['全部状态','草稿','已上架','已下架','已禁用'];
-var S_BRAND=['全部品牌','Apple','HUAWEI','小米','OPPO','vivo','三星','联想','戴尔'];
-var S_CATEGORY=['全部分类','手机','平板','笔记本','耳机','手表','相机'];
+var S_BRAND=['全部品牌','Apple','HUAWEI','小米','OPPO','vivo','三星','荣耀','联想','大疆','索尼','宇树'];
+var S_CATEGORY=['全部分类','手机','电脑','平板','智能穿戴','影像设备','无人机','游戏设备','影音娱乐','机器人'];
 var S_PLAN_STATUS=['全部状态','启用','停用'];
 var SVC_TYPE=['全部类型','租期保障','归还保障'];
 // 合同中心下拉选项
@@ -836,7 +929,7 @@ var S_RESIGN_STATUS=['全部状态','待重签','已通知','重签中','已完�
 // ============================================================
 // 首页概览
 // ============================================================
-pages['dashboard'] = function(){return sc([{v:'1,256',k:'在租订单',s:'较上周 ↑3.2%',c:'primary'},{v:'¥89.6万',k:'本月应收',s:'已回收 ¥72.3万',c:'blue'},{v:'87',k:'逾期订单',s:'M0:52 / M1:21 / M2+:14',c:'red'},{v:'12',k:'待办事项',s:'审批5 / 工单7',c:'orange'}])+'<div class="split2"><div class="card"><div class="card-header"><div class="card-title">统一待办视图</div></div><div style="margin-bottom:12px;font-size:13px;color:var(--t3);border-bottom:1px solid var(--border);padding-bottom:8px;font-weight:600;">审批待办</div><div class="todo-list"><div class="todo-item" onclick="showPage(\'order-list\')"><span class="todo-num">3</span><div class="todo-info"><div class="todo-name">风险订单审核</div><div class="todo-desc">3单风控review待人工审核</div></div><span style="color:var(--warning);font-size:12px">紧急</span></div><div class="todo-item" onclick="showPage(\'refund-list\')"><span class="todo-num">2</span><div class="todo-info"><div class="todo-name">退款审批</div><div class="todo-desc">2单退款申请待审核，1单超24h</div></div><span style="color:var(--danger);font-size:12px">超时</span></div></div><div style="margin:16px 0 12px;font-size:13px;color:var(--t3);border-bottom:1px solid var(--border);padding-bottom:8px;font-weight:600;">工单待办</div><div class="todo-list"><div class="todo-item" onclick="showPage(\'ticket-list\')"><span class="todo-num">5</span><div class="todo-info"><div class="todo-name">设备故障工单</div><div class="todo-desc">5单待处理，其中2单超SLA</div></div><span style="color:var(--danger);font-size:12px">超SLA</span></div><div class="todo-item"><span class="todo-num">2</span><div class="todo-info"><div class="todo-name">定损争议工单</div><div class="todo-desc">2单待二次定损确认</div></div></div></div></div><div class="card"><div class="card-header"><div class="card-title">逾期处置概览</div></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-bottom:12px;"><div style="background:var(--info-bg);border-radius:6px;padding:12px;text-align:center;"><div style="font-size:20px;font-weight:700;color:var(--info)">52</div><div style="font-size:12px;color:var(--t3)">M0 提醒期</div></div><div style="background:var(--warning-bg);border-radius:6px;padding:12px;text-align:center;"><div style="font-size:20px;font-weight:700;color:var(--warning)">21</div><div style="font-size:12px;color:var(--t3)">M1 催收期</div></div><div style="background:var(--danger-bg);border-radius:6px;padding:12px;text-align:center;"><div style="font-size:20px;font-weight:700;color:var(--danger)">14</div><div style="font-size:12px;color:var(--t3)">M2+ 转司法</div></div><div style="background:var(--purple-bg);border-radius:6px;padding:12px;text-align:center;"><div style="font-size:20px;font-weight:700;color:var(--purple)">0</div><div style="font-size:12px;color:var(--t3)">M3+ 长期逾期</div></div></div><div style="font-size:13px;color:var(--t3);margin-top:8px;">催收作业在<b>资管中心 → 催收工作台</b>（第二批原型）</div></div></div>';};
+pages['dashboard'] = function(){return sc([{v:'1,256',k:'在租订单',s:'较上周 ↑3.2%',c:'primary'},{v:'¥89.6万',k:'本月应收',s:'已回收 ¥72.3万',c:'blue'},{v:'87',k:'逾期订单',s:'M1:87 / M2:14 / M3:8',c:'red'},{v:'12',k:'待办事项',s:'审批5 / 工单7',c:'orange'}])+'<div class="split2"><div class="card"><div class="card-header"><div class="card-title">统一待办视图</div></div><div style="margin-bottom:12px;font-size:13px;color:var(--t3);border-bottom:1px solid var(--border);padding-bottom:8px;font-weight:600;">审批待办</div><div class="todo-list"><div class="todo-item" onclick="showPage(\'order-list\')"><span class="todo-num">3</span><div class="todo-info"><div class="todo-name">风险订单审核</div><div class="todo-desc">3单风控review待人工审核</div></div><span style="color:var(--warning);font-size:12px">紧急</span></div><div class="todo-item" onclick="showPage(\'refund-list\')"><span class="todo-num">2</span><div class="todo-info"><div class="todo-name">退款审批</div><div class="todo-desc">2单退款申请待审核，1单超24h</div></div><span style="color:var(--danger);font-size:12px">超时</span></div></div><div style="margin:16px 0 12px;font-size:13px;color:var(--t3);border-bottom:1px solid var(--border);padding-bottom:8px;font-weight:600;">工单待办</div><div class="todo-list"><div class="todo-item" onclick="showPage(\'ticket-list\')"><span class="todo-num">5</span><div class="todo-info"><div class="todo-name">设备故障工单</div><div class="todo-desc">5单待处理，其中2单超SLA</div></div><span style="color:var(--danger);font-size:12px">超SLA</span></div><div class="todo-item"><span class="todo-num">2</span><div class="todo-info"><div class="todo-name">定损争议工单</div><div class="todo-desc">2单待二次定损确认</div></div></div></div></div><div class="card"><div class="card-header"><div class="card-title">逾期处置概览</div></div><div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-bottom:12px;"><div style="background:var(--warning-bg);border-radius:6px;padding:12px;text-align:center;"><div style="font-size:20px;font-weight:700;color:var(--warning)">87</div><div style="font-size:12px;color:var(--t3)">M1 逾期1-30天</div></div><div style="background:var(--danger-bg);border-radius:6px;padding:12px;text-align:center;"><div style="font-size:20px;font-weight:700;color:var(--danger)">14</div><div style="font-size:12px;color:var(--t3)">M2 逾期31-60天</div></div><div style="background:var(--purple-bg);border-radius:6px;padding:12px;text-align:center;"><div style="font-size:20px;font-weight:700;color:var(--purple)">8</div><div style="font-size:12px;color:var(--t3)">M3 逾期61-90天</div></div><div style="background:var(--purple-bg);border-radius:6px;padding:12px;text-align:center;"><div style="font-size:20px;font-weight:700;color:var(--purple)">0</div><div style="font-size:12px;color:var(--t3)">M4+ 逾期90+天</div></div></div><div style="font-size:13px;color:var(--t3);margin-top:8px;">催收作业在<b>资管中心 → 催收工作台</b>（第二批原型）</div></div></div>';};
 
 // ============================================================
 // 订单列表
@@ -848,8 +941,8 @@ pages['order-list'] = function(){return '<section class="card"><div class="card-
 // ============================================================
 pages['order-detail'] = function(){
   return '<section class="card"><div class="order-detail-header"><div class="order-no">OD20260722002</div>'
-  +tg('green','租用中')+' '+tg('red','逾期中')+' <span style="font-size:13px;color:var(--t3);font-weight:400;margin-left:8px">逾期7天 · M1 · 联营订单</span>'
-  +'<div style="margin-left:auto;display:flex;gap:8px">'
+  +tg('green','租用中')+' '+tg('red','逾期中')+' <span style="font-size:13px;color:var(--t3);font-weight:400;margin-left:8px">逾期7天 · M1-2 · 联营订单</span>'
+  +'<div style="margin-left:auto;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">'
   +'<button class="btn sm" onclick="showToast(\'催收工单已创建\')">发起催收</button>'
   +'<button class="btn sm" onclick="showToast(\'代扣请求已发送\')">手动代扣</button>'
   +'<button class="btn sm primary" onclick="showToast(\'跳转合同预览\')">查看合同</button>'
@@ -859,7 +952,7 @@ pages['order-detail'] = function(){
   +dl([
     {k:'订单号',v:'OD20260722002'},
     {k:'订单状态',v:tg('green','租用中')},
-    {k:'履约状态',v:tg('red','逾期中')+' <span style="font-size:12px;color:var(--t3)">逾期7天 · M1</span>'},
+    {k:'履约状态',v:tg('red','逾期中')+' <span style="font-size:12px;color:var(--t3)">逾期7天 · M1-2</span>'},
     {k:'完结方式',v:'<span style="color:var(--t3)">—</span>'},
     {k:'订单类型',v:tg('primary','首租订单')+' <span style="font-size:12px;color:var(--t3)">(orderType=first_rental)</span>'},
     {k:'商品性质',v:'实物商品'},
@@ -894,7 +987,7 @@ pages['order-detail'] = function(){
   +'<div class="timeline-item"><div class="timeline-dot done">✓</div><div class="timeline-info"><div class="tl-title">发货</div><div class="tl-time">2026-07-22 16:00 · 顺丰速运 · SF1234567890</div></div></div>'
   +'<div class="timeline-item"><div class="timeline-dot done">✓</div><div class="timeline-info"><div class="tl-title">签收确认</div><div class="tl-time">2026-07-23 10:15 · 用户签收 · 租赁起始</div></div></div>'
   +'<div class="timeline-item"><div class="timeline-dot done">✓</div><div class="timeline-info"><div class="tl-title">第1期代扣</div><div class="tl-time">2026-08-23 00:00 · ¥499 · 代扣成功</div></div></div>'
-  +'<div class="timeline-item"><div class="timeline-dot current">!</div><div class="timeline-info"><div class="tl-title">第2期代扣失败</div><div class="tl-time">2026-09-23 00:00 · ¥499 · 代扣失败(余额不足) · 逾期7天</div><div class="tl-note" style="color:var(--danger);font-size:12px;margin-top:4px">已触发催收流程 · M1等级</div></div></div>'
+  +'<div class="timeline-item"><div class="timeline-dot current">!</div><div class="timeline-info"><div class="tl-title">第2期代扣失败</div><div class="tl-time">2026-09-23 00:00 · ¥499 · 代扣失败(余额不足) · 逾期7天</div><div class="tl-note" style="color:var(--danger);font-size:12px;margin-top:4px">已触发催收流程 · M1-2等级</div></div></div>'
   +'<div class="timeline-item"><div class="timeline-dot pending">○</div><div class="timeline-info"><div class="tl-title">第3期待还</div><div class="tl-time">2026-10-23 · ¥499 · 待代扣</div></div></div>'
   +'<div class="timeline-item"><div class="timeline-dot pending">○</div><div class="timeline-info"><div class="tl-title">到期处置</div><div class="tl-time">2027-01-18 · 租期结束 · 可选：归还/续租/买断</div></div></div>'
   +'</div></div></div></section>'
@@ -935,7 +1028,7 @@ pages['order-detail'] = function(){
   +'<div class="related-cards">'
   +'<div class="related-card" onclick="showPage(\'order-list\')"><div class="rc-title"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.5"></rect><path d="M5 8h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path></svg>关联售卖订单</div><div class="rc-body"><div>OD20260716008 · 碎屏险</div><div class="rc-sub">售卖商品 · ¥99 · 已完结</div></div></div>'
   +'<div class="related-card" onclick="showPage(\'pay-flow\')"><div class="rc-title"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8h12M8 2v12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"></circle></svg>支付流水</div><div class="rc-body"><div>2笔代扣记录</div><div class="rc-sub">成功1笔 · 失败1笔 · ¥998</div></div></div>'
-  +'<div class="related-card" onclick="showPage(\'overdue-handle\')"><div class="rc-title"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 3l10 10M8 1v2M8 13v2M1 8h2M13 8h2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path><circle cx="8" cy="8" r="5" stroke="currentColor" stroke-width="1.5"></circle></svg>催收记录</div><div class="rc-body"><div>M1 · 逾期7天</div><div class="rc-sub">短信1次 · 电话1次 · 待上门</div></div></div>'
+  +'<div class="related-card" onclick="showPage(\'overdue-handle\')"><div class="rc-title"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 3l10 10M8 1v2M8 13v2M1 8h2M13 8h2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path><circle cx="8" cy="8" r="5" stroke="currentColor" stroke-width="1.5"></circle></svg>催收记录</div><div class="rc-body"><div>M1-2 · 逾期7天</div><div class="rc-sub">短信1次 · 电话1次 · 待上门</div></div></div>'
   +'<div class="related-card" onclick="showPage(\'ticket-list\')"><div class="rc-title"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.5"></rect><path d="M5 7h6M5 10h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path></svg>客服工单</div><div class="rc-body"><div>1个进行中工单</div><div class="rc-sub">用户反馈代扣失败</div></div></div>'
   +'</div></section>'
   +'<section class="card"><div style="font-size:16px;font-weight:600;margin-bottom:12px;">状态说明</div>'
@@ -943,7 +1036,7 @@ pages['order-detail'] = function(){
   +'<div><b style="color:var(--t1)">订单状态</b>：下单中(审核授权中) → 待支付 → 待分配(分配归属) → 待签约 → 待签收 → 租用中 → 将到期 → 已到期 → 已完结/已取消</div>'
   +'<div style="margin-top:4px"><b style="color:var(--t1)">履约状态</b>：签约前=未履约 · 租用中=履约中/逾期中/复履约/司法中/已结清 · 到期后=逾期中/复履约/司法中</div>'
   +'<div style="margin-top:4px"><b style="color:var(--t1)">完结方式</b>：仅已完结的租赁订单有值 · 归还完结/续租完结/买断完结/司法完结</div>'
-  +'<div style="margin-top:8px;padding:8px 12px;background:var(--bg2);border-radius:6px;font-size:12px">当前订单：租用中 + 逾期中 · 逾期7天 M1 · 联营订单 · 已触发催收 · 时间线展示到第2期代扣失败</div>'
+  +'<div style="margin-top:8px;padding:8px 12px;background:var(--bg2);border-radius:6px;font-size:12px">当前订单：租用中 + 逾期中 · 逾期7天 M1-2 · 联营订单 · 已触发催收 · 时间线展示到第2期代扣失败</div>'
   +'</div></section>'
   ;}
 
@@ -965,7 +1058,7 @@ function openBillDetailModal(){
   +'<div class="timeline-item"><div class="timeline-dot done">●</div><div class="timeline-info"><div class="tl-title">逾期金开始计算</div><div class="tl-time">2026-09-23 03:01 · 日费率 0.03% · 每日 ¥0.15</div></div></div>'
   +'<div class="timeline-item"><div class="timeline-dot done">●</div><div class="timeline-info"><div class="tl-title">还款提醒短信已发送</div><div class="tl-time">2026-09-23 10:00 · 模板 SMS_REMIND_OVERDUE · 发送成功</div></div></div>'
   +'<div class="timeline-item"><div class="timeline-dot done">●</div><div class="timeline-info"><div class="tl-title">AI外呼催收</div><div class="tl-time">2026-09-24 14:30 · 通话时长 32秒 · 用户承诺9月27日前还款</div></div></div>'
-  +'<div class="timeline-item"><div class="timeline-dot pending">○</div><div class="timeline-info"><div class="tl-title">等待用户还款</div><div class="tl-time">当前 · 逾期7天 · M1 · 累计逾期金 ¥1.05</div></div></div>'
+  +'<div class="timeline-item"><div class="timeline-dot pending">○</div><div class="timeline-info"><div class="tl-title">等待用户还款</div><div class="tl-time">当前 · 逾期7天 · M1-2 · 累计逾期金 ¥1.05</div></div></div>'
   +'</div><div style="margin-top:16px;display:flex;gap:8px;"><button class="btn primary" onclick="openPenaltyReduceModal()">逾期金减免审批</button><button class="btn" onclick="closeModal()">返回</button></div>','wide');
 }
 
@@ -987,19 +1080,19 @@ function submitReduceAmount(){
 
 
 // ============================================================
-// 租后预警与处置看板（6分区：预提醒+M0+M1+M2++M3++恶意违约）
+// 租后预警与处置看板（6分区：预提醒+M1(细分)+M2+M3+M4++恶意违约）
 // ============================================================
-pages['overdue-board'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">租后预警与处置看板</div><div style="font-size:13px;color:var(--t3)">从预防到处置全阶段管控 · 催收作业在<b>资管中心 \u2192 催收工作台</b></div></div>'+sc([{v:'34',k:'预提醒(7天内到期)',c:'blue'},{v:'87',k:'逾期订单总数',c:'red'},{v:'\u00a517.4万',k:'逾期金额合计',c:'orange'},{v:'0',k:'M3+(30+天)',c:'purple'},{v:'6',k:'恶意违约',c:'danger'}])
+pages['overdue-board'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">租后预警与处置看板</div><div style="font-size:13px;color:var(--t3)">从预防到处置全阶段管控 · 无宽限期 · 逾期第1天即入 M1-1 · 催收作业在<b>资管中心 → 催收工作台</b></div></div>'+sc([{v:'34',k:'预提醒(应还日前)',c:'blue'},{v:'87',k:'逾期订单总数',c:'red'},{v:'¥17.4万',k:'逾期金额合计',c:'orange'},{v:'0',k:'M4+(90+天)',c:'purple'},{v:'6',k:'恶意违约',c:'danger'}])
 
-+'<div class="age-group" style="border-left:3px solid var(--info);"><div class="age-group-header"><div class="age-group-title"><span style="background:var(--info);color:#fff;width:24px;height:24px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;margin-right:8px">\u26a1</span> 预提醒 \u00b7 账单到期前7天内 \u00b7 防逾期干预</div><div class="btn-group"><button class="btn sm primary">批量发送提醒</button><button class="btn sm">代扣预检查</button><button class="btn sm">导出</button></div></div><div class="age-group-stats"><div class="age-stat"><div class="as-v" style="color:var(--info)">34</div><div class="as-k">即将到期订单</div></div><div class="age-stat"><div class="as-v" style="color:var(--orange)">\u00a58.5万</div><div class="as-k">待收金额</div></div><div class="age-stat"><div class="as-v" style="color:var(--success)">28</div><div class="as-k">已签约代扣</div></div><div class="age-stat"><div class="as-v" style="color:var(--danger)">6</div><div class="as-k">未签约/签约异常</div></div></div>'+dt(['订单号','用户','商品','到期账单日','待收金额','代扣状态','上期逾期','风险标记'],[{c:['OD20260723001','李*云','苹果16 Pro Max','2026-10-22','\u00a5667',tg('green','已签约'),'无','\u2014'],o:'<span class="link" onclick="showPage(\'order-detail\')">详情</span>'},{c:['OD20260722002','张*明','华为Mate 70 Pro','2026-10-22','\u00a5499',tg('red','签约异常'),'有(上月逾期3天)',tg('orange','关注')],o:'<span class="link">详情</span> <span class="link" style="color:var(--primary)">代扣预检查</span>'},{c:['OD20260721003','王*华','iPad Pro M4','2026-10-21','\u00a5358',tg('red','未签约'),'\u2014',tg('red','高风险')],o:'<span class="link">详情</span> <span class="link" style="color:var(--primary)">发送提醒</span>'}])+'</div>'
++'<div class="age-group" style="border-left:3px solid var(--info);"><div class="age-group-header"><div class="age-group-title"><span style="background:var(--info);color:#fff;width:24px;height:24px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;margin-right:8px">⚡</span> 预提醒 · 应还日前 T-7/T-3/T-1/T-0 · 防逾期干预</div><div class="btn-group"><button class="btn sm primary">批量发送提醒</button><button class="btn sm">代扣预检查</button><button class="btn sm">导出</button></div></div><div class="age-group-stats"><div class="age-stat"><div class="as-v" style="color:var(--info)">12</div><div class="as-k">T-7 账单已发</div></div><div class="age-stat"><div class="as-v" style="color:var(--info)">10</div><div class="as-k">T-3 还款提醒已发</div></div><div class="age-stat"><div class="as-v" style="color:var(--orange)">8</div><div class="as-k">T-1 短信已发</div></div><div class="age-stat"><div class="as-v" style="color:var(--danger)">4</div><div class="as-k">T-0 今日到期</div></div></div>'+dt(['订单号','用户','商品','应还日','提醒节点','待收金额','代扣状态','风险标记'],[{c:['OD20260723001','李*云','苹果16 Pro Max','2026-10-22',tg('info','T-3 订阅消息'),'¥667',tg('green','已签约'),'—'],o:'<span class="link" onclick="showPage(\'order-detail\')">详情</span>'},{c:['OD20260722002','张*明','华为Mate 70 Pro','2026-10-22',tg('orange','T-1 短信'),'¥499',tg('red','签约异常'),tg('orange','关注')],o:'<span class="link">详情</span> <span class="link" style="color:var(--primary)">代扣预检查</span>'},{c:['OD20260721003','王*华','iPad Pro M4','2026-10-21',tg('red','T-0 今日到期'),'¥358',tg('red','未签约'),tg('red','高风险')],o:'<span class="link">详情</span> <span class="link" style="color:var(--primary)">发送提醒</span>'}])+'</div>' 
 
-+'<div class="age-group" style="border-left:3px solid var(--info);"><div class="age-group-header"><div class="age-group-title"><span style="background:var(--info);color:#fff;width:24px;height:24px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;margin-right:8px">M0</span> M0 逾期 1-6天 \u00b7 提醒期</div><div class="btn-group"><button class="btn sm primary">批量触发提醒</button><button class="btn sm">导出</button></div></div><div class="age-group-stats"><div class="age-stat"><div class="as-v blue">52</div><div class="as-k">订单数</div></div><div class="age-stat"><div class="as-v orange">\u00a56.2万</div><div class="as-k">逾期金额</div></div><div class="age-stat"><div class="as-v blue">\u00a50.9万</div><div class="as-k">逾期金</div></div></div>'+dt(['订单号','用户','商品','逾期天数','逾期金额','逾期金','代扣状态'],[{c:['OD20260722002','张*明','华为Mate 70 Pro','3天','\u00a5499','\u00a50.45',tg('red','扣款失败')],o:'<span class="link" onclick="showPage(\'order-detail\')">详情</span> <span class="link" style="color:var(--primary)">触发提醒</span>'},{c:['OD20260720003','王*华','iPad Pro M4','5天','\u00a5358','\u00a50.54',tg('red','扣款失败')],o:'<span class="link">详情</span>'}])+'</div>'
++'<div class="age-group" style="border-left:3px solid var(--warning);"><div class="age-group-header"><div class="age-group-title"><span style="background:var(--warning);color:#fff;width:24px;height:24px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;margin-right:8px">M1</span> M1 逾期 1-30天 · 内分四段催收</div><div class="btn-group"><button class="btn sm primary">批量触发催收</button><button class="btn sm">导出</button></div></div><div class="age-group-stats"><div class="age-stat"><div class="as-v" style="color:var(--info)">18</div><div class="as-k">M1-1 1-3天</div></div><div class="age-stat"><div class="as-v" style="color:var(--warning)">21</div><div class="as-k">M1-2 4-7天</div></div><div class="age-stat"><div class="as-v" style="color:var(--orange)">26</div><div class="as-k">M1-3 8-15天</div></div><div class="age-stat"><div class="as-v" style="color:var(--danger)">22</div><div class="as-k">M1-4 16-30天</div></div></div>'+dt(['订单号','用户','商品','逾期天数','M1分段','逾期金额','逾期金','代扣状态'],[{c:['OD20260722002','张*明','华为Mate 70 Pro','7天',tg('warning','M1-2 黄金期'),'¥499','¥1.05',tg('red','扣款失败')],o:'<span class="link" onclick="showPage(\'order-detail\')">详情</span> <span class="link" style="color:var(--primary)">触发催收</span>'},{c:['OD20260720004','赵*芳','小米15 Ultra','9天',tg('orange','M1-3 强化期'),'¥599','¥1.62',tg('red','扣款失败')],o:'<span class="link">详情</span>'},{c:['OD20260720001','钱*东','iPhone 15 Pro','23天',tg('danger','M1-4 尾部'),'¥667','¥4.60',tg('red','扣款失败3次')],o:'<span class="link">详情</span> <span class="link" style="color:var(--primary)">人工催收</span>'}])+'</div>' 
 
-+'<div class="age-group" style="border-left:3px solid var(--warning);"><div class="age-group-header"><div class="age-group-title"><span style="background:var(--warning);color:#fff;width:24px;height:24px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;margin-right:8px">M1</span> M1 逾期 7-14天 \u00b7 催收期</div><div class="btn-group"><button class="btn sm primary">批量触发催收</button><button class="btn sm">导出</button></div></div><div class="age-group-stats"><div class="age-stat"><div class="as-v orange">21</div><div class="as-k">订单数</div></div><div class="age-stat"><div class="as-v red">\u00a56.5万</div><div class="as-k">逾期金额</div></div><div class="age-stat"><div class="as-v orange">\u00a51.5万</div><div class="as-k">逾期金</div></div></div>'+dt(['订单号','用户','商品','逾期天数','逾期金额','逾期金','代扣状态'],[{c:['OD20260722002','张*明','华为Mate 70 Pro','7天','\u00a5499','\u00a51.05',tg('red','扣款失败2次')],o:'<span class="link" onclick="showPage(\'order-detail\')">详情</span> <span class="link" style="color:var(--primary)">触发催收</span>'},{c:['OD20260720004','赵*芳','小米15 Ultra','9天','\u00a5599','\u00a51.62',tg('red','扣款失败')],o:'<span class="link">详情</span>'}])+'</div>'
++'<div class="age-group" style="border-left:3px solid var(--danger);"><div class="age-group-header"><div class="age-group-title"><span style="background:var(--danger);color:#fff;width:24px;height:24px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;margin-right:8px">M2</span> M2 逾期 31-60天 · 人工电话催收</div><div class="btn-group"><button class="btn sm danger">批量人工催收</button><button class="btn sm">导出</button></div></div><div class="age-group-stats"><div class="age-stat"><div class="as-v red">14</div><div class="as-k">订单数</div></div><div class="age-stat"><div class="as-v red">¥4.7万</div><div class="as-k">逾期金额</div></div><div class="age-stat"><div class="as-v red">¥0.8万</div><div class="as-k">逾期金</div></div></div>'+dt(['订单号','用户','商品','逾期天数','逾期金额','逾期金','催收记录'],[{c:['OD20260715001','陈*军','iPhone 15 Pro','35天','¥667','¥7.00','电话3次/短信5次'],o:'<span class="link">详情</span> <span class="link" style="color:var(--primary)">人工催收</span>'},{c:['OD20260708002','刘*刚','MacBook Air M3','48天','¥899','¥12.90','电话5次/已协商分期'],o:'<span class="link">详情</span>'}])+'</div>' 
 
-+'<div class="age-group" style="border-left:3px solid var(--danger);"><div class="age-group-header"><div class="age-group-title"><span style="background:var(--danger);color:#fff;width:24px;height:24px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;margin-right:8px">M2+</span> M2+ 逾期 15-29天 \u00b7 密集催收\u00b7上门预备</div><div class="btn-group"><button class="btn sm danger">批量上门催收</button><button class="btn sm danger">转司法</button><button class="btn sm">导出</button></div></div><div class="age-group-stats"><div class="age-stat"><div class="as-v red">14</div><div class="as-k">订单数</div></div><div class="age-stat"><div class="as-v red">\u00a54.7万</div><div class="as-k">逾期金额</div></div><div class="age-stat"><div class="as-v red">\u00a50.8万</div><div class="as-k">逾期金</div></div></div>'+dt(['订单号','用户','商品','逾期天数','逾期金额','逾期金','催收记录'],[{c:['OD20260715001','陈*军','iPhone 15 Pro','18天','\u00a5667','\u00a53.60','电话3次/短信5次'],o:'<span class="link">详情</span> <span class="link" style="color:var(--primary)">上门催收</span> <span class="btn danger sm">转司法</span>'}])+'</div>'
++'<div class="age-group" style="border-left:3px solid var(--purple);"><div class="age-group-header"><div class="age-group-title"><span style="background:var(--purple);color:#fff;width:24px;height:24px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;margin-right:8px">M3</span> M3 逾期 61-90天 · 委外·法诉准备</div><div class="btn-group"><button class="btn sm danger">批量委外</button><button class="btn sm danger">转司法准备</button><button class="btn sm">导出</button></div></div><div class="age-group-stats"><div class="age-stat"><div class="as-v" style="color:var(--purple)">8</div><div class="as-k">订单数</div></div><div class="age-stat"><div class="as-v" style="color:var(--purple)">¥3.2万</div><div class="as-k">逾期金额</div></div><div class="age-stat"><div class="as-v" style="color:var(--purple)">¥0.6万</div><div class="as-k">逾期金</div></div></div>'+dt(['订单号','用户','商品','逾期天数','逾期金额','逾期金','催收记录'],[{c:['OD20260620003','孙*磊','华为Mate 70 Pro','72天','¥499','¥10.78','委外机构跟进中'],o:'<span class="link">详情</span> <span class="btn danger sm">转司法</span>'}])+'</div>' 
 
-+'<div class="age-group" style="border-left:3px solid var(--purple);"><div class="age-group-header"><div class="age-group-title"><span style="background:var(--purple);color:#fff;width:24px;height:24px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;margin-right:8px">M3+</span> M3+ 逾期 30+天 \u00b7 转司法准备</div><div class="btn-group"><button class="btn sm danger">批量转司法</button><button class="btn sm">导出</button></div></div><div class="age-group-stats"><div class="age-stat"><div class="as-v purple">0</div><div class="as-k">订单数</div></div><div class="age-stat"><div class="as-v" style="color:var(--purple)">\u00a50</div><div class="as-k">逾期金额</div></div><div class="age-stat"><div class="as-v" style="color:var(--purple)">\u00a50</div><div class="as-k">逾期金</div></div></div><div style="text-align:center;padding:20px;color:var(--t3);font-size:14px;">暂无M3+逾期订单 · 可导出当前逾期数据备查</div></div>'
++'<div class="age-group" style="border-left:3px solid var(--purple);"><div class="age-group-header"><div class="age-group-title"><span style="background:var(--purple);color:#fff;width:24px;height:24px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;margin-right:8px">M4+</span> M4+ 逾期 90天以上 · 法诉·坏账核销</div><div class="btn-group"><button class="btn sm danger">批量转司法</button><button class="btn sm">导出</button></div></div><div class="age-group-stats"><div class="age-stat"><div class="as-v purple">0</div><div class="as-k">订单数</div></div><div class="age-stat"><div class="as-v" style="color:var(--purple)">¥0</div><div class="as-k">逾期金额</div></div><div class="age-stat"><div class="as-v" style="color:var(--purple)">¥0</div><div class="as-k">逾期金</div></div></div><div style="text-align:center;padding:20px;color:var(--t3);font-size:14px;">暂无 M4+ 逾期订单 · 逾期≥180天进入坏账核销流程</div></div>' 
 
 +'<div class="age-group" style="border-left:3px solid var(--danger);margin-top:8px;"><div class="age-group-header"><div class="age-group-title"><span style="background:var(--danger);color:#fff;width:24px;height:24px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;margin-right:8px">\u26a0</span> 恶意违约 \u00b7 不限账龄 \u00b7 快速止损\u00b7直接转司法</div><div class="btn-group"><button class="btn sm danger">批量转司法</button><button class="btn sm">导出</button></div></div><div class="age-group-stats"><div class="age-stat"><div class="as-v danger">6</div><div class="as-k">恶意违约订单</div></div><div class="age-stat"><div class="as-v red">\u00a52.8万</div><div class="as-k">涉及金额</div></div><div class="age-stat"><div class="as-v" style="color:var(--danger)">\u00a51.2万</div><div class="as-k">逾期金</div></div></div>'+dt(['订单号','用户','商品','违约类型','逾期天数','涉及金额','标记来源','操作'],[{c:['OD20260722005','孙*飞','华为Mate 70 Pro','失联超过15天','35天','\u00a5499','风控自动识别',tg('red','高风险')],o:'<span class="link" onclick="showPage(\'order-detail\')">详情</span> <span class="btn danger sm">转司法</span>'},{c:['OD20260720008','周*丽','iPhone 16 Pro Max','连续3次累计逾期>45天','52天','\u00a5667','催收员标记',tg('orange','关注')],o:'<span class="link">详情</span> <span class="btn danger sm">转司法</span>'},{c:['OD20260719012','吴*强','iPad Pro M4','虚假信息（收货地址异常）','20天','\u00a5358','风控自动识别',tg('red','高风险')],o:'<span class="link">详情</span> <span class="btn danger sm">转司法</span>'}])+'</div>'
 
@@ -1007,12 +1100,12 @@ pages['overdue-board'] = function(){return '<section class="card"><div class="ca
 // ============================================================
 // 应收账单列表（按费项设计）
 // ============================================================
-pages['bill-list'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">应收账单列表</div></div>'+sc([{v:'¥89.6万',k:'应收总额',c:'primary'},{v:'¥72.3万',k:'已回收',c:'green'},{v:'¥17.4万',k:'逾期应收',c:'red'},{v:'¥258',k:'逾期金合计',c:'orange'}])+fb([{t:'i',p:'账单编号 / 订单号 / 手机号',w:'220px'},{t:'s',o:S_BILL_FEE},{t:'s',o:S_BILL_STATUS},{t:'s',o:['全部逾期等级','M0','M1','M2+','M3+']},{t:'d',p:'应还日期起',w:'140px'},{t:'d',p:'应还日期止',w:'140px'}])+ab([{t:'导出',c:'primary',fn:'exportData()'}])+dt(['账单编号','订单号','用户','费项类型','期数/说明','应还','已还','逾期金','应还日期','状态'],[{c:['BL20260922002','OD20260722002','张*明',tg('primary','月租金'),'第2期','¥499','¥0','¥1.05','2026-09-22',tg('red','逾期')],o:'<span class="link" onclick="openBillDetailModal()">详情</span>'},{c:['BL20260822001','OD20260723001','李*云',tg('primary','月租金'),'第1期','¥667','¥667','—','2026-08-23',tg('green','已还')],o:'<span class="link">详情</span>'},{c:['BL-D20260723001','OD20260723001','李*云',tg('orange','押金'),'预授权冻结','¥1,500','冻结中','—','2026-07-23',tg('orange','冻结')],o:'<span class="link">详情</span>'},{c:['BL-S20260723001','OD20260723001','李*云',tg('purple','保证金'),'全额','¥500','¥500','—','2026-07-23',tg('green','已付')],o:'<span class="link">详情</span>'},{c:['BL-V20260723001','OD20260723001','李*云',tg('green','增值服务费'),'碎屏险','¥99','¥99','—','2026-07-23',tg('green','已付')],o:'<span class="link">详情</span>'},{c:['BL-SB20260723001','OD20260723001','李*云',tg('red','补缴'),'定损差额','¥350','¥0','—','2026-08-30',tg('orange','待补缴')],o:'<span class="link">详情</span> <span class="link" style="color:var(--primary)">→ 补缴作业</span>'}])+pg(4870)+'</section>';};
+pages['bill-list'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">应收账单列表</div></div>'+sc([{v:'¥89.6万',k:'应收总额',c:'primary'},{v:'¥72.3万',k:'已回收',c:'green'},{v:'¥17.4万',k:'逾期应收',c:'red'},{v:'¥258',k:'逾期金合计',c:'orange'}])+fb([{t:'i',p:'账单编号 / 订单号 / 手机号',w:'220px'},{t:'s',o:S_BILL_FEE},{t:'s',o:S_BILL_STATUS},{t:'s',o:['全部账龄','M1-1','M1-2','M1-3','M1-4','M2','M3','M4+']},{t:'d',p:'应还日期起',w:'140px'},{t:'d',p:'应还日期止',w:'140px'}])+ab([{t:'导出',c:'primary',fn:'exportData()'}])+dt(['账单编号','订单号','用户','费项类型','期数/说明','应还','已还','逾期金','应还日期','状态'],[{c:['BL20260922002','OD20260722002','张*明',tg('primary','月租金'),'第2期','¥499','¥0','¥1.05','2026-09-22',tg('red','逾期')],o:'<span class="link" onclick="openBillDetailModal()">详情</span>'},{c:['BL20260822001','OD20260723001','李*云',tg('primary','月租金'),'第1期','¥667','¥667','—','2026-08-23',tg('green','已还')],o:'<span class="link">详情</span>'},{c:['BL-D20260723001','OD20260723001','李*云',tg('orange','押金'),'预授权冻结','¥1,500','冻结中','—','2026-07-23',tg('orange','冻结')],o:'<span class="link">详情</span>'},{c:['BL-S20260723001','OD20260723001','李*云',tg('purple','保证金'),'全额','¥500','¥500','—','2026-07-23',tg('green','已付')],o:'<span class="link">详情</span>'},{c:['BL-V20260723001','OD20260723001','李*云',tg('green','增值服务费'),'碎屏险','¥99','¥99','—','2026-07-23',tg('green','已付')],o:'<span class="link">详情</span>'},{c:['BL-SB20260723001','OD20260723001','李*云',tg('red','补缴'),'定损差额','¥350','¥0','—','2026-08-30',tg('orange','待补缴')],o:'<span class="link">详情</span> <span class="link" style="color:var(--primary)">→ 补缴作业</span>'}])+pg(4870)+'</section>';};
 
 // ============================================================
 // 逾期账龄看板
 // ============================================================
-pages['bill-age-board'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">逾期账龄看板</div></div>'+sc([{v:'87',k:'逾期账单总数',c:'red'},{v:'¥17.4万',k:'逾期本金合计',c:'orange'},{v:'¥258',k:'逾期金合计',c:'danger'},{v:'38%',k:'逾期率',c:'red'}])+'<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;margin-bottom:16px;"><div class="age-group"><div style="text-align:center;padding:8px 0"><div style="font-size:14px;font-weight:600;color:var(--info);margin-bottom:4px">M0 (1-6天)</div><div style="font-size:24px;font-weight:700;color:var(--info)">52</div><div style="font-size:12px;color:var(--t3)">¥6.2万 / 逾期金¥46</div></div><button class="btn sm primary" style="width:100%;justify-content:center">批量触发提醒</button></div><div class="age-group"><div style="text-align:center;padding:8px 0"><div style="font-size:14px;font-weight:600;color:var(--warning);margin-bottom:4px">M1 (7-14天)</div><div style="font-size:24px;font-weight:700;color:var(--warning)">21</div><div style="font-size:12px;color:var(--t3)">¥6.5万 / 逾期金¥64</div></div><button class="btn sm primary" style="width:100%;justify-content:center">批量触发催收</button></div><div class="age-group"><div style="text-align:center;padding:8px 0"><div style="font-size:14px;font-weight:600;color:var(--danger);margin-bottom:4px">M2+ (15-29天)</div><div style="font-size:24px;font-weight:700;color:var(--danger)">14</div><div style="font-size:12px;color:var(--t3)">¥4.7万 / 逾期金¥85</div></div><button class="btn sm danger" style="width:100%;justify-content:center">批量转司法</button></div><div class="age-group"><div style="text-align:center;padding:8px 0"><div style="font-size:14px;font-weight:600;color:var(--purple);margin-bottom:4px">M3+ (30+天)</div><div style="font-size:24px;font-weight:700;color:var(--purple)">0</div><div style="font-size:12px;color:var(--t3)">¥0 / ¥0逾期金</div></div><button class="btn sm danger" style="width:100%;justify-content:center">转司法</button></div></div><div style="font-size:13px;color:var(--t3);margin-bottom:12px;">催收作业在<b>资管中心 → 催收工作台</b>（第二批原型）</div>'+dt(['账单编号','订单号','用户','费项','逾期天数','逾期本金','逾期金','账龄','操作'],[{c:['BL20260922002','OD20260722002','张*明',tg('primary','月租金·第2期'),'7天','¥499','¥1.05','M1','—'],o:'<span class="link" onclick="openBillDetailModal()">详情</span>'},{c:['BL20260923001','OD20260720004','赵*芳',tg('primary','月租金·第3期'),'9天','¥599','¥1.62','M1','—'],o:'<span class="link">详情</span>'}])+pg(87)+'</section>';};
+pages['bill-age-board'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">逾期账龄看板</div></div>'+sc([{v:'87',k:'逾期账单总数',c:'red'},{v:'¥17.4万',k:'逾期本金合计',c:'orange'},{v:'¥258',k:'逾期金合计',c:'danger'},{v:'38%',k:'逾期率',c:'red'}])+'<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;margin-bottom:16px;"><div class="age-group"><div style="text-align:center;padding:8px 0"><div style="font-size:14px;font-weight:600;color:var(--warning);margin-bottom:4px">M1 (1-30天)</div><div style="font-size:24px;font-weight:700;color:var(--warning)">87</div><div style="font-size:12px;color:var(--t3)">M1-1~M1-4 · ¥17.4万</div></div><button class="btn sm primary" style="width:100%;justify-content:center">批量触发催收</button></div><div class="age-group"><div style="text-align:center;padding:8px 0"><div style="font-size:14px;font-weight:600;color:var(--danger);margin-bottom:4px">M2 (31-60天)</div><div style="font-size:24px;font-weight:700;color:var(--danger)">14</div><div style="font-size:12px;color:var(--t3)">¥4.7万 / 逾期金¥85</div></div><button class="btn sm danger" style="width:100%;justify-content:center">批量人工催收</button></div><div class="age-group"><div style="text-align:center;padding:8px 0"><div style="font-size:14px;font-weight:600;color:var(--purple);margin-bottom:4px">M3 (61-90天)</div><div style="font-size:24px;font-weight:700;color:var(--purple)">8</div><div style="font-size:12px;color:var(--t3)">¥3.2万 / 逾期金¥45</div></div><button class="btn sm danger" style="width:100%;justify-content:center">委外·法诉准备</button></div><div class="age-group"><div style="text-align:center;padding:8px 0"><div style="font-size:14px;font-weight:600;color:var(--purple);margin-bottom:4px">M4+ (90+天)</div><div style="font-size:24px;font-weight:700;color:var(--purple)">0</div><div style="font-size:12px;color:var(--t3)">¥0 / ¥0逾期金</div></div><button class="btn sm danger" style="width:100%;justify-content:center">转司法</button></div></div><div style="font-size:13px;color:var(--t3);margin-bottom:12px;">账龄口径：无宽限期 · 逾期第1天即入 M1-1 · 催收作业在<b>资管中心 → 催收工作台</b></div>'+dt(['账单编号','订单号','用户','费项','逾期天数','逾期本金','逾期金','账龄','操作'],[{c:['BL20260922002','OD20260722002','张*明',tg('primary','月租金·第2期'),'7天','¥499','¥1.05',tg('warning','M1-2')],o:'<span class="link" onclick="openBillDetailModal()">详情</span>'},{c:['BL20260923001','OD20260720004','赵*芳',tg('primary','月租金·第3期'),'9天','¥599','¥1.62',tg('orange','M1-3')],o:'<span class="link">详情</span>'},{c:['BL20260815001','OD20260715001','陈*军',tg('primary','月租金·第4期'),'35天','¥667','¥7.00',tg('danger','M2')],o:'<span class="link">详情</span>'}])+pg(87)+'</section>';};
 
 // ============================================================
 // 罚金管理（三Tab：逾期金规则 / 违约金规则 / 减免审批）
@@ -1171,9 +1264,515 @@ function openAddSKU(){
 }
 
 // ============================================================
-// 商品分类管理
+// 后台商品分类管理
 // ============================================================
-pages['category-tree'] = function(){return '<div class="split2"><div class="card"><div class="card-header"><div class="card-title">分类树管理</div><button class="btn sm primary" onclick="openAddCategory()">新增分类</button></div><div class="tree"><div class="tree-node active" onclick="toggleTree(this)"><span class="arrow open">\u25be</span> 手机 <span class="count">86 SPU</span></div><div class="tree-children open"><div class="tree-node" onclick="toggleTree(this)"><span class="arrow open">\u25be</span> Apple <span class="count">32 SPU</span></div><div class="tree-children open"><div class="tree-node">iPhone 16系列 <span class="count">8 SPU</span></div><div class="tree-node">iPhone 15系列 <span class="count">6 SPU</span></div></div><div class="tree-node" onclick="toggleTree(this)"><span class="arrow">\u25be</span> HUAWEI <span class="count">28 SPU</span></div><div class="tree-children"><div class="tree-node">Mate系列 <span class="count">6 SPU</span></div><div class="tree-node">P系列 <span class="count">4 SPU</span></div></div><div class="tree-node">小米 <span class="count">12 SPU</span></div><div class="tree-node">OPPO <span class="count">8 SPU</span></div></div><div class="tree-node" onclick="toggleTree(this)"><span class="arrow">\u25be</span> 平板 <span class="count">28 SPU</span></div><div class="tree-children"><div class="tree-node">Apple <span class="count">10 SPU</span></div><div class="tree-node">HUAWEI <span class="count">8 SPU</span></div><div class="tree-node">小米 <span class="count">6 SPU</span></div></div><div class="tree-node">笔记本 <span class="count">22 SPU</span></div><div class="tree-node">耳机 <span class="count">12 SPU</span></div><div class="tree-node">手表 <span class="count">10 SPU</span></div><div class="tree-node">相机 <span class="count">0 SPU</span></div></div></div><div class="card"><div class="card-header"><div class="card-title">分类详情 \u2014 手机</div></div>'+dl([{k:'分类编码',v:'CAT001'},{k:'分类名称',v:'手机'},{k:'上级分类',v:'顶级分类'},{k:'排序号',v:'1'},{k:'关联SPU数',v:'86'},{k:'子分类数',v:'5'},{k:'状态',v:tg('green','启用')}])+'<div style="margin-top:12px"><button class="btn sm primary">编辑</button> <button class="btn sm danger">删除</button></div></div></div>';};
+// ============================================================
+// 商品分类数据（统一四级：L1根分类 → L2品类 → L3品牌 → L4 SPU系列）
+// 规则：SPU只挂L4叶子节点；父级SPU数由子级自动汇总
+// ============================================================
+var CAT_DATA=[
+ {n:'手机',code:'CAT001',icon:'📱',cats:[
+  ['智能手机',[
+   ['Apple',[['iPhone 17系列',6],['iPhone 16系列',8],['iPhone SE系列',2]]],
+   ['HUAWEI',[['Mate系列',6],['P系列',4],['nova系列',5]]],
+   ['小米',[['小米数字系列',5],['Civi系列',3]]],
+   ['Redmi',[['K系列',4],['Note系列',5],['Turbo系列',2]]],
+   ['OPPO',[['Find系列',4],['Reno系列',4],['A系列',3]]],
+   ['vivo',[['X系列',4],['S系列',3],['Y系列',3]]],
+   ['iQOO',[['数字系列',3],['Neo系列',3],['Z系列',2]]],
+   ['荣耀',[['Magic系列',4],['数字系列',4],['X系列',3]]],
+   ['三星',[['Galaxy S系列',3],['Galaxy A系列',3]]],
+   ['一加',[['数字系列',3],['Ace系列',3]]],
+   ['真我',[['GT系列',2],['Neo系列',2]]],
+   ['魅族',[['数字系列',2],['Lucky系列',1]]]
+  ]],
+  ['折叠屏手机',[
+   ['HUAWEI',[['Mate X系列',3],['Pocket系列',2]]],
+   ['三星',[['Galaxy Z Fold系列',2],['Galaxy Z Flip系列',2]]],
+   ['荣耀',[['Magic V系列',2]]],
+   ['vivo',[['X Fold系列',2]]],
+   ['OPPO',[['Find N系列',2]]],
+   ['小米',[['MIX Fold系列',2]]]
+  ]],
+  ['手机配件',[
+   ['Apple',[['MagSafe磁吸充电器',2],['官方手机壳',3],['20W充电器',1],['数据线',2]]],
+   ['Anker安克',[['氮化镓充电器',4],['MagGo磁吸系列',3],['安心充移动电源',2]]],
+   ['贝尔金',[['MagSafe充电器',2],['车载支架',1]]],
+   ['绿联',[['氮化镓充电器',3],['磁吸无线充',2],['扩展坞',2]]],
+   ['倍思',[['磁吸充电宝',2],['车载充电器',2],['数据线',2]]],
+   ['品胜',[['数据线系列',2],['充电头系列',2]]],
+   ['图拉斯',[['支架系列',2],['挂钩小风扇',1]]],
+   ['Mophie',[['磁吸无线充系列',1]]],
+   ['罗马仕',[['移动电源系列',3]]],
+   ['亿色',[['手机壳系列',3],['钢化膜系列',2]]]
+  ]]
+ ]},
+ {n:'电脑',code:'CAT002',icon:'💻',cats:[
+  ['笔记本电脑',[
+   ['Apple',[['MacBook Air',3],['MacBook Pro',4]]],
+   ['联想',[['拯救者',4],['ThinkPad',5],['小新',3],['Yoga',3]]],
+   ['华硕',[['天选',3],['灵耀',2],['无畏',2]]],
+   ['戴尔',[['XPS',3],['游匣',2],['Latitude',2]]],
+   ['惠普',[['暗影精灵',3],['星Book',2],['战系列',2]]],
+   ['HUAWEI',[['MateBook X',2],['MateBook D',2]]],
+   ['荣耀',[['MagicBook',3]]],
+   ['小米',[['Redmi Book',2],['小米Book',1]]],
+   ['微星',[['泰坦',2],['绝影',1]]],
+   ['雷蛇',[['Blade灵刃',2]]]
+  ]],
+  ['台式/一体机',[
+   ['Apple',[['iMac',1],['Mac mini',2],['Mac Studio',1]]],
+   ['联想',[['GeekPro',2],['ThinkCentre',2]]],
+   ['HUAWEI',[['MateStation',2]]]
+  ]],
+  ['显示器',[
+   ['Apple',[['Studio Display',1],['Pro Display XDR',1]]],
+   ['戴尔',[['U系列',3],['G系列',2]]],
+   ['LG',[['UltraFine',2],['UltraGear',3]]],
+   ['三星',[['Odyssey玄龙骑士',2]]],
+   ['AOC',[['电竞系列',3]]]
+  ]],
+  ['电脑配件',[
+   ['罗技',[['键盘系列',4],['鼠标系列',4],['扩展坞',1]]],
+   ['雷蛇',[['键鼠系列',3]]],
+   ['绿联',[['扩展坞',3],['数据线',2]]],
+   ['贝尔金',[['扩展坞',2],['雷电线',1]]],
+   ['Anker安克',[['氮化镓充电器',2]]]
+  ]]
+ ]},
+ {n:'平板',code:'CAT003',icon:'📟',cats:[
+  ['标准平板',[
+   ['Apple',[['iPad Pro',3],['iPad Air',3],['iPad',2],['iPad mini',1]]],
+   ['HUAWEI',[['MatePad Pro',3],['MatePad',3]]],
+   ['小米',[['小米平板',3],['Redmi Pad',2]]],
+   ['荣耀',[['MagicPad',2],['荣耀平板',2]]],
+   ['OPPO',[['Pad系列',2]]],
+   ['vivo',[['Pad系列',2]]],
+   ['三星',[['Galaxy Tab S系列',2]]],
+   ['联想',[['小新Pad',3],['YOGA Pad',1]]],
+   ['iQOO',[['Pad系列',1]]]
+  ]],
+  ['墨水屏平板',[
+   ['HUAWEI',[['MatePad Paper',1]]],
+   ['文石',[['BOOX Tab系列',3],['Note系列',3]]],
+   ['掌阅',[['Smart系列',2]]]
+  ]],
+  ['平板配件',[
+   ['Apple',[['妙控键盘',1],['Apple Pencil',2]]],
+   ['罗技',[['键盘套装',3],['Crayon触控笔',1]]],
+   ['倍思',[['平板支架',2],['保护壳',2]]],
+   ['亿色',[['保护壳系列',3],['钢化膜系列',2]]]
+  ]]
+ ]},
+ {n:'智能穿戴',code:'CAT004',icon:'⌚',cats:[
+  ['智能手表',[
+   ['Apple',[['Watch Ultra',1],['Watch Series',2],['Watch SE',1]]],
+   ['HUAWEI',[['Watch GT',4],['Watch Ultimate',1],['Watch D',1]]],
+   ['小米',[['Watch S系列',2],['Watch H系列',1]]],
+   ['荣耀',[['Watch系列',2]]],
+   ['三星',[['Galaxy Watch',2]]],
+   ['小天才',[['儿童手表Z系列',3],['Q系列',2]]],
+   ['华米',[['Amazfit系列',3]]]
+  ]],
+  ['智能耳机',[
+   ['Apple',[['AirPods Pro',2],['AirPods Max',1],['AirPods',2]]],
+   ['索尼',[['WH-1000X头戴',3],['WF真无线',3]]],
+   ['Bose',[['QC消噪系列',3]]],
+   ['HUAWEI',[['FreeBuds Pro',2],['FreeBuds',2]]],
+   ['小米',[['Redmi Buds',2],['Buds系列',2]]],
+   ['OPPO',[['Enco系列',3]]],
+   ['Beats',[['Studio',1],['Solo',1]]],
+   ['漫步者',[['NeoBuds',2],['STAX系列',1]]]
+  ]],
+  ['智能眼镜',[
+   ['雷鸟',[['Air系列',2]]],
+   ['Rokid',[['Air',1],['Max',1]]],
+   ['小米',[['Mijia眼镜相机',1]]]
+  ]],
+  ['穿戴配件',[
+   ['Apple',[['表带系列',4],['MagSafe充电底座',1]]],
+   ['Nomad',[['表带系列',2]]],
+   ['南卡',[['开放式耳机配件',2]]]
+  ]]
+ ]},
+ {n:'影像设备',code:'CAT005',icon:'📷',cats:[
+  ['相机机身',[
+   ['索尼',[['α7全画幅微单',4],['α6半画幅',3],['ZV系列',2]]],
+   ['佳能',[['EOS R系列',4],['EOS M系列',2]]],
+   ['尼康',[['Z系列',4]]],
+   ['富士',[['X系列',4],['GFX中画幅',1]]],
+   ['松下',[['LUMIX S',2],['LUMIX G',2]]],
+   ['徕卡',[['Q系列',1],['SL系列',1]]],
+   ['哈苏',[['X2D',1]]],
+   ['大疆',[['Pocket系列',2],['Osmo Action',2]]],
+   ['GoPro',[['HERO系列',2]]],
+   ['影石',[['Insta360系列',3]]]
+  ]],
+  ['镜头',[
+   ['索尼',[['E卡口FE系列',5]]],
+   ['佳能',[['RF卡口系列',4],['RF-S卡口系列',1]]],
+   ['尼康',[['Z卡口系列',4]]],
+   ['适马',[['Art系列',3]]],
+   ['腾龙',[['大三元系列',2]]]
+  ]],
+  ['摄影配件',[
+   ['大疆',[['如影稳定器系列',2]]],
+   ['智云',[['云台稳定器系列',3]]],
+   ['曼富图',[['三脚架系列',3]]],
+   ['神牛',[['补光灯',2],['闪光灯',2]]],
+   ['SmallRig斯莫格',[['兔笼系列',3]]],
+   ['南光',[['摄影灯系列',2]]]
+  ]]
+ ]},
+ {n:'无人机',code:'CAT006',icon:'🚁',cats:[
+  ['消费航拍无人机',[
+   ['大疆',[['Mavic系列',3],['Air系列',2],['Mini系列',3],['Avata穿越系列',1]]],
+   ['道通',[['EVO系列',2]]],
+   ['哈博森',[['Zino系列',1]]]
+  ]],
+  ['行业应用无人机',[
+   ['大疆',[['Inspire系列',1],['Matrice系列',2],['农业T系列',2]]],
+   ['极飞',[['农业无人机系列',2]]],
+   ['亿航',[['EH216系列',1]]]
+  ]],
+  ['无人机配件',[
+   ['大疆',[['智能飞行电池',3],['桨叶',2],['遥控器',2]]],
+   ['道通',[['电池',1],['桨叶',1]]]
+  ]]
+ ]},
+ {n:'游戏设备',code:'CAT007',icon:'🎮',cats:[
+  ['游戏主机',[
+   ['索尼',[['PS5',1],['PS5 Pro',1],['PS5 Slim',1]]],
+   ['微软',[['Xbox Series X',1],['Xbox Series S',1]]],
+   ['任天堂',[['Switch',1],['Switch 2',1],['Switch Lite',1]]]
+  ]],
+  ['掌机/VR',[
+   ['Valve',[['Steam Deck',2]]],
+   ['PICO',[['PICO 4系列',2]]],
+   ['Meta',[['Quest系列',2]]],
+   ['ROG',[['Ally掌机',2]]]
+  ]],
+  ['游戏外设',[
+   ['索尼',[['DualSense手柄',2]]],
+   ['微软',[['Xbox手柄',2]]],
+   ['北通',[['手柄',3],['方向盘',1]]],
+   ['图马思',[['方向盘',2],['摇杆',1]]],
+   ['雷蛇',[['键鼠',3],['手柄',1]]],
+   ['罗技',[['飞行摇杆',1],['飞行面板',1]]],
+   ['HyperX',[['飓风系列耳机',2]]]
+  ]]
+ ]},
+ {n:'影音娱乐',code:'CAT008',icon:'🎬',cats:[
+  ['投影',[
+   ['极米',[['H系列',2],['Z系列',2],['RS系列',1]]],
+   ['坚果',[['N系列',2],['O系列',1]]],
+   ['当贝',[['X系列',2],['F系列',1]]],
+   ['爱普生',[['家用3LCD系列',2]]],
+   ['明基',[['GK系列',1]]],
+   ['峰米',[['R系列',1],['T系列',1]]]
+  ]],
+  ['音响',[
+   ['Sonos',[['Era',2],['Arc',1],['One',1]]],
+   ['Marshall',[['Acton',1],['Stanmore',1],['Woburn',1]]],
+   ['Bose',[['SoundLink',2],['SoundLink Max',1]]],
+   ['JBL',[['Charge',1],['Flip',1],['PartyBox',1]]],
+   ['哈曼卡顿',[['琉璃系列',2]]],
+   ['B&O',[['Beosound系列',1]]],
+   ['宝华韦健',[['Zeppelin',1],['Formation系列',1]]],
+   ['天龙',[['Home系列',1]]]
+  ]],
+  ['电视',[
+   ['索尼',[['XR系列',3]]],
+   ['三星',[['QLED系列',3]]],
+   ['TCL',[['Q10系列',3]]],
+   ['海信',[['E系列',2],['U系列',2]]],
+   ['小米',[['S系列',2],['ES系列',2]]],
+   ['LG',[['OLED C系列',2],['G系列',1]]]
+  ]],
+  ['影音配件',[
+   ['极米',[['幕布',1],['支架系列',1]]],
+   ['FITUEYES',[['电视移动支架',3]]],
+   ['NB',[['壁挂支架',3]]]
+  ]]
+ ]},
+ {n:'机器人',code:'CAT009',icon:'🤖',cats:[
+  ['机器狗/四足机器人',[
+   ['宇树',[['Go2',1],['Go2 Pro',1],['B系列',1]]],
+   ['蔚蓝',[['AlphaDog系列',1]]]
+  ]],
+  ['AI陪伴机器人',[
+   ['萌友智能',[['Ropet',1]]],
+   ['跃然创新',[['BubblePal',1]]],
+   ['萌宇宙',[['汤圆机器人',1]]]
+  ]],
+  ['人形机器人',[
+   ['宇树',[['G1',1],['H1',1]]],
+   ['智元',[['远征A2',1]]],
+   ['优必选',[['Walker系列',1]]]
+  ]],
+  ['教育编程机器人',[
+   ['乐高',[['SPIKE',1],['Robot Inventor',1]]],
+   ['大疆',[['RoboMaster S1',1],['EP',1]]],
+   ['Makeblock',[['mBot系列',2]]],
+   ['优必选',[['Alpha悟空系列',1]]]
+  ]],
+  ['机器人配件',[
+   ['宇树',[['Go2电池',1],['编程模块',1]]],
+   ['大疆',[['RoboMaster配件系列',2]]],
+   ['Makeblock',[['传感器套件',1]]]
+  ]]
+ ]}
+];
+
+// 品牌库：[品牌编码, 品牌名称, 英文名, 品牌类型, 授权状态, 状态]
+var BRANDS=[
+ ['BR001','Apple','Apple','综合厂商','官方授权','启用'],
+ ['BR002','HUAWEI','Huawei','综合厂商','品牌直供','启用'],
+ ['BR003','小米','Xiaomi','综合厂商','品牌直供','启用'],
+ ['BR004','Redmi','Redmi','手机厂商','品牌直供','启用'],
+ ['BR005','OPPO','OPPO','手机厂商','品牌直供','启用'],
+ ['BR006','vivo','vivo','手机厂商','品牌直供','启用'],
+ ['BR007','iQOO','iQOO','手机厂商','品牌直供','启用'],
+ ['BR008','荣耀','HONOR','手机厂商','品牌直供','启用'],
+ ['BR009','三星','Samsung','综合厂商','品牌直供','启用'],
+ ['BR010','一加','OnePlus','手机厂商','品牌直供','启用'],
+ ['BR011','真我','realme','手机厂商','品牌直供','启用'],
+ ['BR012','魅族','MEIZU','手机厂商','经销供货','启用'],
+ ['BR013','Anker安克','Anker','配件品牌','品牌直供','启用'],
+ ['BR014','贝尔金','Belkin','配件品牌','经销供货','启用'],
+ ['BR015','绿联','UGREEN','配件品牌','品牌直供','启用'],
+ ['BR016','倍思','Baseus','配件品牌','品牌直供','启用'],
+ ['BR017','品胜','PISEN','配件品牌','经销供货','启用'],
+ ['BR018','图拉斯','TORRAS','配件品牌','经销供货','启用'],
+ ['BR019','Mophie','Mophie','配件品牌','经销供货','启用'],
+ ['BR020','罗马仕','ROMOSS','配件品牌','经销供货','启用'],
+ ['BR021','亿色','ESR','配件品牌','经销供货','启用'],
+ ['BR022','联想','Lenovo','电脑厂商','品牌直供','启用'],
+ ['BR023','华硕','ASUS','电脑厂商','品牌直供','启用'],
+ ['BR024','戴尔','DELL','电脑厂商','品牌直供','启用'],
+ ['BR025','惠普','HP','电脑厂商','品牌直供','启用'],
+ ['BR026','微星','MSI','电脑厂商','经销供货','启用'],
+ ['BR027','雷蛇','Razer','外设品牌','经销供货','启用'],
+ ['BR028','LG','LG','综合厂商','经销供货','启用'],
+ ['BR029','AOC','AOC','电脑厂商','经销供货','启用'],
+ ['BR030','罗技','Logitech','外设品牌','品牌直供','启用'],
+ ['BR031','文石','BOOX','专业品牌','品牌直供','启用'],
+ ['BR032','掌阅','iReader','专业品牌','品牌直供','启用'],
+ ['BR033','小天才','imoo','专业品牌','品牌直供','启用'],
+ ['BR034','华米','Amazfit','穿戴厂商','品牌直供','启用'],
+ ['BR035','索尼','Sony','综合厂商','品牌直供','启用'],
+ ['BR036','Bose','Bose','音频品牌','经销供货','启用'],
+ ['BR037','Beats','Beats','音频品牌','经销供货','启用'],
+ ['BR038','漫步者','EDIFIER','音频品牌','品牌直供','启用'],
+ ['BR039','雷鸟','RayNeo','专业品牌','品牌直供','启用'],
+ ['BR040','Rokid','Rokid','专业品牌','品牌直供','启用'],
+ ['BR041','Nomad','Nomad','配件品牌','经销供货','启用'],
+ ['BR042','南卡','NANK','配件品牌','经销供货','启用'],
+ ['BR043','佳能','Canon','影像厂商','品牌直供','启用'],
+ ['BR044','尼康','Nikon','影像厂商','品牌直供','启用'],
+ ['BR045','富士','FUJIFILM','影像厂商','品牌直供','启用'],
+ ['BR046','松下','Panasonic','影像厂商','品牌直供','启用'],
+ ['BR047','徕卡','Leica','影像厂商','经销供货','停用'],
+ ['BR048','哈苏','Hasselblad','影像厂商','经销供货','停用'],
+ ['BR049','大疆','DJI','综合厂商','品牌直供','启用'],
+ ['BR050','GoPro','GoPro','影像厂商','经销供货','启用'],
+ ['BR051','影石','Insta360','影像厂商','品牌直供','启用'],
+ ['BR052','适马','SIGMA','影像厂商','经销供货','启用'],
+ ['BR053','腾龙','TAMRON','影像厂商','经销供货','启用'],
+ ['BR054','智云','ZHIYUN','影像厂商','品牌直供','启用'],
+ ['BR055','曼富图','Manfrotto','影像厂商','经销供货','启用'],
+ ['BR056','神牛','Godox','影像厂商','品牌直供','启用'],
+ ['BR057','SmallRig斯莫格','SmallRig','配件品牌','品牌直供','启用'],
+ ['BR058','南光','Nanlite','影像厂商','经销供货','启用'],
+ ['BR059','道通','Autel','无人机厂商','品牌直供','启用'],
+ ['BR060','哈博森','Hubsan','无人机厂商','经销供货','启用'],
+ ['BR061','极飞','XAG','无人机厂商','品牌直供','启用'],
+ ['BR062','亿航','EHang','无人机厂商','经销供货','停用'],
+ ['BR063','微软','Microsoft','游戏厂商','品牌直供','启用'],
+ ['BR064','任天堂','Nintendo','游戏厂商','品牌直供','启用'],
+ ['BR065','Valve','Valve','游戏厂商','经销供货','启用'],
+ ['BR066','PICO','PICO','游戏厂商','品牌直供','启用'],
+ ['BR067','Meta','Meta','游戏厂商','经销供货','启用'],
+ ['BR068','ROG','ROG','电脑厂商','经销供货','启用'],
+ ['BR069','北通','Betop','外设品牌','品牌直供','启用'],
+ ['BR070','图马思','Thrustmaster','外设品牌','经销供货','启用'],
+ ['BR071','HyperX','HyperX','外设品牌','经销供货','启用'],
+ ['BR072','极米','XGIMI','影音厂商','品牌直供','启用'],
+ ['BR073','坚果','JMGO','影音厂商','品牌直供','启用'],
+ ['BR074','当贝','Dangbei','影音厂商','品牌直供','启用'],
+ ['BR075','爱普生','Epson','影音厂商','品牌直供','启用'],
+ ['BR076','明基','BenQ','影音厂商','品牌直供','启用'],
+ ['BR077','峰米','Formovie','影音厂商','品牌直供','启用'],
+ ['BR078','Sonos','Sonos','音频品牌','经销供货','启用'],
+ ['BR079','Marshall','Marshall','音频品牌','经销供货','启用'],
+ ['BR080','JBL','JBL','音频品牌','品牌直供','启用'],
+ ['BR081','哈曼卡顿','Harman Kardon','音频品牌','经销供货','启用'],
+ ['BR082','B&O','Bang & Olufsen','音频品牌','经销供货','启用'],
+ ['BR083','宝华韦健','Bowers & Wilkins','音频品牌','经销供货','启用'],
+ ['BR084','天龙','Denon','音频品牌','经销供货','启用'],
+ ['BR085','TCL','TCL','综合厂商','品牌直供','启用'],
+ ['BR086','海信','Hisense','综合厂商','品牌直供','启用'],
+ ['BR087','FITUEYES','FITUEYES','配件品牌','经销供货','启用'],
+ ['BR088','NB','North Bayou','配件品牌','经销供货','启用'],
+ ['BR089','宇树','Unitree','机器人厂商','品牌直供','启用'],
+ ['BR090','蔚蓝','DynamicX','机器人厂商','经销供货','停用'],
+ ['BR091','萌友智能','Mofriend','机器人厂商','品牌直供','启用'],
+ ['BR092','跃然创新','Yuanran','机器人厂商','品牌直供','启用'],
+ ['BR093','萌宇宙','Mengyuzhou','机器人厂商','品牌直供','启用'],
+ ['BR094','智元','AgiBot','机器人厂商','品牌直供','停用'],
+ ['BR095','优必选','UBTECH','机器人厂商','品牌直供','启用'],
+ ['BR096','乐高','LEGO','机器人厂商','品牌直供','启用'],
+ ['BR097','Makeblock','Makeblock','机器人厂商','品牌直供','启用']
+];
+var BRAND_MAP={};
+BRANDS.forEach(function(b){BRAND_MAP[b[1]]={code:b[0],en:b[2],type:b[3],auth:b[4],status:b[5]};});
+
+// ---- 分类统计辅助 ----
+function catBrandSpu(br){var s=0;br[1].forEach(function(x){s+=x[1];});return s;}
+function catCatSpu(cat){var s=0;cat[1].forEach(function(br){s+=catBrandSpu(br);});return s;}
+function catL1Spu(l1){var s=0;l1.cats.forEach(function(cat){s+=catCatSpu(cat);});return s;}
+function catL1Brands(l1){var n=0;l1.cats.forEach(function(cat){n+=cat[1].length;});return n;}
+function catL1Series(l1){var n=0;l1.cats.forEach(function(cat){cat[1].forEach(function(br){n+=br[1].length;});});return n;}
+function catL2Series(cat){var n=0;cat[1].forEach(function(br){n+=br[1].length;});return n;}
+function catStatusOf(name){if(name==='人形机器人')return '停用';if(BRAND_MAP[name])return BRAND_MAP[name].status;return '启用';}
+function pad2(n){return (n<10?'0':'')+n;}
+function catL2Code(l1,ci){return l1.code+'-'+pad2(ci+1);}
+
+// ---- 品牌维度统计（涉及分类数 / 关联SPU数） ----
+function brandStats(){
+ var m={};
+ CAT_DATA.forEach(function(l1){
+  l1.cats.forEach(function(cat){
+   cat[1].forEach(function(br){
+    var k=br[0];
+    if(!m[k])m[k]={cats:0,spu:0,paths:[]};
+    m[k].cats+=1;
+    m[k].paths.push(l1.n+' · '+cat[0]);
+    br[1].forEach(function(s){m[k].spu+=s[1];});
+   });
+  });
+ });
+ return m;
+}
+
+// ---- 分类树渲染（默认展开：手机 > 智能手机 > Apple） ----
+function renderCatTree(){
+ var html='';
+ CAT_DATA.forEach(function(l1,li){
+  var o1=(li===0);
+  html+='<div class="tree-node l1'+(o1?' active':'')+'" onclick="catNode(this);catPick('+li+')"><span class="arrow'+(o1?' open':'')+'">▾</span> '+l1.icon+' '+l1.n+' <span class="count">'+catL1Spu(l1)+' SPU · '+l1.cats.length+'品类</span></div>';
+  html+='<div class="tree-children'+(o1?' open':'')+'">';
+  l1.cats.forEach(function(cat,ci){
+   var o2=(li===0&&ci===0);
+   html+='<div class="tree-node" onclick="catNode(this);catPick('+li+','+ci+')"><span class="arrow'+(o2?' open':'')+'">▾</span> '+cat[0]+' <span class="count">'+catCatSpu(cat)+' SPU · '+cat[1].length+'品牌</span></div>';
+   html+='<div class="tree-children'+(o2?' open':'')+'">';
+   cat[1].forEach(function(br,bi){
+    var o3=(li===0&&ci===0&&bi===0);
+    var st=catStatusOf(br[0]);
+    html+='<div class="tree-node" onclick="catNode(this);catPick('+li+','+ci+','+bi+')"><span class="arrow'+(o3?' open':'')+'">▾</span> '+br[0]+' <span class="count">'+catBrandSpu(br)+' SPU</span>'+(st==='停用'?' <span class="tag gray" style="font-size:10px">停用</span>':'')+'</div>';
+    html+='<div class="tree-children'+(o3?' open':'')+'">';
+    br[1].forEach(function(se,si){
+     html+='<div class="tree-node leaf" onclick="catNode(this);catPick('+li+','+ci+','+bi+','+si+')">'+se[0]+' <span class="count">'+se[1]+' SPU</span></div>';
+    });
+    html+='</div>';
+   });
+   html+='</div>';
+  });
+  html+='</div>';
+ });
+ return html;
+}
+function catNode(el){
+ if(el.querySelector('.arrow'))toggleTree(el);
+ var all=document.querySelectorAll('.cat-tree-wrap .tree-node');
+ for(var i=0;i<all.length;i++){all[i].classList.remove('active');}
+ el.classList.add('active');
+}
+function catPick(li,ci,bi,si){
+ var box=document.getElementById('catDetail');
+ if(box)box.innerHTML=catDetailHtml.apply(null,arguments);
+}
+function catDetailHtml(li,ci,bi,si){
+ var l1=CAT_DATA[li],al=arguments.length,btns='<div style="margin-top:12px"><button class="btn sm primary" onclick="showToast(\'编辑分类\')">编辑</button> <button class="btn sm" onclick="showToast(\'调整排序\')">调整排序</button> <button class="btn sm danger" onclick="showToast(\'删除前需确认该分类下无SPU\')">删除</button></div>';
+ if(al===1){
+  return '<div class="card-header"><div class="card-title">分类详情 — '+l1.icon+' '+l1.n+'</div></div>'+dl([
+   {k:'分类编码',v:l1.code},{k:'分类名称',v:l1.n},{k:'上级分类',v:'—（顶级）'},{k:'层级',v:'L1 · 根分类'},
+   {k:'排序号',v:String(li+1)},{k:'子品类数（L2）',v:String(l1.cats.length)},{k:'品牌节点数（L3）',v:String(catL1Brands(l1))},
+   {k:'SPU系列数（L4）',v:String(catL1Series(l1))},{k:'关联SPU数',v:String(catL1Spu(l1))},{k:'状态',v:tg('green','启用')}
+  ])+btns;
+ }
+ var cat=l1.cats[ci],l2code=catL2Code(l1,ci);
+ if(al===2){
+  var cst=catStatusOf(cat[0]);
+  return '<div class="card-header"><div class="card-title">分类详情 — '+cat[0]+'</div></div>'+dl([
+   {k:'分类编码',v:l2code},{k:'分类名称',v:cat[0]},{k:'上级分类',v:l1.n+'（'+l1.code+'）'},{k:'层级',v:'L2 · 品类'},
+   {k:'排序号',v:String(ci+1)},{k:'品牌节点数（L3）',v:String(cat[1].length)},{k:'SPU系列数（L4）',v:String(catL2Series(cat))},
+   {k:'关联SPU数',v:String(catCatSpu(cat))},{k:'状态',v:tg(cst==='启用'?'green':'gray',cst)}
+  ])+btns;
+ }
+ var br=cat[1][bi];
+ if(al===3){
+  var bm=BRAND_MAP[br[0]]||{},bst=catStatusOf(br[0]);
+  return '<div class="card-header"><div class="card-title">品牌节点 — '+br[0]+'</div></div>'+dl([
+   {k:'品牌编码',v:bm.code||'—'},{k:'品牌名称',v:br[0]},{k:'英文名',v:bm.en||'—'},{k:'层级',v:'L3 · 品牌'},
+   {k:'所属品类',v:l1.n+' · '+cat[0]},{k:'授权状态',v:bm.auth||'—'},
+   {k:'SPU系列数（L4）',v:String(br[1].length)},{k:'关联SPU数',v:String(catBrandSpu(br))},{k:'状态',v:tg(bst==='启用'?'green':'gray',bst)}
+  ])+'<div style="margin-top:12px"><button class="btn sm primary" onclick="showPage(\'brand-manage\')">查看品牌档案</button> <button class="btn sm" onclick="showToast(\'编辑分类\')">编辑</button> <button class="btn sm danger" onclick="showToast(\'删除前需确认该分类下无SPU\')">删除</button></div>';
+ }
+ var se=br[1][si],sst=catStatusOf(br[0]);
+ return '<div class="card-header"><div class="card-title">SPU系列 — '+se[0]+'</div></div>'+dl([
+  {k:'分类编码',v:l2code+'-'+pad2(si+1)},{k:'系列名称',v:se[0]},{k:'层级',v:'L4 · SPU系列（叶子）'},
+  {k:'完整路径',v:l1.n+' / '+cat[0]+' / '+br[0]+' / '+se[0]},{k:'所属品牌',v:br[0]+'（'+(BRAND_MAP[br[0]]?BRAND_MAP[br[0]].code:'—')+'）'},
+  {k:'关联SPU数',v:String(se[1])},{k:'挂载约束',v:tg('info','仅L4可挂SPU')},{k:'状态',v:tg(sst==='启用'?'green':'gray',sst)}
+ ])+btns;
+}
+
+pages['category-tree'] = function(){
+ var l2c=0,l3c=0,l4c=0,spuT=0;
+ CAT_DATA.forEach(function(l1){l2c+=l1.cats.length;l3c+=catL1Brands(l1);l4c+=catL1Series(l1);spuT+=catL1Spu(l1);});
+ return '<section class="card">'+sc([{v:String(CAT_DATA.length),k:'L1根分类',c:'primary'},{v:String(l2c),k:'L2品类',c:'blue'},{v:String(l3c),k:'L3品牌节点',c:'blue'},{v:String(l4c),k:'L4 SPU系列',c:'orange'},{v:String(spuT),k:'SPU总数',c:'green'}])+
+ '<div style="background:var(--info-bg);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--t2);line-height:1.8">统一四级结构：<b>L1根分类 → L2品类 → L3品牌 → L4 SPU系列</b>，SPU只能挂在L4叶子节点上（非L4不允许挂SPU）。同一品牌可在多个品类下出现（如HUAWEI同时出现在手机/电脑/平板/穿戴下），节点不要求唯一，SPU编码全局唯一。人形机器人等高客单品类已建类但状态为停用，待风控与保险方案后启用。</div></section>'+
+ '<div class="split2 asym" style="margin-top:16px"><div class="card"><div class="card-header"><div class="card-title">后台分类树管理 <span class="sub">运营管理视角 · 统一四级</span></div><button class="btn sm primary" onclick="openAddCategory()">新增分类</button></div><div class="tree cat-tree-wrap">'+renderCatTree()+'</div></div>'+
+ '<div class="card"><div class="card-header"><div class="card-title">分类详情</div></div><div id="catDetail">'+catDetailHtml(0)+'</div></div></div>';
+};
+
+// ============================================================
+// 品牌管理
+// ============================================================
+var S_BRAND_TYPE=['全部类型','综合厂商','手机厂商','电脑厂商','影像厂商','无人机厂商','游戏厂商','影音厂商','机器人厂商','音频品牌','外设品牌','配件品牌','专业品牌','穿戴厂商'];
+var S_BRAND_AUTH=['全部授权','官方授权','品牌直供','经销供货'];
+var S_BRAND_ST=['全部状态','启用','停用'];
+
+function brandLogo(en,name){
+  var ch=(en||name||'?').charAt(0).toUpperCase();
+  var p=['#007AFF','#E61E2A','#FF6900','#5AC8FA','#34C759','#5856D6','#AF52DE','#FF2D55','#FF9500','#00C7BE','#36C5F0','#F43F5E','#8E8E93','#30D158','#BF5AF2'];
+  var idx=(en||name||'A').charCodeAt(0)-65;
+  idx=((idx%p.length)+p.length)%p.length;
+  return '<div style="width:36px;height:36px;border-radius:50%;background:'+p[idx]+';color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;font-family:Inter,sans-serif;box-shadow:0 1px 3px rgba(0,0,0,.1)">'+ch+'</div>';
+}
+pages['brand-manage'] = function(){
+ var st=brandStats();
+ var nAuth=0,nDirect=0,nDist=0,nOff=0;
+ BRANDS.forEach(function(b){if(b[4]==='官方授权')nAuth++;else if(b[4]==='品牌直供')nDirect++;else nDist++;if(b[5]==='停用')nOff++;});
+ var rows=BRANDS.map(function(b){
+  var s=st[b[1]]||{cats:0,spu:0};
+  return {c:[brandLogo(b[2],b[1]),tg('primary',b[0]),'<b>'+b[1]+'</b>',b[2],b[4],String(s.cats),String(s.spu),tg(b[5]==='启用'?'green':'gray',b[5])],
+   o:'<span class="link" onclick="showToast(\'编辑品牌\')">编辑</span> <span class="link" onclick="showPage(\'category-tree\')">查看分类</span>'};
+ });
+ return '<section class="card"><div class="card-header"><div class="card-title">品牌库管理 <span class="sub">与后台分类树L3品牌节点联动</span></div><button class="btn sm primary" onclick="openAddBrand()">新增品牌</button></div>'+
+ sc([{v:String(BRANDS.length),k:'品牌总数',c:'primary'},{v:String(nAuth),k:'官方授权',c:'orange'},{v:String(nDirect),k:'品牌直供',c:'blue'},{v:String(nDist),k:'经销供货',c:'blue'},{v:String(nOff),k:'停用',c:'danger'}])+
+ fb([{t:'i',p:'品牌名称 / 编码',w:'180px'},{t:'s',o:S_BRAND_AUTH},{t:'s',o:S_BRAND_ST}])+
+ ab([{t:'新增品牌',c:'primary',fn:'openAddBrand()'},{t:'批量启用',c:'success'},{t:'批量停用',c:'danger'},{t:'导出',c:'primary'}])+
+ '<div class="brand-table-wrap">'+
+ dt(['品牌Logo','品牌编码','品牌名称','英文名','授权状态','涉及分类数','关联SPU数','状态'],rows)+
+ '</div>'+
+ pg(BRANDS.length)+'</section>'+
+ '<section class="card" style="margin-top:16px"><div class="card-header"><div class="card-title">品牌使用说明</div></div><div style="font-size:12px;color:var(--t2);line-height:1.9">① 品牌库与后台分类树的L3品牌节点联动：树上出现过的品牌自动统计「涉及分类数」和「关联SPU数」；② 同一品牌跨多个品类时（如HUAWEI涉及手机/电脑/平板/穿戴/影音多个品类）统计自动汇总；③ 停用品牌（徕卡、哈苏、亿航、蔚蓝、智元）对应的树节点置灰，不允许新挂SPU，存量SPU可继续履约；④ 授权状态区分：官方授权（Apple）/ 品牌直供（头部厂商协议供货）/ 经销供货（经销商渠道采购）。</div></section>';
+};
+
+function openAddBrand(){
+  editModal('新增品牌','<div class="form-group"><label class="form-label">品牌Logo</label><div style="display:flex;align-items:center;gap:12px"><div style="width:48px;height:48px;border-radius:12px;background:var(--bg2);border:2px dashed var(--border);display:flex;align-items:center;justify-content:center;color:var(--t3);font-size:24px;font-weight:300;cursor:pointer" onclick="showToast(\'点击上传Logo\')">+</div><div style="flex:1"><input class="form-input" placeholder="粘贴Logo URL或点击上传" style="margin-bottom:4px"><div style="font-size:11px;color:var(--t3)">建议200×200px PNG/JPG/SVG，圆形或方形</div></div></div></div><div class="form-group"><label class="form-label required">品牌名称</label><input class="form-input" placeholder="如：摩托罗拉"></div><div class="form-group"><label class="form-label">英文名</label><input class="form-input" placeholder="如：Motorola"></div><div class="form-group"><label class="form-label">授权状态</label><select class="form-select"><option>经销供货</option><option>品牌直供</option><option>官方授权</option></select></div><div class="form-group"><label class="form-label">备注</label><input class="form-input" placeholder="联系人 / 供货协议编号等"></div>');
+}
 
 function toggleTree(node){
   var arrow=node.querySelector('.arrow');
@@ -1185,7 +1784,182 @@ function toggleTree(node){
 }
 
 function openAddCategory(){
-  editModal('新增分类','<div class="form-group"><label class="form-label required">分类名称</label><input class="form-input" placeholder="如：手机"></div><div class="form-group"><label class="form-label">上级分类</label><select class="form-select"><option>顶级分类</option><option>手机</option><option>平板</option><option>笔记本</option></select></div><div class="form-group"><label class="form-label">排序号</label><input class="form-input" placeholder="越小越靠前"></div>');
+  editModal('新增后台分类','<div class="form-group"><label class="form-label required">分类名称</label><input class="form-input" placeholder="如：手机配件"></div><div class="form-group"><label class="form-label">上级分类</label><select class="form-select"><option>顶级分类（新建L1根分类）</option><option>手机（新建L2品类）</option><option>手机 · 智能手机（新建L3品牌）</option><option>手机 · 智能手机 · Apple（新建L4系列）</option></select></div><div class="form-group"><label class="form-label">层级</label><select class="form-select"><option>L1 根分类</option><option>L2 品类</option><option>L3 品牌</option><option>L4 SPU系列</option></select></div><div class="form-group"><label class="form-label">排序号</label><input class="form-input" placeholder="越小越靠前"></div><div style="font-size:12px;color:var(--t3);line-height:1.7">提示：统一四级结构，SPU只能挂在L4叶子节点上；新建L3品牌时若品牌库中不存在该品牌，会先自动创建品牌档案。</div>');
+}
+
+// ============================================================
+// C端商品分类管理
+// ============================================================
+pages['c-category'] = function(){return (
+// 业务引导条
+'<div class="card" style="margin-bottom:16px;padding:14px 20px;display:flex;gap:14px;align-items:flex-start">'+
+'<div style="width:40px;height:40px;border-radius:10px;background:var(--purple-bg);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">💡</div>'+
+'<div><div style="font-size:14px;font-weight:700;color:var(--t1);margin-bottom:4px">这个页面管什么？</div>'+
+'<div style="font-size:12px;color:var(--t2);line-height:1.7">用户在支付宝小程序里看到的商品分类（如「手机通讯」「电脑平板」）都在这里维护。左侧选分类，右侧配置<b>用户看到的样子</b>和<b>里面展示哪些商品</b>。改完点「保存」→「发布」才会对用户生效；发错了随时可以下线，不影响商品数据。</div></div></div>'+
+'<div class="split2" style="grid-template-columns:360px 1fr;">'+
+// 左侧C端分类树
+'<div class="card"><div class="card-header"><div class="card-title">用户看到的分类</div><button class="btn sm" style="background:var(--purple);border-color:var(--purple);color:#fff" onclick="openAddCCategory()">+ 新建分类</button></div>'+
+'<div style="margin-bottom:12px"><input class="form-input" placeholder="搜索分类名称..." style="width:100%"></div>'+
+'<div>'+
+'<div class="ctree-node l1 active" onclick="selectCCategory(this,\'手机通讯\')"><span>📱 手机通讯</span><span class="child-count purple">2</span></div>'+
+'<div class="ctree-node l2" onclick="selectCCategory(this,\'iPhone\')"><span>iPhone</span><span class="node-tag n1" title="这个分类的商品来自多个后台分类，合并展示" style="font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;background:var(--warning-bg);color:var(--warning)">合并</span></div>'+
+'<div class="ctree-node l2"><span>安卓手机</span><span class="node-tag n11" title="商品与后台分类一一对应" style="font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;background:var(--info-bg);color:var(--info)">同步</span></div>'+
+'<div class="ctree-node l1"><span>💻 电脑平板</span><span class="child-count">2</span></div>'+
+'<div class="ctree-node l2"><span>MacBook</span><span class="node-tag n1" title="这个分类的商品来自多个后台分类，合并展示" style="font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;background:var(--warning-bg);color:var(--warning)">合并</span></div>'+
+'<div class="ctree-node l2"><span>iPad</span><span class="node-tag n1" title="这个分类的商品来自多个后台分类，合并展示" style="font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;background:var(--warning-bg);color:var(--warning)">合并</span></div>'+
+'<div class="ctree-node l1"><span>⌚ 智能穿戴</span><span class="child-count">1</span></div>'+
+'<div class="ctree-node l2"><span>手表耳机</span><span class="node-tag n11" title="商品与后台分类一一对应" style="font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;background:var(--info-bg);color:var(--info)">同步</span></div>'+
+'<div class="ctree-node l1"><span>🎮 开学季（活动）</span><span class="node-tag nn" title="同一批商品同时出现在多个入口" style="font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;background:var(--success-bg);color:var(--success)">多入口</span></div>'+
+'</div>'+
+'<div style="margin-top:12px;padding:8px 12px;background:var(--border2);border-radius:6px;font-size:11px;color:var(--t3)">⠿ 按住上下拖动可调整用户看到的排序 · 黄标=合并，蓝标=同步，绿标=多入口</div>'+
+'</div>'+
+// 右侧详情面板
+'<div class="card"><div class="card-header"><div class="card-title">iPhone <span class="sub">编辑中</span></div><div><button class="btn sm">预览手机效果</button> <button class="btn sm" style="background:var(--purple);border-color:var(--purple);color:#fff">保存</button></div></div>'+
+'<div style="font-size:13px;font-weight:700;color:var(--t3);margin-bottom:10px">基本信息</div>'+
+'<div class="grid col2" style="margin-bottom:20px">'+
+'<div class="field"><div class="k">分类名称（用户看到）</div><div class="v">iPhone</div></div>'+
+'<div class="field"><div class="k">挂在哪个分类下</div><div class="v">手机通讯</div></div>'+
+'<div class="field"><div class="k">展示顺序</div><div class="v">第 1 位（拖动左侧列表调整）</div></div>'+
+'<div class="field"><div class="k">链接地址</div><div class="v" style="color:var(--t3)">系统自动生成，无需填写</div></div>'+
+'<div class="field"><div class="k">是否对用户显示</div><div class="v">'+tg('green','显示中')+'（先给50%用户看）</div></div>'+
+'<div class="field"><div class="k">创建时间</div><div class="v">2026-06-01 10:00</div></div>'+
+'</div>'+
+'<div style="font-size:13px;font-weight:700;color:var(--t3);margin-bottom:6px">商品来源 · 这个分类里展示哪些商品</div>'+
+'<div style="font-size:11px;color:var(--t3);margin-bottom:8px">选一种方式，决定商品从哪来：</div>'+
+'<div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">'+
+'<span class="map-type-btn active n1" title="把多个后台分类的商品放进这个分类一起展示">多个分类的商品合并 ✓</span>'+
+'<span class="map-type-btn" title="后台分类里是什么，这里就展示什么">直接同步一个分类</span>'+
+'<span class="map-type-btn" title="同一批商品同时出现在多个页面，适合活动页">同一批商品多处展示</span>'+
+'</div>'+
+'<div style="font-size:12px;color:var(--t2);margin-bottom:6px">目前这个分类展示的商品来自（3个后台分类）：</div>'+
+'<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px">'+
+'<span class="map-picked">iPhone 15 Pro Max ×</span>'+
+'<span class="map-picked">iPhone 15 Pro ×</span>'+
+'<span class="map-picked">iPhone 15 ×</span>'+
+'</div>'+
+'<div style="font-size:12px;color:var(--purple);font-weight:600;cursor:pointer" onclick="openAddMapping()">+ 添加商品来源</div>'+
+'<div style="margin-top:20px;font-size:13px;font-weight:700;color:var(--t3);margin-bottom:10px">展示样式</div>'+
+'<div class="grid col2">'+
+'<div class="field"><div class="k">分类图标</div><div class="v"><div style="width:36px;height:36px;background:var(--purple-bg);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--purple);font-size:10px;font-weight:700">iPhone</div> &nbsp;<span style="color:var(--purple);font-weight:600;font-size:12px;cursor:pointer">上传/替换</span></div></div>'+
+'<div class="field"><div class="k">营销文案</div><div class="v">全新iPhone，0押金租回家</div></div>'+
+'<div class="field"><div class="k">用户可按什么筛选</div><div class="v">价格区间 / 存储 / 颜色 / 成色</div></div>'+
+'<div class="field"><div class="k">点进去看到的页面</div><div class="v">'+tg('primary','商品列表页')+'</div></div>'+
+'</div>'+
+'<div style="margin-top:16px;padding:10px 14px;background:var(--purple-bg);border-radius:6px;font-size:12px;color:var(--t2);line-height:1.6">'+
+'<b style="color:var(--purple)">💡 两个常见疑问</b><br>'+
+'① 链接地址为什么不用填？——系统自动生成，这样用户收藏的页面、投出去的广告链接才不会失效。确实要调整请联系系统管理员。<br>'+
+'② 保存和发布的区别？——保存只是暂存草稿，发布后用户才能看到新样子；发布前可先「预览手机效果」自己过一遍。'+
+'</div>'+
+'</div>'+
+'</div>'+
+// 底部常见操作
+'<div class="card" style="margin-top:16px"><div class="card-header"><div class="card-title">常见操作 · 三步就能搞定，不需要技术参与</div></div>'+
+'<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">'+
+'<div class="scene-card"><div class="sc-tag" style="background:var(--success-bg);color:var(--success)">日常新增</div><div class="sc-title">上新一个品类</div><div class="sc-desc">① 新建分类、传图标、写文案 → ② 勾选这个分类展示哪些商品 → ③ 发布。全程点选完成，不用找开发</div></div>'+
+'<div class="scene-card"><div class="sc-tag" style="background:var(--warning-bg);color:var(--warning)">后台调整了</div><div class="sc-title">后台分类合并/拆分</div><div class="sc-desc">商品管理那边怎么合并拆分都不影响这里——只需重新勾一次商品来源，用户看到的页面和链接照常不变</div></div>'+
+'<div class="scene-card"><div class="sc-tag" style="background:var(--purple-bg);color:var(--purple)">营销活动</div><div class="sc-title">做一个活动专题页</div><div class="sc-desc">如「开学季」：新建分类 → 选「同一批商品多处展示」并勾选要推的商品 → 写活动文案 → 设定自动上线/下线时间</div></div>'+
+'</div></div>');
+};
+
+function openAddCCategory(){
+  editModal('新建用户看到的分类','<div class="form-group"><label class="form-label required">分类名称</label><input class="form-input" placeholder="用户看到的名称，如：iPhone"><div style="font-size:11px;color:var(--t3);margin-top:4px">建议不超过6个字，手机上太长会被截断</div></div><div class="form-group"><label class="form-label">挂在哪个分类下</label><select class="form-select"><option>不挂（作为首页一级分类）</option><option>手机通讯</option><option>电脑平板</option><option>智能穿戴</option></select><div style="font-size:11px;color:var(--t3);margin-top:4px">不确定就先不挂，建好后再拖动调整</div></div><div class="form-group"><label class="form-label">分类图标</label><div style="display:flex;align-items:center;gap:10px"><button class="btn sm">选择图片上传</button><span style="font-size:11px;color:var(--t3)">支持PNG，建议120×120</span></div></div><div class="form-group"><label class="form-label">营销文案（可选）</label><input class="form-input" placeholder="如：全新iPhone，0押金租回家"></div><div style="padding:10px 14px;background:var(--purple-bg);border-radius:6px;font-size:12px;color:var(--t2);line-height:1.6">💡 链接地址系统会自动生成，<b>不需要填写</b>。创建后下一步：在「商品来源」里勾选这个分类展示哪些商品，然后发布。</div>','<button class="btn" onclick="closeModal()">取消</button><button class="btn primary" onclick="closeModal();showToast(\'分类已创建，接下来请配置商品来源\')">下一步：配置商品来源</button>');
+}
+
+function selectCCategory(el, name){
+  document.querySelectorAll('.ctree-node').forEach(function(n){n.classList.remove('active');});
+  el.classList.add('active');
+}
+
+// ============================================================
+// 分类映射管理
+// ============================================================
+pages['category-map'] = function(){return (
+// 三栏关联图
+'<div class="card"><div class="card-header"><div class="card-title">两套分类是什么关系？</div><div><button class="btn sm primary" onclick="openAddMapping()">给分类添加商品来源</button></div></div>'+
+'<div style="padding:0 4px 14px;font-size:12px;color:var(--t3);line-height:1.7">简单说：<b style="color:var(--t2)">商品管理分类是给内部用的</b>（按品牌型号管商品），<b style="color:var(--t2)">用户看到的分类是给顾客用的</b>（怎么好逛怎么来）。两套各自维护、互不干扰，中间靠「商品来源」把商品放进对应的用户分类里。</div>'+
+'<div class="map-diagram">'+
+// 后台分类面板
+'<div class="map-panel"><div class="map-panel-head"><div class="map-panel-title" style="color:var(--info)">商品管理分类（内部用）</div>'+tg('blue','运营/采购视角')+'</div><div class="map-panel-desc">按品牌、型号精细管理<br>结构随时可调，不影响用户端</div>'+
+'<div class="map-tree-node l1 bp"><span>📱 数码3C</span><span style="font-size:10px;opacity:.7">大分类</span></div>'+
+'<div class="map-tree-node l2"><span>手机</span></div>'+
+'<div class="map-tree-node l3"><span>iPhone</span></div>'+
+'<div class="map-tree-node l4"><span>iPhone 15 Pro Max</span></div>'+
+'<div class="map-tree-node l4"><span>iPhone 15 Pro</span></div>'+
+'<div class="map-tree-node l4"><span>iPhone 15</span></div>'+
+'<div class="map-tree-node l3"><span>安卓手机</span></div>'+
+'<div class="map-tree-node l2"><span>电脑</span></div>'+
+'<div class="map-tree-node l2"><span>平板</span></div>'+
+'<div class="map-tree-node l2"><span>智能穿戴</span></div>'+
+'</div>'+
+// 商品来源方式面板
+'<div class="map-panel center"><div style="text-align:center"><div class="map-panel-title" style="color:var(--warning);text-align:center">商品来源方式</div><div style="font-size:11px;color:var(--t3);margin-top:4px">左边挑商品 → 放进右边的用户分类</div></div><div style="margin-top:14px">'+
+'<div class="map-card n1"><div class="mc-type" style="color:var(--warning)">合并展示</div><div class="mc-desc">「电脑」和「平板」里的商品 → 合并放进用户的「电脑平板」<br>也可以把15 Pro Max、15 Pro、15一起放进「iPhone」</div></div>'+
+'<div class="map-card nn"><div class="mc-type" style="color:var(--success)">多处展示</div><div class="mc-desc">「iPhone」的商品 → 既出现在「iPhone」分类，也出现在「开学季」活动页<br>做活动最常用</div></div>'+
+'<div class="map-card n11"><div class="mc-type" style="color:var(--info)">直接同步</div><div class="mc-desc">「智能穿戴」里的商品 → 原样放进用户的「智能穿戴」<br>两边一致，最省心</div></div>'+
+'<div class="map-card inherit"><div class="mc-type" style="color:var(--t3)">不配置时</div><div class="mc-desc">新建分类还没挑商品时，默认展示上级分类下的全部商品，不用每次都手动配</div></div>'+
+'</div></div>'+
+// C端分类面板
+'<div class="map-panel"><div class="map-panel-head"><div class="map-panel-title" style="color:var(--purple)">用户看到的分类（对外）</div>'+tg('purple','顾客视角')+'</div><div class="map-panel-desc">1-2层，怎么好逛怎么来<br>链接固定，收藏和广告不会失效</div>'+
+'<div class="map-tree-node l1 cp"><span>📱 手机通讯</span><span style="font-size:10px;opacity:.7">一级</span></div>'+
+'<div class="map-tree-node l2"><span>iPhone</span><span class="node-tag n1" title="商品来自多个后台分类，合并展示" style="font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;background:var(--warning-bg);color:var(--warning)">合并</span></div>'+
+'<div class="map-tree-node l2"><span>安卓手机</span><span class="node-tag n11" title="商品与后台分类一一对应" style="font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;background:var(--info-bg);color:var(--info)">同步</span></div>'+
+'<div class="map-tree-node l1 cp"><span>💻 电脑平板</span><span style="font-size:10px;opacity:.7">← 两个分类合并而来</span></div>'+
+'<div class="map-tree-node l2"><span>MacBook</span><span class="node-tag n1" title="商品来自多个后台分类，合并展示" style="font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;background:var(--warning-bg);color:var(--warning)">合并</span></div>'+
+'<div class="map-tree-node l2"><span>iPad</span><span class="node-tag n1" title="商品来自多个后台分类，合并展示" style="font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;background:var(--warning-bg);color:var(--warning)">合并</span></div>'+
+'<div class="map-tree-node l1 cp"><span>⌚ 智能穿戴</span><span style="font-size:10px;opacity:.7">一级</span></div>'+
+'<div class="map-tree-node l2"><span>手表耳机</span><span class="node-tag n11" title="商品与后台分类一一对应" style="font-size:10px;padding:1px 6px;border-radius:3px;font-weight:600;background:var(--info-bg);color:var(--info)">同步</span></div>'+
+'<div class="map-tree-node l1 cp"><span>🎮 开学季</span><span style="font-size:10px;opacity:.7">活动 · 多处展示</span></div>'+
+'</div>'+
+'</div></div>'+
+// 维护流程
+'<div class="card" style="margin-top:16px"><div class="card-header"><div class="card-title">建一个新分类的完整过程</div></div>'+
+'<div class="flow-steps">'+
+'<div class="flow-step" style="border-color:var(--purple)"><div class="fs-num" style="background:var(--purple)">1</div><div class="fs-title">建分类</div><div class="fs-desc">起名、传图标、挂在哪个分类下（链接系统自动生成）</div></div>'+
+'<span class="flow-arrow">→</span>'+
+'<div class="flow-step" style="border-color:var(--purple)"><div class="fs-num" style="background:var(--purple)">2</div><div class="fs-title">配样式</div><div class="fs-desc">排序、营销文案、用户可按什么筛选</div></div>'+
+'<span class="flow-arrow">→</span>'+
+'<div class="flow-step" style="border-color:var(--warning)"><div class="fs-num" style="background:var(--warning)">3</div><div class="fs-title">挑商品</div><div class="fs-desc">选「合并 / 同步 / 多处展示」，勾选这个分类展示哪些商品</div></div>'+
+'<span class="flow-arrow">→</span>'+
+'<div class="flow-step" style="border-color:var(--success)"><div class="fs-num" style="background:var(--success)">4</div><div class="fs-title">发布</div><div class="fs-desc">先预览手机效果再发布；活动分类可设自动上线/下线时间</div></div>'+
+'<span class="flow-arrow">→</span>'+
+'<div class="flow-step" style="border-color:var(--info)"><div class="fs-num" style="background:var(--info)">5</div><div class="fs-title">看效果</div><div class="fs-desc">看点击和下单数据，调整排序、文案，效果差的下线</div></div>'+
+'</div></div>'+
+// 关键原则 + 属性对照
+'<div class="split2" style="margin-top:16px">'+
+'<div class="card"><div class="card-header"><div class="card-title">运营最关心的5件事</div></div>'+
+'<div style="display:flex;flex-direction:column;gap:14px">'+
+'<div style="display:flex;gap:12px;align-items:flex-start"><span style="font-size:18px;font-weight:800;color:var(--info);width:28px">01</span><span style="font-size:13px;line-height:1.6;color:var(--t2)"><b>两边随便改，互不影响</b> — 商品管理那边合并拆分分类，用户端的页面和链接照常不变</span></div>'+
+'<div style="display:flex;gap:12px;align-items:flex-start"><span style="font-size:18px;font-weight:800;color:var(--purple);width:28px">02</span><span style="font-size:13px;line-height:1.6;color:var(--t2)"><b>商品来源灵活配</b> — 可以合并多个分类、可以原样同步、也可以让同一批商品出现在多个页面</span></div>'+
+'<div style="display:flex;gap:12px;align-items:flex-start"><span style="font-size:18px;font-weight:800;color:var(--warning);width:28px">03</span><span style="font-size:13px;line-height:1.6;color:var(--t2)"><b>各管各的</b> — 商品资料（供应商、成本、上下架）在商品管理那边改；用户看到的样式在这边改</span></div>'+
+'<div style="display:flex;gap:12px;align-items:flex-start"><span style="font-size:18px;font-weight:800;color:var(--success);width:28px">04</span><span style="font-size:13px;line-height:1.6;color:var(--t2)"><b>不挑商品也能用</b> — 新建分类默认沿用上级分类的商品，配好来源再细调</span></div>'+
+'<div style="display:flex;gap:12px;align-items:flex-start"><span style="font-size:18px;font-weight:800;color:var(--info);width:28px">05</span><span style="font-size:13px;line-height:1.6;color:var(--t2)"><b>链接永久有效</b> — 用户收藏的页面、投出去的广告链接，不会因为调整分类而失效</span></div>'+
+'</div></div>'+
+// 属性对照卡
+'<div class="card"><div class="card-header"><div class="card-title">两边各管哪些信息</div></div>'+
+'<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">'+
+'<div class="attr-box bp"><div class="ab-title">商品管理分类管（内部）</div><div class="ab-item">• 商品的供应商、成本价</div><div class="ab-item">• 上下架状态、运营标签</div><div class="ab-item">• 品类优先级、风控规则</div><div class="ab-item">• 商品数量统计</div></div>'+
+'<div class="attr-box cp"><div class="ab-title">用户分类管（对外）</div><div class="ab-item">• 用户看到的图标、名称</div><div class="ab-item">• 排序、营销文案</div><div class="ab-item">• 是否显示、点进去的页面</div><div class="ab-item">• 筛选项、路径导航</div></div>'+
+'</div></div>'+
+'</div>');
+};
+
+function openAddMapping(){
+  editModal('给用户分类添加商品来源','<div class="form-group"><label class="form-label required">要给哪个用户分类配商品</label><select class="form-select"><option>iPhone（挂在：手机通讯）</option><option>MacBook（挂在：电脑平板）</option><option>手表耳机（挂在：智能穿戴）</option><option>开学季（活动分类）</option></select></div><div class="form-group"><label class="form-label required">商品从哪来</label><div style="display:flex;flex-direction:column;gap:8px">'+
+'<div class="map-src-opt active" onclick="pickMapSrc(this)" style="display:flex;gap:10px;align-items:flex-start;padding:10px 14px;border:1.5px solid var(--primary);border-radius:8px;cursor:pointer"><div style="color:var(--primary);font-weight:700">✓</div><div><div style="font-size:13px;font-weight:600">多个分类的商品合并</div><div style="font-size:11px;color:var(--t3);margin-top:2px">如：15 Pro Max、15 Pro、15 一起放进「iPhone」</div></div></div>'+
+'<div class="map-src-opt" onclick="pickMapSrc(this)" style="display:flex;gap:10px;align-items:flex-start;padding:10px 14px;border:1.5px solid var(--border2);border-radius:8px;cursor:pointer"><div style="opacity:0">✓</div><div><div style="font-size:13px;font-weight:600">直接同步一个分类</div><div style="font-size:11px;color:var(--t3);margin-top:2px">如：后台「智能穿戴」是什么，这里就展示什么</div></div></div>'+
+'<div class="map-src-opt" onclick="pickMapSrc(this)" style="display:flex;gap:10px;align-items:flex-start;padding:10px 14px;border:1.5px solid var(--border2);border-radius:8px;cursor:pointer"><div style="opacity:0">✓</div><div><div style="font-size:13px;font-weight:600">同一批商品多处展示</div><div style="font-size:11px;color:var(--t3);margin-top:2px">如：iPhone 的商品同时出现在「iPhone」和「开学季」活动页</div></div></div>'+
+'</div></div><div class="form-group"><label class="form-label required">勾选要放进来的商品分类</label><select class="form-select" multiple style="min-height:110px"><option>📱 iPhone 15 Pro Max</option><option>📱 iPhone 15 Pro</option><option>📱 iPhone 15</option><option>💻 MacBook</option><option>📱 iPad Air</option></select></div><div style="font-size:12px;color:var(--t2);padding:10px 12px;background:var(--warning-bg);border-radius:6px;line-height:1.6">💡 如果同一批商品已经出现在别的分类里，这里会提示你确认——避免顾客在两个入口刷到重复商品</div>','<button class="btn" onclick="closeModal()">取消</button><button class="btn primary" onclick="closeModal();showToast(\'商品来源已保存\')">保存</button>');
+}
+
+function pickMapSrc(el){
+  document.querySelectorAll('.map-src-opt').forEach(function(n){
+    n.style.border='1.5px solid var(--border2)';
+    n.firstChild.style.opacity=0;
+    n.firstChild.style.color='';
+  });
+  el.style.border='1.5px solid var(--primary)';
+  el.firstChild.style.opacity=1;
+  el.firstChild.style.color='var(--primary)';
 }
 
 // ============================================================
@@ -1203,7 +1977,7 @@ function openRentPlanDetail(){
 pages['buy-plan'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">购买方案配置</div></div>'+sc([{v:'600',k:'购买方案总数',c:'primary'},{v:'520',k:'启用',c:'green'},{v:'3',k:'校验异常',c:'danger'}])+fb([{t:'i',p:'SKU名称 / 方案编码',w:'200px'},{t:'s',o:['全部折旧模式','等额折旧','差额折旧']},{t:'s',o:S_PLAN_STATUS},{t:'s',o:S_CATEGORY}])+ab([{t:'新增购买方案',c:'primary'},{t:'导出',c:'primary'}])+dt(['方案编码','SKU','折旧模式','折旧参数','总价上限系数','总价下限系数','校验结果','状态'],[{c:['BP001-EQ','iPhone 16 Pro Max 256GB 黑色',tg('primary','等额折旧'),'月折旧 ¥500','1.0','0.1',tg('green','通过'),tg('green','启用')],o:'<span class="link" onclick="openBuyPlanDetail()">详情</span> <span class="link">编辑</span>'},{c:['BP001-DIFF','iPhone 16 Pro Max 256GB 黑色',tg('info','差额折旧'),'逐月折旧率','1.0','0.1',tg('green','通过'),tg('green','启用')],o:'<span class="link">详情</span> <span class="link">编辑</span>'},{c:['BP002-EQ','华为Mate 70 Pro 512GB',tg('primary','等额折旧'),'月折旧 ¥350','1.0','0.1',tg('green','通过'),tg('green','启用')],o:'<span class="link">详情</span> <span class="link">编辑</span>'},{c:['BP003-DIFF','MacBook Air M4 256GB',tg('info','差额折旧'),'逐月折旧率','1.0','0.1',tg('red','购买金超上限'),tg('orange','停用')],o:'<span class="link">详情</span> <span class="link">编辑</span>'}])+pg(600)+'</section>';};
 
 function openBuyPlanDetail(){
-  detailModal('购买方案详情 \u2014 等额折旧 (BP001-EQ)',dl([{k:'方案编码',v:'BP001-EQ'},{k:'SKU',v:'iPhone 16 Pro Max 256GB 黑色钛金属'},{k:'折旧模式',v:tg('primary','等额折旧')},{k:'官网价',v:'¥12,999'},{k:'月折旧方式',v:'固定金额 ¥500/月'},{k:'总价上限系数',v:'1.0（当年期初 × 1.0）'},{k:'总价下限系数',v:'0.1（当年期初 × 0.1）'},{k:'状态',v:tg('green','启用')}])+'<div style="margin-top:16px"><div style="font-size:14px;font-weight:600;margin-bottom:8px">购买金计算表</div><table class="calc-table"><thead><tr><th>期数</th><th>月租金</th><th>月折旧</th><th>累计折旧</th><th>购买金</th><th>购买应付</th></tr></thead><tbody><tr><td>第1期</td><td>¥799.93</td><td>¥500</td><td>¥500</td><td>¥12,499</td><td>¥13,298.93</td></tr><tr><td>第2期</td><td>¥799.93</td><td>¥500</td><td>¥1,000</td><td>¥11,999</td><td>¥12,798.93</td></tr><tr><td>第3期</td><td>¥799.93</td><td>¥500</td><td>¥1,500</td><td>¥11,499</td><td>¥12,298.93</td></tr><tr><td>\u2026</td><td>\u2026</td><td>\u2026</td><td>\u2026</td><td>\u2026</td><td>\u2026</td></tr><tr><td>第12期</td><td>¥799.93</td><td>¥500</td><td>¥6,000</td><td>¥6,999</td><td>¥7,798.93</td></tr></tbody></table></div><div style="margin-top:12px;font-size:13px;color:var(--success)">✅ 校验通过：所有期数购买金在上下限范围内</div>','wide');
+  detailModal('购买方案详情 \u2014 等额折旧 (BP001-EQ)',dl([{k:'方案编码',v:'BP001-EQ'},{k:'SKU',v:'iPhone 16 Pro Max 256GB 黑色钛金属'},{k:'折旧模式',v:tg('primary','等额折旧')},{k:'官网价',v:'¥12,999'},{k:'月折旧方式',v:'固定金额 ¥500/月'},{k:'总价上限系数',v:'1.0（当年期初 × 1.0）'},{k:'总价下限系数',v:'0.1（当年期初 × 0.1）'},{k:'状态',v:tg('green','启用')}])+'<div style="margin-top:16px;overflow-x:auto"><div style="font-size:14px;font-weight:600;margin-bottom:8px">购买金计算表</div><table class="calc-table"><thead><tr><th>期数</th><th>月租金</th><th>月折旧</th><th>累计折旧</th><th>购买金</th><th>购买应付</th></tr></thead><tbody><tr><td>第1期</td><td>¥799.93</td><td>¥500</td><td>¥500</td><td>¥12,499</td><td>¥13,298.93</td></tr><tr><td>第2期</td><td>¥799.93</td><td>¥500</td><td>¥1,000</td><td>¥11,999</td><td>¥12,798.93</td></tr><tr><td>第3期</td><td>¥799.93</td><td>¥500</td><td>¥1,500</td><td>¥11,499</td><td>¥12,298.93</td></tr><tr><td>\u2026</td><td>\u2026</td><td>\u2026</td><td>\u2026</td><td>\u2026</td><td>\u2026</td></tr><tr><td>第12期</td><td>¥799.93</td><td>¥500</td><td>¥6,000</td><td>¥6,999</td><td>¥7,798.93</td></tr></tbody></table></div><div style="margin-top:12px;font-size:13px;color:var(--success)">✅ 校验通过：所有期数购买金在上下限范围内</div>','wide');
 }
 
 // ============================================================
@@ -1214,7 +1988,7 @@ pages['svc-pkg'] = function(){return '<section class="card"><div class="card-hea
 // ============================================================
 // 报价引擎测试
 // ============================================================
-pages['quote-test'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">报价引擎测试</div></div><div class="form-row col3"><div class="form-group"><label class="form-label required">选择SKU</label><select class="form-select"><option>iPhone 16 Pro Max 256GB 黑色钛金属</option><option>华为Mate 70 Pro 512GB</option><option>AirPods Pro 3</option></select></div><div class="form-group"><label class="form-label">官网价（可修改测试）</label><input class="form-input" value="12999"></div><div class="form-group"><label class="form-label required">选择租用方案</label><select class="form-select"><option>12月 · 月付 · 总租金系数0.74</option><option>6月 · 月付 · 总租金系数0.60</option><option>3月 · 月付 · 总租金系数0.45</option></select></div><div class="form-group"><label class="form-label required">选择购买方案</label><select class="form-select"><option>等额折旧 · 月折旧¥500</option><option>差额折旧 · 逐月折旧率</option></select></div><div class="form-group"><label class="form-label">增值服务包（选填）</label><select class="form-select"><option>不选择</option><option>轻享维修包 ¥17/月</option><option>全能维修包 ¥33/月</option><option>尊享无忧包 ¥50/月</option></select></div></div><div style="margin-top:8px"><button class="btn primary" onclick="recalcQuote()">重新计算</button> <button class="btn">导出Excel</button></div><div style="margin-top:20px"><div style="font-size:15px;font-weight:700;margin-bottom:12px">📊 计算结果</div><div class="price-preview"><div class="price-row"><span class="label">官网价</span><span class="value">¥12,999</span></div><div class="price-row"><span class="label">总租金系数</span><span class="value">0.74</span></div><div class="price-row"><span class="label">总租金</span><span class="value">¥9,599.16</span></div><div class="price-row"><span class="label">月租金</span><span class="value">¥799.93</span></div><div class="price-row"><span class="label">日租金</span><span class="value">¥26.28</span></div><div class="price-row"><span class="label">履约保证金（月租×2）</span><span class="value">¥1,599.86</span></div><div class="price-total"><span class="label">首期支付合计</span><span class="value">¥2,399.79</span></div></div><div style="margin-top:16px;font-size:15px;font-weight:700;margin-bottom:12px">📈 购买金计算表（等额折旧）</div><table class="calc-table"><thead><tr><th>期数</th><th>月租金</th><th>月折旧</th><th>累计折旧</th><th>购买金</th><th>购买应付</th><th>校验</th></tr></thead><tbody><tr><td>第1期</td><td>¥799.93</td><td>¥500</td><td>¥500</td><td>¥12,499</td><td>¥13,298.93</td><td class="warn">⚠ 超上限</td></tr><tr><td>第2期</td><td>¥799.93</td><td>¥500</td><td>¥1,000</td><td>¥11,999</td><td>¥12,798.93</td><td>✅</td></tr><tr><td>第3期</td><td>¥799.93</td><td>¥500</td><td>¥1,500</td><td>¥11,499</td><td>¥12,298.93</td><td>✅</td></tr><tr><td>\u2026</td><td>\u2026</td><td>\u2026</td><td>\u2026</td><td>\u2026</td><td>\u2026</td><td>\u2026</td></tr><tr><td>第12期</td><td>¥799.93</td><td>¥500</td><td>¥6,000</td><td>¥6,999</td><td>¥7,798.93</td><td>✅</td></tr></tbody></table><div style="margin-top:12px;font-size:13px;color:var(--danger)">❌ 校验异常：第1期购买金 ¥12,499 > 上限 ¥12,999（当年期初 × 1.0），建议调整折旧参数或上限系数</div></div></section>';};
+pages['quote-test'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">报价引擎测试</div></div><div class="form-row col3"><div class="form-group"><label class="form-label required">选择SKU</label><select class="form-select"><option>iPhone 16 Pro Max 256GB 黑色钛金属</option><option>华为Mate 70 Pro 512GB</option><option>AirPods Pro 3</option></select></div><div class="form-group"><label class="form-label">官网价（可修改测试）</label><input class="form-input" value="12999"></div><div class="form-group"><label class="form-label required">选择租用方案</label><select class="form-select"><option>12月 · 月付 · 总租金系数0.74</option><option>6月 · 月付 · 总租金系数0.60</option><option>3月 · 月付 · 总租金系数0.45</option></select></div><div class="form-group"><label class="form-label required">选择购买方案</label><select class="form-select"><option>等额折旧 · 月折旧¥500</option><option>差额折旧 · 逐月折旧率</option></select></div><div class="form-group"><label class="form-label">增值服务包（选填）</label><select class="form-select"><option>不选择</option><option>轻享维修包 ¥17/月</option><option>全能维修包 ¥33/月</option><option>尊享无忧包 ¥50/月</option></select></div></div><div style="margin-top:8px"><button class="btn primary" onclick="recalcQuote()">重新计算</button> <button class="btn">导出Excel</button></div><div style="margin-top:20px"><div style="font-size:15px;font-weight:700;margin-bottom:12px">📊 计算结果</div><div class="price-preview"><div class="price-row"><span class="label">官网价</span><span class="value">¥12,999</span></div><div class="price-row"><span class="label">总租金系数</span><span class="value">0.74</span></div><div class="price-row"><span class="label">总租金</span><span class="value">¥9,599.16</span></div><div class="price-row"><span class="label">月租金</span><span class="value">¥799.93</span></div><div class="price-row"><span class="label">日租金</span><span class="value">¥26.28</span></div><div class="price-row"><span class="label">履约保证金（月租×2）</span><span class="value">¥1,599.86</span></div><div class="price-total"><span class="label">首期支付合计</span><span class="value">¥2,399.79</span></div></div><div style="margin-top:16px;font-size:15px;font-weight:700;margin-bottom:12px">📈 购买金计算表（等额折旧）</div><div style="overflow-x:auto"><table class="calc-table"><thead><tr><th>期数</th><th>月租金</th><th>月折旧</th><th>累计折旧</th><th>购买金</th><th>购买应付</th><th>校验</th></tr></thead><tbody><tr><td>第1期</td><td>¥799.93</td><td>¥500</td><td>¥500</td><td>¥12,499</td><td>¥13,298.93</td><td class="warn">⚠ 超上限</td></tr><tr><td>第2期</td><td>¥799.93</td><td>¥500</td><td>¥1,000</td><td>¥11,999</td><td>¥12,798.93</td><td>✅</td></tr><tr><td>第3期</td><td>¥799.93</td><td>¥500</td><td>¥1,500</td><td>¥11,499</td><td>¥12,298.93</td><td>✅</td></tr><tr><td>\u2026</td><td>\u2026</td><td>\u2026</td><td>\u2026</td><td>\u2026</td><td>\u2026</td><td>\u2026</td></tr><tr><td>第12期</td><td>¥799.93</td><td>¥500</td><td>¥6,000</td><td>¥6,999</td><td>¥7,798.93</td><td>✅</td></tr></tbody></table></div><div style="margin-top:12px;font-size:13px;color:var(--danger)">❌ 校验异常：第1期购买金 ¥12,499 > 上限 ¥12,999（当年期初 × 1.0），建议调整折旧参数或上限系数</div></div></section>';};
 
 function recalcQuote(){
   alert('报价引擎重新计算完成（原型演示）');
@@ -1248,7 +2022,7 @@ pages['user-profile'] = function(){
   +'<div class="split2"><section class="card"><div class="card-header"><div class="card-title">租赁历史</div></div>'
   +dl([{k:'订单总数',v:'2'},{k:'在租订单',v:'1'},{k:'已完成订单',v:'1'},{k:'首单时间',v:'2026-07-22'},{k:'最近订单',v:'2026-07-22'},{k:'累计租金',v:'¥1,498'},{k:'到期处理分布',v:'续租0 / 购买0 / 归还1'}])
   +'</section><section class="card"><div class="card-header"><div class="card-title">逾期记录</div></div>'
-  +dl([{k:'逾期次数',v:tg('red','3次')},{k:'累计逾期天数',v:'28天'},{k:'最近逾期',v:'2026-09-22 · ¥499'},{k:'最高逾期等级',v:tg('red','M2+')},{k:'严重违约',v:tg('danger','1次')},{k:'司法记录',v:'0次'}])
+  +dl([{k:'逾期次数',v:tg('red','3次')},{k:'累计逾期天数',v:'28天'},{k:'最近逾期',v:'2026-09-22 · ¥499'},{k:'最高逾期等级',v:tg('red','M2')},{k:'严重违约',v:tg('danger','1次')},{k:'司法记录',v:'0次'}])
   +'</section></div>'
   // 标签区
   +'<section class="card" style="margin-top:16px"><div class="card-header"><div class="card-title">用户标签</div><button class="btn sm primary" onclick="openAddTag()">添加标签</button></div>'
@@ -1355,7 +2129,7 @@ pages['contract-detail'] = function(){return '<section class="card"><div class="
 pages['tpl-variable'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">合同变量管理</div></div>'+sc([{v:'42',k:'变量总数',c:'primary'},{v:'35',k:'已关联模板',c:'green'},{v:'7',k:'未使用',c:'gray'}])+fb([{t:'i',p:'变量名称/编码搜索',w:'200px'},{t:'s',o:['全部来源','用户中心','交易中心','商品中心','供销中心','合同中心','系统中心']}])+ab([{t:'新增变量',c:'primary'}])+dt(['变量编码','变量名称','数据类型','来源中心','关联模板数','示例值','状态'],[{c:['user_name','用户姓名','字符串',tg('primary','用户中心'),tg('primary','5'),'张*明',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['user_phone','用户手机号','字符串',tg('primary','用户中心'),tg('primary','5'),'138****5678',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['user_id_card','用户身份证号','字符串',tg('primary','用户中心'),tg('primary','3'),'410***XXXX',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['order_no','订单编号','字符串',tg('primary','交易中心'),tg('primary','4'),'BJ-20260720-001',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['device_name','设备名称','字符串',tg('blue','商品中心'),tg('primary','3'),'iPhone 15 Pro 256G',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['monthly_rent','月租金','数值',tg('primary','交易中心'),tg('primary','4'),'¥399',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['rental_period','租期','字符串',tg('primary','交易中心'),tg('primary','4'),'12个月',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['deposit_amount','押金金额','数值',tg('primary','交易中心'),tg('primary','3'),'¥1,200',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['supplier_name','供货商名称','字符串',tg('blue','供销中心'),tg('primary','2'),'深圳顺电',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['guarantor_name','担保人姓名','字符串',tg('primary','用户中心'),tg('primary','1'),'—',tg('orange','草稿')],o:'<span class="link">编辑</span>'}])+pg(42)+'</section>';};
 
 // 签署监控
-pages['sign-monitor'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">签署漏斗分析</div></div><div style="display:flex;gap:16px;padding:16px 0"><div style="flex:1;text-align:center;padding:20px 12px;border:1px solid var(--border);border-radius:6px"><div style="font-size:24px;color:var(--primary);font-weight:600">52,386</div><div style="color:var(--t2);margin-top:4px">合同生成</div><div style="font-size:12px;color:var(--t3)">100%</div></div><div style="flex:1;text-align:center;padding:20px 12px;border:1px solid var(--border);border-radius:6px"><div style="font-size:24px;color:var(--info);font-weight:600">48,580</div><div style="color:var(--t2);margin-top:4px">用户查看</div><div style="font-size:12px;color:var(--t3)">92.8%</div></div><div style="flex:1;text-align:center;padding:20px 12px;border:1px solid var(--border);border-radius:6px"><div style="font-size:24px;color:var(--primary);font-weight:600">47,200</div><div style="color:var(--t2);margin-top:4px">开始签署</div><div style="font-size:12px;color:var(--t3)">89.7%</div></div><div style="flex:1;text-align:center;padding:20px 12px;border:1px solid var(--border);border-radius:6px;background:var(--success-bg)"><div style="font-size:24px;color:var(--success);font-weight:600">48,200</div><div style="color:var(--t2);margin-top:4px">签署完成</div><div style="font-size:12px;color:var(--t3)">91.8%</div></div></div></section><section class="card" style="margin-top:16px"><div class="card-header"><div class="card-title">超时预警</div></div>'+sc([{v:'156',k:'超时预警',c:'danger'},{v:'89',k:'24h未查看(黄色)',c:'orange'},{v:'45',k:'查看后未签(橙色)',c:'danger'},{v:'12',k:'签署失败(红色)',c:'danger'},{v:'10',k:'宽限期到期(红色)',c:'danger'}])+dt(['预警等级','合同编号','用户手机号','超时类型','超时时长','操作'],[{c:[tg('orange','黄色预警'),'CTR-20260720045','139****2345','生成后24h未查看','26小时',tg('orange','89单')],o:'<span class="link">查看详情</span>'},{c:[tg('danger','橙色预警'),'CTR-20260721012','158****7890','查看后24h未签','30小时',tg('danger','45单')],o:'<span class="link">查看详情</span>'},{c:[tg('danger','红色告警'),'CTR-20260719003','136****4567','签署失败','3次人脸识别失败',tg('danger','12单')],o:'<span class="link">转人工</span>'},{c:[tg('danger','红色告警'),'CTR-20260718001','188****1234','宽限期到期','7天未操作',tg('danger','10单')],o:'<span class="link">限制服务</span>'}])+'</section>';};
+pages['sign-monitor'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">签署漏斗分析</div></div><div style="display:flex;gap:16px;padding:16px 0;flex-wrap:wrap"><div style="flex:1;text-align:center;padding:20px 12px;border:1px solid var(--border);border-radius:6px"><div style="font-size:24px;color:var(--primary);font-weight:600">52,386</div><div style="color:var(--t2);margin-top:4px">合同生成</div><div style="font-size:12px;color:var(--t3)">100%</div></div><div style="flex:1;text-align:center;padding:20px 12px;border:1px solid var(--border);border-radius:6px"><div style="font-size:24px;color:var(--info);font-weight:600">48,580</div><div style="color:var(--t2);margin-top:4px">用户查看</div><div style="font-size:12px;color:var(--t3)">92.8%</div></div><div style="flex:1;text-align:center;padding:20px 12px;border:1px solid var(--border);border-radius:6px"><div style="font-size:24px;color:var(--primary);font-weight:600">47,200</div><div style="color:var(--t2);margin-top:4px">开始签署</div><div style="font-size:12px;color:var(--t3)">89.7%</div></div><div style="flex:1;text-align:center;padding:20px 12px;border:1px solid var(--border);border-radius:6px;background:var(--success-bg)"><div style="font-size:24px;color:var(--success);font-weight:600">48,200</div><div style="color:var(--t2);margin-top:4px">签署完成</div><div style="font-size:12px;color:var(--t3)">91.8%</div></div></div></section><section class="card" style="margin-top:16px"><div class="card-header"><div class="card-title">超时预警</div></div>'+sc([{v:'156',k:'超时预警',c:'danger'},{v:'89',k:'24h未查看(黄色)',c:'orange'},{v:'45',k:'查看后未签(橙色)',c:'danger'},{v:'12',k:'签署失败(红色)',c:'danger'},{v:'10',k:'宽限期到期(红色)',c:'danger'}])+dt(['预警等级','合同编号','用户手机号','超时类型','超时时长','操作'],[{c:[tg('orange','黄色预警'),'CTR-20260720045','139****2345','生成后24h未查看','26小时',tg('orange','89单')],o:'<span class="link">查看详情</span>'},{c:[tg('danger','橙色预警'),'CTR-20260721012','158****7890','查看后24h未签','30小时',tg('danger','45单')],o:'<span class="link">查看详情</span>'},{c:[tg('danger','红色告警'),'CTR-20260719003','136****4567','签署失败','3次人脸识别失败',tg('danger','12单')],o:'<span class="link">转人工</span>'},{c:[tg('danger','红色告警'),'CTR-20260718001','188****1234','宽限期到期','7天未操作',tg('danger','10单')],o:'<span class="link">限制服务</span>'}])+'</section>';};
 
 // 合同变更管理（含存量重签）
 pages['resign-task'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">合同变更管理（含存量重签）</div><div style="margin-left:auto"><button class="btn sm primary" onclick="openResignTask()">发起合同变更</button></div></div>'+sc([{v:'3',k:'进行中变更任务',c:'primary'},{v:'2,560',k:'受影响合同总数',c:'orange'},{v:'1,920',k:'已重签完成',c:'green'},{v:'320',k:'宽限期过期',c:'danger'},{v:'75%',k:'平均重签率',c:'primary'}])+fb([{t:'s',o:S_RESIGN_STATUS},{t:'s',o:['全部模板','标准租赁合同','委托扣款授权']},{t:'d',p:'发起日期',w:'140px'}])+dt(['任务编号','变更模板','变更前版本→变更后','受影响数','已重签','已拒绝','宽限过期','重签率','任务状态'],[{c:['RS-20260723-01',tg('primary','标准租赁合同'),'v3.2→v3.3',tg('primary','1,200'),tg('green','896'),tg('danger','28'),tg('danger','48'),'74.7%',tg('orange','重签中')],o:'<span class="link">查看明细</span>'},{c:['RS-20260720-02',tg('primary','委托扣款授权'),'v2.1→v2.2',tg('primary','860'),tg('green','680'),tg('danger','12'),tg('danger','56'),'79.1%',tg('orange','重签中')],o:'<span class="link">查看明细</span>'},{c:['RS-20260715-01',tg('primary','隐私协议'),'v1.8→v1.9',tg('primary','500'),tg('green','444'),tg('danger','8'),tg('danger','0'),'96%',tg('green','已完成')],o:'<span class="link">查看明细</span>'}])+'</section><section class="card" style="margin-top:16px"><div class="card-header"><div class="card-title">重签明细（RS-20260723-01）</div></div>'+dt(['合同编号','订单号','用户手机号','重签状态','通知时间','签署时间','备注'],[{c:['CTR-20260723001','BJ-20260720-001','138****5678',tg('green','已完成'),'07-23 12:00','07-23 12:30','—'],o:'<span class="link">查看对比</span>'},{c:['CTR-20260722005','BJ-20260720-002','139****2345',tg('orange','重签中'),'07-23 12:00','—','第5天未签'],o:'<span class="link">查看对比</span>'},{c:['CTR-20260721008','BJ-20260718-001','158****7890',tg('danger','已拒绝'),'07-23 12:00','—','申请退租'],o:'<span class="link">引导退租</span>'},{c:['CTR-20260719012','BJ-20260715-002','136****4567',tg('danger','宽限期过期'),'07-23 12:00','—','7天未操作'],o:'<span class="link">限制服务</span>'}])+pg(1200)+'</section>';};
@@ -1372,7 +2146,7 @@ pages['agreement-list'] = function(){return '<section class="card"><div class="c
 // ============================================================
 
 // 财务中心首页概览
-pages['fin-dashboard'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">财务中心概览</div></div>'+sc([{v:'¥2,380万',k:'本月总收入',c:'primary',s:'环比+8.2%'}, {v:'¥1,850万',k:'应收总额（会计口径）',c:'blue',s:'待核销 ¥680万'}, {v:'¥1,170万',k:'实收总额',c:'green',s:'核销率 63.2%'}, {v:'¥156万',k:'逾期应收',c:'danger',s:'M2+ ¥42万'}])+ '<section class="card" style="margin-top:0"><div class="card-header"><div class="card-title">应收实收状态分布</div></div>'+dt(['应收类型','应收金额','已核销金额','剩余应收','核销率','逾期应收','坏账核销'],[{c:['月租金',tg('primary','¥1,200万'),tg('green','¥780万'),tg('orange','¥420万'),tg('green','65%'),tg('danger','¥86万'),tg('gray','¥12万')],o:'<span class="link">查看台账</span>'},{c:['补缴',tg('primary','¥280万'),tg('green','¥180万'),tg('orange','¥100万'),tg('green','64.3%'),tg('danger','¥38万'),tg('gray','¥8万')],o:'<span class="link">查看台账</span>'},{c:['司法追偿',tg('primary','¥160万'),tg('green','¥120万'),tg('orange','¥40万'),tg('green','75%'),tg('danger','¥24万'),tg('gray','¥6万')],o:'<span class="link">查看台账</span>'},{c:['违约金',tg('primary','¥210万'),tg('green','¥90万'),tg('orange','¥120万'),tg('orange','42.9%'),tg('danger','¥52万'),tg('gray','¥18万')],o:'<span class="link">查看台账</span>'}])+'</section><section class="card" style="margin-top:16px"><div class="card-header"><div class="card-title">近期财务事件</div></div>'+dt(['时间','事件类型','关联订单','金额','状态'],[{c:['07-23 16:00',tg('blue','bill.created'),tg('primary','BJ-20260723-056'),tg('primary','¥399'),tg('green','已登记应收')],o:'<span class="link">查看</span>'},{c:['07-23 15:30',tg('green','bill.paid'),tg('primary','BJ-20260723-052'),tg('green','¥399'),tg('green','已核销实收')],o:'<span class="link">查看</span>'},{c:['07-23 14:00',tg('orange','bill.overdue'),tg('primary','BJ-20260722-048'),tg('danger','¥399+¥60违约金'),tg('orange','逾期应收')],o:'<span class="link">查看</span>'},{c:['07-23 10:00',tg('blue','refund.approved'),tg('primary','BJ-20260720-035'),tg('primary','¥500'),tg('green','退款执行中')],o:'<span class="link">查看</span>'},{c:['07-22 09:00',tg('danger','bad_debt.writeoff'),tg('primary','BJ-20260301-012'),tg('danger','¥3,600'),tg('gray','已核销')],o:'<span class="link">查看</span>'}])+'</section>';};
+pages['fin-dashboard'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">财务中心概览</div></div>'+sc([{v:'¥2,380万',k:'本月总收入',c:'primary',s:'环比+8.2%'}, {v:'¥1,850万',k:'应收总额（会计口径）',c:'blue',s:'待核销 ¥680万'}, {v:'¥1,170万',k:'实收总额',c:'green',s:'核销率 63.2%'}, {v:'¥156万',k:'逾期应收',c:'danger',s:'M2 ¥42万'}])+ '<section class="card" style="margin-top:0"><div class="card-header"><div class="card-title">应收实收状态分布</div></div>'+dt(['应收类型','应收金额','已核销金额','剩余应收','核销率','逾期应收','坏账核销'],[{c:['月租金',tg('primary','¥1,200万'),tg('green','¥780万'),tg('orange','¥420万'),tg('green','65%'),tg('danger','¥86万'),tg('gray','¥12万')],o:'<span class="link">查看台账</span>'},{c:['补缴',tg('primary','¥280万'),tg('green','¥180万'),tg('orange','¥100万'),tg('green','64.3%'),tg('danger','¥38万'),tg('gray','¥8万')],o:'<span class="link">查看台账</span>'},{c:['司法追偿',tg('primary','¥160万'),tg('green','¥120万'),tg('orange','¥40万'),tg('green','75%'),tg('danger','¥24万'),tg('gray','¥6万')],o:'<span class="link">查看台账</span>'},{c:['违约金',tg('primary','¥210万'),tg('green','¥90万'),tg('orange','¥120万'),tg('orange','42.9%'),tg('danger','¥52万'),tg('gray','¥18万')],o:'<span class="link">查看台账</span>'}])+'</section><section class="card" style="margin-top:16px"><div class="card-header"><div class="card-title">近期财务事件</div></div>'+dt(['时间','事件类型','关联订单','金额','状态'],[{c:['07-23 16:00',tg('blue','bill.created'),tg('primary','BJ-20260723-056'),tg('primary','¥399'),tg('green','已登记应收')],o:'<span class="link">查看</span>'},{c:['07-23 15:30',tg('green','bill.paid'),tg('primary','BJ-20260723-052'),tg('green','¥399'),tg('green','已核销实收')],o:'<span class="link">查看</span>'},{c:['07-23 14:00',tg('orange','bill.overdue'),tg('primary','BJ-20260722-048'),tg('danger','¥399+¥60违约金'),tg('orange','逾期应收')],o:'<span class="link">查看</span>'},{c:['07-23 10:00',tg('blue','refund.approved'),tg('primary','BJ-20260720-035'),tg('primary','¥500'),tg('green','退款执行中')],o:'<span class="link">查看</span>'},{c:['07-22 09:00',tg('danger','bad_debt.writeoff'),tg('primary','BJ-20260301-012'),tg('danger','¥3,600'),tg('gray','已核销')],o:'<span class="link">查看</span>'}])+'</section>';};
 
 // 应收实收台账（会计口径）
 pages['recv-ledger'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">应收实收台账 <span class="sub">会计口径 · 由交易中心事件推送触发登记</span></div></div>'+sc([{v:'¥1,850万',k:'应收总额',c:'primary'}, {v:'¥1,170万',k:'已核销实收',c:'green'}, {v:'¥680万',k:'剩余应收',c:'orange'}, {v:'¥156万',k:'逾期应收',c:'danger'}, {v:'¥44万',k:'坏账核销',c:'gray'}, {v:'63.2%',k:'核销率',c:'blue'}])+fb([{t:'i',p:'应收登记号 / 订单号',w:'220px'},{t:'s',o:S_RECV_TYPE},{t:'s',o:S_RECV},{t:'d',p:'登记日期',w:'140px'}])+ab([{t:'导出',c:'info'},{t:'人工核销（异常）',c:'orange'}])+dt(['应收登记号','关联账单号','订单号','应收类型','应收金额','已核销金额','剩余应收','登记状态','登记时间','来源事件'],[{c:['RV-20260723-001',tg('primary','BL-20260723-056'),tg('primary','BJ-20260723-056'),tg('blue','租金'),tg('primary','¥399'),'¥0',tg('orange','¥399'),tg('blue','待核销'),'07-23 16:00',tg('blue','bill.created')],o:'<span class="link">详情</span>'},{c:['RV-20260723-002',tg('primary','BL-20260723-052'),tg('primary','BJ-20260723-052'),tg('blue','租金'),tg('primary','¥399'),tg('green','¥399'),'¥0',tg('green','已核销'),'07-23 15:30',tg('green','bill.paid')],o:'<span class="link">详情</span>'},{c:['RV-20260722-001',tg('primary','BL-20260722-048'),tg('primary','BJ-20260722-048'),tg('blue','租金'),tg('primary','¥399'),tg('green','¥120'),tg('danger','¥279'),tg('orange','逾期应收'),'07-22 14:00',tg('orange','bill.overdue')],o:'<span class="link">详情</span> <span class="link" style="color:var(--danger)">触发坏账</span>'},{c:['RV-20260720-001',tg('primary','BL-SUP-20260720-001'),tg('primary','BJ-20260720-035'),tg('danger','补缴'),tg('primary','¥280'),tg('green','¥280'),'¥0',tg('green','已核销'),'07-20 10:00',tg('blue','supplement_bill.created')],o:'<span class="link">详情</span>'},{c:['RV-20260715-001',tg('primary','BL-JUD-20260715-001'),tg('primary','BJ-20260715-018'),tg('danger','司法'),tg('primary','¥3,600'),tg('green','¥1,200'),tg('danger','¥2,400'),tg('orange','逾期应收'),'07-15 09:00',tg('danger','judicial_bill.created')],o:'<span class="link">详情</span>'},{c:['RV-20260710-001',tg('primary','BL-20260710-045'),tg('primary','BJ-20260710-045'),tg('blue','租金'),tg('primary','¥399'),tg('green','¥199'),tg('orange','¥200'),tg('blue','部分核销'),'07-10 08:00',tg('blue','bill.partial_paid')],o:'<span class="link">详情</span>'},{c:['RV-20260301-001',tg('primary','BL-20260301-012'),tg('primary','BJ-20260301-012'),tg('blue','租金'),tg('primary','¥3,600'),'¥0',tg('gray','¥0'),tg('gray','坏账核销'),'03-01 10:00',tg('danger','bad_debt.writeoff')],o:'<span class="link">详情</span>'}])+pg(1850)+'</section>';};
@@ -1381,7 +2155,7 @@ pages['recv-ledger'] = function(){return '<section class="card"><div class="card
 pages['recv-check'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">应收实收核对 <span class="sub">交易中心账单 vs 财务中心应收实收</span></div></div>'+sc([{v:'07-23',k:'核对日期',c:'primary'}, {v:'100%',k:'一致性比率',c:'green'}, {v:'3',k:'差异项',c:'danger'}, {v:'0',k:'待人工核实',c:'orange'}])+ '<div style="padding:20px 0"><div style="font-weight:600;font-size:15px;margin-bottom:16px">核对维度一：交易中心账单总额 vs 财务中心应收登记总额</div>'+dt(['核对维度','交易中心数据','财务中心数据','差异金额','一致性','核对结果'],[{c:[tg('primary','月租金账单总额'),tg('primary','¥1,200万'),tg('primary','¥1,200万'),'¥0',tg('green','100%一致'),tg('green','自动确认')],o:'<span class="link">明细</span>'},{c:[tg('primary','补缴账单总额'),tg('primary','¥280万'),tg('primary','¥280万'),'¥0',tg('green','100%一致'),tg('green','自动确认')],o:'<span class="link">明细</span>'},{c:[tg('primary','司法账单总额'),tg('primary','¥160万'),tg('orange','¥158万'),tg('danger','¥2万'),tg('orange','98.8%'),tg('danger','需核实')],o:'<span class="link" style="color:var(--danger)">核实</span>'},{c:[tg('primary','违约金总额'),tg('primary','¥210万'),tg('orange','¥208万'),tg('danger','¥2万'),tg('orange','99.0%'),tg('danger','需核实')],o:'<span class="link" style="color:var(--danger)">核实</span>'}])+'</div><div style="padding:20px 0;border-top:1px solid var(--border)"><div style="font-weight:600;font-size:15px;margin-bottom:16px">核对维度二：交易中心支付流水 vs 财务中心实收核销记录</div>'+dt(['核对维度','交易中心支付总额','财务中心实收总额','差异金额','一致性','核对结果'],[{c:[tg('primary','代扣扣款'),tg('primary','¥850万'),tg('primary','¥850万'),'¥0',tg('green','100%一致'),tg('green','自动确认')],o:'<span class="link">明细</span>'},{c:[tg('primary','主动还款'),tg('primary','¥200万'),tg('primary','¥200万'),'¥0',tg('green','100%一致'),tg('green','自动确认')],o:'<span class="link">明细</span>'},{c:[tg('primary','下单支付'),tg('primary','¥120万'),tg('orange','¥119.5万'),tg('danger','¥0.5万'),tg('orange','99.6%'),tg('danger','需核实')],o:'<span class="link" style="color:var(--danger)">核实</span>'}])+'</div></section>';};
 
 // 逾期应收看板（账龄分组）
-pages['overdue-receivable'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">逾期应收看板 <span class="sub">会计口径 · 账龄分组展示</span></div></div>'+sc([{v:'¥156万',k:'逾期应收总额',c:'danger'}, {v:'¥42万',k:'违约金应收',c:'orange'}, {v:'¥80万',k:'已部分核销',c:'blue'}, {v:'156笔',k:'逾期笔数',c:'danger'}])+ '<div class="age-group" style="background:var(--warning-bg);border-color:var(--warning)"><div class="age-group-header"><div class="age-group-title">'+tg('orange','M0')+' 轻度逾期（1-6天）</div><div>'+tg('orange','48笔 ¥38万')+'</div></div><div class="age-group-stats"><div class="age-stat"><div class="as-v orange">¥38万</div><div class="as-k">逾期应收</div></div><div class="age-stat"><div class="as-v">¥12万</div><div class="as-k">违约金应收</div></div><div class="age-stat"><div class="as-v blue">¥8万</div><div class="as-k">已部分核销</div></div></div><div style="font-size:13px;color:var(--t2)">剩余应收 ¥30万 · 催收跟进中 · 建议发送短信提醒</div></div><div class="age-group" style="background:var(--warning-bg);border-color:var(--warning)"><div class="age-group-header"><div class="age-group-title">'+tg('orange','M1')+' 一般逾期（7-14天）</div><div>'+tg('orange','56笔 ¥52万')+'</div></div><div class="age-group-stats"><div class="age-stat"><div class="as-v orange">¥52万</div><div class="as-k">逾期应收</div></div><div class="age-stat"><div class="as-v">¥15万</div><div class="as-k">违约金应收</div></div><div class="age-stat"><div class="as-v blue">¥20万</div><div class="as-k">已部分核销</div></div></div><div style="font-size:13px;color:var(--t2)">剩余应收 ¥32万 · 电话催收阶段 · 建议升级催收力度</div></div><div class="age-group" style="background:var(--danger-bg);border-color:var(--danger)"><div class="age-group-header"><div class="age-group-title">'+tg('danger','M2+')+' 严重逾期（15-29天）</div><div>'+tg('danger','32笔 ¥42万')+'</div></div><div class="age-group-stats"><div class="age-stat"><div class="as-v red">¥42万</div><div class="as-k">逾期应收</div></div><div class="age-stat"><div class="as-v">¥10万</div><div class="as-k">违约金应收</div></div><div class="age-stat"><div class="as-v blue">¥18万</div><div class="as-k">已部分核销</div></div></div><div style="font-size:13px;color:var(--t2)">剩余应收 ¥24万 · 催收专员介入 · 建议发律师函</div></div><div class="age-group" style="background:var(--danger-bg);border-color:var(--danger)"><div class="age-group-header"><div class="age-group-title">'+tg('danger','M3+')+' 长期逾期（30天+）</div><div>'+tg('danger','20笔 ¥24万')+'</div></div><div class="age-group-stats"><div class="age-stat"><div class="as-v red">¥24万</div><div class="as-k">逾期应收</div></div><div class="age-stat"><div class="as-v">¥15万</div><div class="as-k">违约金应收</div></div><div class="age-stat"><div class="as-v blue">¥34万</div><div class="as-k">已部分核销</div></div></div><div style="font-size:13px;color:var(--t2)">剩余应收 ¥24万 · 建议转司法 · 可触发坏账核销流程（逾期≥180天）</div></div></section>';};
+pages['overdue-receivable'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">逾期应收看板 <span class="sub">会计口径 · 账龄分组展示</span></div></div>'+sc([{v:'¥156万',k:'逾期应收总额',c:'danger'}, {v:'¥42万',k:'违约金应收',c:'orange'}, {v:'¥80万',k:'已部分核销',c:'blue'}, {v:'156笔',k:'逾期笔数',c:'danger'}])+ '<div class="age-group" style="background:var(--warning-bg);border-color:var(--warning)"><div class="age-group-header"><div class="age-group-title">'+tg('orange','M1')+' 一般逾期（1-30天）</div><div>'+tg('orange','104笔 ¥90万')+'</div></div><div class="age-group-stats"><div class="age-stat"><div class="as-v orange">¥90万</div><div class="as-k">逾期应收</div></div><div class="age-stat"><div class="as-v">¥18万</div><div class="as-k">违约金应收</div></div><div class="age-stat"><div class="as-v blue">¥28万</div><div class="as-k">已部分核销</div></div></div><div style="font-size:13px;color:var(--t2)">剩余应收 ¥62万 · 内分 M1-1~M1-4 四段催收 · 前7天黄金期重点触达</div></div><div class="age-group" style="background:var(--warning-bg);border-color:var(--warning)"><div class="age-group-header"><div class="age-group-title">'+tg('orange','M2')+' 中度逾期（31-60天）</div><div>'+tg('orange','32笔 ¥42万')+'</div></div><div class="age-group-stats"><div class="age-stat"><div class="as-v orange">¥42万</div><div class="as-k">逾期应收</div></div><div class="age-stat"><div class="as-v">¥14万</div><div class="as-k">违约金应收</div></div><div class="age-stat"><div class="as-v blue">¥20万</div><div class="as-k">已部分核销</div></div></div><div style="font-size:13px;color:var(--t2)">剩余应收 ¥22万 · 人工电话催收 · 建议升级催收力度</div></div><div class="age-group" style="background:var(--danger-bg);border-color:var(--danger)"><div class="age-group-header"><div class="age-group-title">'+tg('danger','M3')+' 严重逾期（61-90天）</div><div>'+tg('danger','14笔 ¥18万')+'</div></div><div class="age-group-stats"><div class="age-stat"><div class="as-v red">¥18万</div><div class="as-k">逾期应收</div></div><div class="age-stat"><div class="as-v">¥8万</div><div class="as-k">违约金应收</div></div><div class="age-stat"><div class="as-v blue">¥18万</div><div class="as-k">已部分核销</div></div></div><div style="font-size:13px;color:var(--t2)">剩余应收 ¥10万 · 委外催收 · 建议发律师函</div></div><div class="age-group" style="background:var(--danger-bg);border-color:var(--danger)"><div class="age-group-header"><div class="age-group-title">'+tg('danger','M4+')+' 长期逾期（90天+）</div><div>'+tg('danger','6笔 ¥6万')+'</div></div><div class="age-group-stats"><div class="age-stat"><div class="as-v red">¥6万</div><div class="as-k">逾期应收</div></div><div class="age-stat"><div class="as-v">¥2万</div><div class="as-k">违约金应收</div></div><div class="age-stat"><div class="as-v blue">¥14万</div><div class="as-k">已部分核销</div></div></div><div style="font-size:13px;color:var(--t2)">剩余应收 ¥6万 · 建议转司法 · 逾期≥180天可触发坏账核销</div></div></section>';};
 
 // 退款审批
 pages['refund-approval'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">退款审批待办</div></div>'+sc([{v:'8',k:'待审批退款',c:'danger'}, {v:'3',k:'金额>¥5,000（需二级审批）',c:'orange'}, {v:'5',k:'金额≤¥5,000（一级审批）',c:'primary'}, {v:'¥12,600',k:'待退款总金额',c:'blue'}])+fb([{t:'i',p:'退款单号 / 订单号',w:'220px'},{t:'s',o:['全部来源','订单取消','保证金退还','手动发起']},{t:'s',o:S_REFUND_APP},{t:'d',p:'申请日期',w:'140px'}])+dt(['退款单号','来源类型','关联订单','用户手机','退款金额','申请人','是否跨商户','申请时间','状态'],[{c:['RF-20260723-001',tg('blue','订单取消'),tg('primary','BJ-20260723-056'),'138****5678',tg('danger','¥399'),'用户自助','否','07-23 16:30',tg('danger','待审批')],o:'<span class="link">审批</span> <span class="link">详情</span>'},{c:['RF-20260723-002',tg('orange','保证金退还'),tg('primary','BJ-20260720-035'),'139****1234',tg('danger','¥1,599'),'用户申请','否','07-23 15:00',tg('danger','待审批')],o:'<span class="link">审批</span> <span class="link">详情</span>'},{c:['RF-20260723-003',tg('green','手动发起'),tg('primary','BJ-20260722-048'),'136****7890',tg('danger','¥6,800'),'产品经理 老马',tg('danger','是'),'07-23 14:00',tg('danger','待审批')],o:'<span class="link">审批</span> <span class="link">详情</span>'},{c:['RF-20260722-001',tg('blue','订单取消'),tg('primary','BJ-20260722-045'),'158****4567',tg('primary','¥399'),'用户自助','否','07-22 10:00',tg('green','审批通过')],o:'<span class="link">详情</span>'},{c:['RF-20260721-001',tg('orange','保证金退还'),tg('primary','BJ-20260721-030'),'137****8901',tg('primary','¥2,399'),'用户申请','否','07-21 09:00',tg('orange','退款中')],o:'<span class="link">详情</span>'}])+pg(8)+'</section>';};
@@ -1390,7 +2164,7 @@ pages['refund-approval'] = function(){return '<section class="card"><div class="
 pages['refund-flow'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">退款流水记录</div></div>'+sc([{v:'¥28.6万',k:'本月退款总额',c:'blue'}, {v:'156',k:'退款笔数',c:'primary'}, {v:'¥12,600',k:'待退款金额',c:'danger'}, {v:'3.2%',k:'退款率',c:'orange'}])+fb([{t:'i',p:'退款交易号 / 订单号',w:'220px'},{t:'s',o:['全部渠道','支付宝原路退回','平台垫付']},{t:'s',o:['全部状态','退款成功','退款失败','退款中']},{t:'d',p:'退款日期',w:'140px'}])+ab([{t:'导出',c:'info'}])+dt(['退款交易号','退款单号','订单号','退款金额','退款渠道','是否跨商户垫付','退款状态','退款完成时间'],[{c:['TF-20260723-001',tg('primary','RF-20260722-001'),tg('primary','BJ-20260722-045'),tg('primary','¥399'),tg('blue','支付宝原路退回'),'否',tg('green','退款成功'),'07-22 12:00'],o:'<span class="link">详情</span>'},{c:['TF-20260723-002',tg('primary','RF-20260721-001'),tg('primary','BJ-20260721-030'),tg('primary','¥2,399'),tg('blue','支付宝原路退回'),'否',tg('orange','退款中'),'—'],o:'<span class="link">详情</span>'},{c:['TF-20260720-001',tg('primary','RF-20260720-003'),tg('primary','BJ-20260720-018'),tg('danger','¥6,800'),tg('orange','平台垫付'),tg('danger','是'),tg('green','退款成功'),'07-20 18:00'],o:'<span class="link">详情</span>'},{c:['TF-20260719-001',tg('primary','RF-20260719-001'),tg('primary','BJ-20260719-025'),tg('primary','¥500'),tg('blue','支付宝原路退回'),'否',tg('danger','退款失败'),'07-19 14:00'],o:'<span class="link" style="color:var(--danger)">重试</span> <span class="link">详情</span>'}])+pg(156)+'</section>';};
 
 // 坏账核销
-pages['bad-debt'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">坏账核销管理</div></div>'+sc([{v:'6',k:'待认定',c:'danger'}, {v:'2',k:'认定中',c:'orange'}, {v:'3',k:'待核销审批',c:'primary'}, {v:'¥44万',k:'已核销总额',c:'gray'}])+fb([{t:'i',p:'核销单号 / 订单号',w:'220px'},{t:'s',o:S_BAD_DEBT},{t:'s',o:['逾期天数范围','180天+','120天+','90天+']},{t:'d',p:'建议核销日期',w:'140px'}])+ab([{t:'导出核销记录',c:'info'}])+dt(['核销单号','订单号','用户手机','逾期天数','坏账金额','催收阶段','司法状态','设备状态','核销状态','建议时间'],[{c:['BD-20260723-001',tg('primary','BJ-20260101-012'),'138****5678',tg('danger','236天'),tg('danger','¥3,600'),tg('gray','M3+已结束'),tg('gray','司法终结'),tg('gray','已召回'),tg('danger','待认定'),'07-23'],o:'<span class="link">核实</span>'},{c:['BD-20260723-002',tg('primary','BJ-20260201-018'),'139****1234',tg('danger','182天'),tg('danger','¥2,399'),tg('gray','M3+已结束'),tg('gray','无法立案'),tg('gray','已定损'),tg('danger','待认定'),'07-23'],o:'<span class="link">核实</span>'},{c:['BD-20260722-001',tg('primary','BJ-20260115-008'),'136****7890',tg('danger','190天'),tg('danger','¥1,599'),tg('orange','催收进行'),tg('orange','执行中'),tg('orange','未召回'),tg('orange','认定中'),'07-22'],o:'<span class="link">查看</span>'},{c:['BD-20260720-001',tg('primary','BJ-20260301-005'),'158****4567',tg('danger','181天'),tg('danger','¥899'),tg('gray','M3+已结束'),tg('gray','司法终结'),tg('gray','已召回'),tg('blue','待核销审批'),'07-20'],o:'<span class="link">审批</span>'},{c:['BD-20260710-001',tg('primary','BJ-20260101-012'),'137****8901',tg('danger','196天'),tg('danger','¥3,600'),tg('gray','催收/司法均结束'),tg('gray','司法终结'),tg('gray','已召回'),tg('gray','已核销'),'07-10'],o:'<span class="link">追回记录</span>'}])+pg(6)+'</section>';};
+pages['bad-debt'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">坏账核销管理</div></div>'+sc([{v:'6',k:'待认定',c:'danger'}, {v:'2',k:'认定中',c:'orange'}, {v:'3',k:'待核销审批',c:'primary'}, {v:'¥44万',k:'已核销总额',c:'gray'}])+fb([{t:'i',p:'核销单号 / 订单号',w:'220px'},{t:'s',o:S_BAD_DEBT},{t:'s',o:['逾期天数范围','180天+','120天+','90天+']},{t:'d',p:'建议核销日期',w:'140px'}])+ab([{t:'导出核销记录',c:'info'}])+dt(['核销单号','订单号','用户手机','逾期天数','坏账金额','催收阶段','司法状态','设备状态','核销状态','建议时间'],[{c:['BD-20260723-001',tg('primary','BJ-20260101-012'),'138****5678',tg('danger','236天'),tg('danger','¥3,600'),tg('gray','M4+已结束'),tg('gray','司法终结'),tg('gray','已召回'),tg('danger','待认定'),'07-23'],o:'<span class="link">核实</span>'},{c:['BD-20260723-002',tg('primary','BJ-20260201-018'),'139****1234',tg('danger','182天'),tg('danger','¥2,399'),tg('gray','M4+已结束'),tg('gray','无法立案'),tg('gray','已定损'),tg('danger','待认定'),'07-23'],o:'<span class="link">核实</span>'},{c:['BD-20260722-001',tg('primary','BJ-20260115-008'),'136****7890',tg('danger','190天'),tg('danger','¥1,599'),tg('orange','催收进行'),tg('orange','执行中'),tg('orange','未召回'),tg('orange','认定中'),'07-22'],o:'<span class="link">查看</span>'},{c:['BD-20260720-001',tg('primary','BJ-20260301-005'),'158****4567',tg('danger','181天'),tg('danger','¥899'),tg('gray','M4+已结束'),tg('gray','司法终结'),tg('gray','已召回'),tg('blue','待核销审批'),'07-20'],o:'<span class="link">审批</span>'},{c:['BD-20260710-001',tg('primary','BJ-20260101-012'),'137****8901',tg('danger','196天'),tg('danger','¥3,600'),tg('gray','催收/司法均结束'),tg('gray','司法终结'),tg('gray','已召回'),tg('gray','已核销'),'07-10'],o:'<span class="link">追回记录</span>'}])+pg(6)+'</section>';};
 
 // 资金流水
 pages['fund-flow'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">资金流水</div></div>'+sc([{v:'¥2,380万',k:'本月收入',c:'green'}, {v:'¥28.6万',k:'本月退款',c:'danger'}, {v:'¥156万',k:'本月冻结',c:'orange'}, {v:'¥2,195万',k:'本月可用',c:'primary'}])+fb([{t:'i',p:'流水号 / 订单号',w:'220px'},{t:'s',o:['全部类型','收入','支出','冻结','解冻']},{t:'s',o:['全部渠道','支付宝','微信','银行转账']},{t:'d',p:'流水日期',w:'140px'}])+ab([{t:'导出',c:'info'}])+dt(['流水号','订单号','流水类型','金额','渠道','商户/资方','关联主体','时间'],[{c:['FW-20260723-001',tg('primary','BJ-20260723-056'),tg('green','收入'),tg('green','¥399'),tg('blue','支付宝'),'—',tg('primary','自营'),tg('info','07-23 16:30')],o:'<span class="link">详情</span>'},{c:['FW-20260723-002',tg('primary','BJ-20260723-052'),tg('green','收入'),tg('green','¥399'),tg('blue','支付宝'),'—',tg('primary','自营'),tg('info','07-23 15:30')],o:'<span class="link">详情</span>'},{c:['FW-20260723-003',tg('primary','BJ-20260723-035'),tg('danger','退款'),tg('danger','¥500'),tg('blue','支付宝'),'—',tg('primary','自营'),tg('info','07-23 10:00')],o:'<span class="link">详情</span>'},{c:['FW-20260722-001',tg('primary','BJ-20260722-020'),tg('green','收入'),tg('green','¥1,599'),tg('blue','支付宝'),tg('blue','深圳顺电'),tg('blue','商户'),tg('info','07-22 12:00')],o:'<span class="link">详情</span>'},{c:['FW-20260722-002','—',tg('orange','冻结'),tg('orange','¥28,500'),'—',tg('blue','深圳顺电'),tg('blue','保证金冻结'),tg('info','07-22 09:00')],o:'<span class="link">详情</span>'},{c:['FW-20260720-001',tg('primary','BJ-20260720-018'),tg('danger','支出'),tg('danger','¥6,800'),tg('orange','平台垫付'),tg('blue','北京华联'),tg('orange','跨商户垫付'),tg('info','07-20 18:00')],o:'<span class="link">详情</span>'}])+pg(2380)+'</section>';};
@@ -1463,13 +2237,13 @@ function publishDecorate(){
   confirmAction('发布装修方案','发布后小程序页面将实时更新','该操作不可撤回','function(){showToast(\'装修方案已发布\',\'success\');closeModal();}');
 }
 
-pages['page-decorate'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">小程序页面装修</div><div style="font-size:13px;color:var(--t3)">首页 / 分类页 / 活动页 — 拖拽装修</div></div><div style="display:flex;gap:16px;min-height:580px"><div style="width:180px;border-right:1px solid var(--border);padding-right:16px"><div style="font-weight:600;margin-bottom:12px;font-size:14px">可装修页面</div><div style="display:flex;flex-direction:column;gap:6px"><div style="padding:10px 12px;border-radius:6px;cursor:pointer;background:var(--primary);color:#fff;font-size:13px">📱 首页</div><div style="padding:10px 12px;border-radius:6px;cursor:pointer;background:var(--bg2);font-size:13px" onclick="showToast(\'切换到分类页装修\',\'info\')">📂 分类页</div><div style="padding:10px 12px;border-radius:6px;cursor:pointer;background:var(--bg2);font-size:13px" onclick="showToast(\'切换到活动页装修\',\'info\')">🎉 活动页</div></div><div style="margin-top:20px;font-size:12px;color:var(--t3);line-height:1.8">从右侧组件库拖拽组件到中间预览区，点击组件可编辑属性。装修完成后点击"发布"生效。</div></div><div style="flex:1;display:flex;justify-content:center;align-items:flex-start;padding:16px;background:var(--bg2);border-radius:8px"><div style="width:340px;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.08)"><div style="padding:10px 12px;background:var(--primary)"><div style="background:rgba(255,255,255,0.9);border-radius:20px;padding:5px 14px;font-size:12px;color:var(--t3)">🔍 搜索租赁商品...</div></div><div style="height:130px;background:linear-gradient(135deg,#3491FA,#5BB6FF);display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;font-weight:600">🎉 开学季限时折扣 9折起</div><div style="display:flex;gap:4px;justify-content:center;padding:5px 0"><div style="width:14px;height:3px;background:var(--primary);border-radius:2px"></div><div style="width:6px;height:3px;background:var(--border);border-radius:2px"></div><div style="width:6px;height:3px;background:var(--border);border-radius:2px"></div></div><div style="display:flex;justify-content:space-around;padding:10px 8px;border-bottom:1px solid var(--bg2)"><div style="text-align:center"><div style="width:36px;height:36px;background:var(--bg2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px">📱</div><div style="font-size:10px;margin-top:3px">手机</div></div><div style="text-align:center"><div style="width:36px;height:36px;background:var(--bg2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px">💻</div><div style="font-size:10px;margin-top:3px">电脑</div></div><div style="text-align:center"><div style="width:36px;height:36px;background:var(--bg2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px">⌨️</div><div style="font-size:10px;margin-top:3px">外设</div></div><div style="text-align:center"><div style="width:36px;height:36px;background:var(--bg2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px">🎧</div><div style="font-size:10px;margin-top:3px">耳机</div></div><div style="text-align:center"><div style="width:36px;height:36px;background:var(--bg2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px">⌚</div><div style="font-size:10px;margin-top:3px">手表</div></div></div><div style="padding:7px 12px;background:#FFF7E6;border-bottom:1px solid var(--bg2);font-size:11px;color:var(--warning)"><b>📢 公告</b> 新用户首月8折，限时开放中...</div><div style="margin:10px;padding:10px;background:linear-gradient(90deg,#FF6B6B,#FF8E53);border-radius:8px;color:#fff;font-size:13px;font-weight:600;text-align:center">🔥 满1000减100 立即查看 →</div><div style="padding:0 12px 12px"><div style="font-weight:600;font-size:14px;margin-bottom:6px">热门推荐</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><div style="border:1px solid var(--bg2);border-radius:8px;overflow:hidden"><div style="height:100px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:28px">📱</div><div style="padding:6px 8px"><div style="font-size:12px;font-weight:600">iPhone 15 Pro</div><div style="font-size:11px;color:var(--primary);margin-top:2px">¥667/月</div></div></div><div style="border:1px solid var(--bg2);border-radius:8px;overflow:hidden"><div style="height:100px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:28px">💻</div><div style="padding:6px 8px"><div style="font-size:12px;font-weight:600">MacBook Air</div><div style="font-size:11px;color:var(--primary);margin-top:2px">¥599/月</div></div></div></div></div></div></div><div style="width:220px;border-left:1px solid var(--border);padding-left:16px"><div style="font-weight:600;margin-bottom:12px;font-size:14px">组件库（拖拽添加）</div><div style="display:flex;flex-direction:column;gap:6px"><div style="padding:10px;border:1px dashed var(--border);border-radius:6px;cursor:grab;font-size:13px;display:flex;align-items:center;gap:8px"><span style="font-size:16px">🔍</span> 搜索栏</div><div style="padding:10px;border:1px dashed var(--border);border-radius:6px;cursor:grab;font-size:13px;display:flex;align-items:center;gap:8px"><span style="font-size:16px">🖼️</span> 轮播图</div><div style="padding:10px;border:1px dashed var(--border);border-radius:6px;cursor:grab;font-size:13px;display:flex;align-items:center;gap:8px"><span style="font-size:16px">📂</span> 分类导航</div><div style="padding:10px;border:1px dashed var(--border);border-radius:6px;cursor:grab;font-size:13px;display:flex;align-items:center;gap:8px"><span style="font-size:16px">📢</span> 公告栏</div><div style="padding:10px;border:1px dashed var(--border);border-radius:6px;cursor:grab;font-size:13px;display:flex;align-items:center;gap:8px"><span style="font-size:16px">🔥</span> 活动横幅</div><div style="padding:10px;border:1px dashed var(--border);border-radius:6px;cursor:grab;font-size:13px;display:flex;align-items:center;gap:8px"><span style="font-size:16px">📦</span> 商品推荐</div></div><div style="margin-top:20px"><div class="btn-group"><button class="btn sm primary" onclick="showToast(\'装修方案已保存\',\'success\')">保存</button><button class="btn sm success" onclick="publishDecorate()">发布</button></div></div></div></div></section>';};
+pages['page-decorate'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">小程序页面装修</div><div style="font-size:13px;color:var(--t3)">首页 / 分类页 / 活动页 — 拖拽装修</div></div><div class="decorate" style="display:flex;gap:16px;min-height:580px"><div style="width:180px;border-right:1px solid var(--border);padding-right:16px"><div style="font-weight:600;margin-bottom:12px;font-size:14px">可装修页面</div><div style="display:flex;flex-direction:column;gap:6px"><div style="padding:10px 12px;border-radius:6px;cursor:pointer;background:var(--primary);color:#fff;font-size:13px">📱 首页</div><div style="padding:10px 12px;border-radius:6px;cursor:pointer;background:var(--bg2);font-size:13px" onclick="showToast(\'切换到分类页装修\',\'info\')">📂 分类页</div><div style="padding:10px 12px;border-radius:6px;cursor:pointer;background:var(--bg2);font-size:13px" onclick="showToast(\'切换到活动页装修\',\'info\')">🎉 活动页</div></div><div style="margin-top:20px;font-size:12px;color:var(--t3);line-height:1.8">从右侧组件库拖拽组件到中间预览区，点击组件可编辑属性。装修完成后点击"发布"生效。</div></div><div style="flex:1;display:flex;justify-content:center;align-items:flex-start;padding:16px;background:var(--bg2);border-radius:8px"><div style="width:340px;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.08)"><div style="padding:10px 12px;background:var(--primary)"><div style="background:rgba(255,255,255,0.9);border-radius:20px;padding:5px 14px;font-size:12px;color:var(--t3)">🔍 搜索租赁商品...</div></div><div style="height:130px;background:linear-gradient(135deg,#3491FA,#5BB6FF);display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;font-weight:600">🎉 开学季限时折扣 9折起</div><div style="display:flex;gap:4px;justify-content:center;padding:5px 0"><div style="width:14px;height:3px;background:var(--primary);border-radius:2px"></div><div style="width:6px;height:3px;background:var(--border);border-radius:2px"></div><div style="width:6px;height:3px;background:var(--border);border-radius:2px"></div></div><div style="display:flex;justify-content:space-around;padding:10px 8px;border-bottom:1px solid var(--bg2)"><div style="text-align:center"><div style="width:36px;height:36px;background:var(--bg2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px">📱</div><div style="font-size:10px;margin-top:3px">手机</div></div><div style="text-align:center"><div style="width:36px;height:36px;background:var(--bg2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px">💻</div><div style="font-size:10px;margin-top:3px">电脑</div></div><div style="text-align:center"><div style="width:36px;height:36px;background:var(--bg2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px">⌨️</div><div style="font-size:10px;margin-top:3px">外设</div></div><div style="text-align:center"><div style="width:36px;height:36px;background:var(--bg2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px">🎧</div><div style="font-size:10px;margin-top:3px">耳机</div></div><div style="text-align:center"><div style="width:36px;height:36px;background:var(--bg2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px">⌚</div><div style="font-size:10px;margin-top:3px">手表</div></div></div><div style="padding:7px 12px;background:#FFF7E6;border-bottom:1px solid var(--bg2);font-size:11px;color:var(--warning)"><b>📢 公告</b> 新用户首月8折，限时开放中...</div><div style="margin:10px;padding:10px;background:linear-gradient(90deg,#FF6B6B,#FF8E53);border-radius:8px;color:#fff;font-size:13px;font-weight:600;text-align:center">🔥 满1000减100 立即查看 →</div><div style="padding:0 12px 12px"><div style="font-weight:600;font-size:14px;margin-bottom:6px">热门推荐</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><div style="border:1px solid var(--bg2);border-radius:8px;overflow:hidden"><div style="height:100px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:28px">📱</div><div style="padding:6px 8px"><div style="font-size:12px;font-weight:600">iPhone 15 Pro</div><div style="font-size:11px;color:var(--primary);margin-top:2px">¥667/月</div></div></div><div style="border:1px solid var(--bg2);border-radius:8px;overflow:hidden"><div style="height:100px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:28px">💻</div><div style="padding:6px 8px"><div style="font-size:12px;font-weight:600">MacBook Air</div><div style="font-size:11px;color:var(--primary);margin-top:2px">¥599/月</div></div></div></div></div></div></div><div style="width:220px;border-left:1px solid var(--border);padding-left:16px"><div style="font-weight:600;margin-bottom:12px;font-size:14px">组件库（拖拽添加）</div><div style="display:flex;flex-direction:column;gap:6px"><div style="padding:10px;border:1px dashed var(--border);border-radius:6px;cursor:grab;font-size:13px;display:flex;align-items:center;gap:8px"><span style="font-size:16px">🔍</span> 搜索栏</div><div style="padding:10px;border:1px dashed var(--border);border-radius:6px;cursor:grab;font-size:13px;display:flex;align-items:center;gap:8px"><span style="font-size:16px">🖼️</span> 轮播图</div><div style="padding:10px;border:1px dashed var(--border);border-radius:6px;cursor:grab;font-size:13px;display:flex;align-items:center;gap:8px"><span style="font-size:16px">📂</span> 分类导航</div><div style="padding:10px;border:1px dashed var(--border);border-radius:6px;cursor:grab;font-size:13px;display:flex;align-items:center;gap:8px"><span style="font-size:16px">📢</span> 公告栏</div><div style="padding:10px;border:1px dashed var(--border);border-radius:6px;cursor:grab;font-size:13px;display:flex;align-items:center;gap:8px"><span style="font-size:16px">🔥</span> 活动横幅</div><div style="padding:10px;border:1px dashed var(--border);border-radius:6px;cursor:grab;font-size:13px;display:flex;align-items:center;gap:8px"><span style="font-size:16px">📦</span> 商品推荐</div></div><div style="margin-top:20px"><div class="btn-group"><button class="btn sm primary" onclick="showToast(\'装修方案已保存\',\'success\')">保存</button><button class="btn sm success" onclick="publishDecorate()">发布</button></div></div></div></div></section>';};
 
 pages['component-lib'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">组件库管理</div><div style="font-size:13px;color:var(--t3)">6种装修组件模板配置</div></div>'+dt(['组件类型','组件说明','核心配置项','模板数','使用页面','默认排序','状态','操作'],[{c:[tg('primary','搜索栏'),'搜索输入入口','占位文字/热词/样式',tg('blue','1个'),'首页/分类页','1',tg('green','启用')],o:'<span class="link" onclick="showToast(\'编辑搜索栏组件\',\'info\')">编辑</span>'},{c:[tg('primary','轮播图'),'首页顶部banner轮播','图片/跳转链接/排序/自动播放',tg('blue','3个'),'首页/活动页','2',tg('green','启用')],o:'<span class="link" onclick="showToast(\'管理轮播图模板\',\'info\')">模板管理</span> <span class="link" onclick="showToast(\'编辑轮播图组件\',\'info\')">编辑</span>'},{c:[tg('primary','分类导航'),'分类入口图标','分类/图标/排序/跳转',tg('blue','1个'),'首页/分类页','3',tg('green','启用')],o:'<span class="link" onclick="showToast(\'编辑分类导航组件\',\'info\')">编辑</span>'},{c:[tg('primary','公告栏'),'滚动公告文字','文字内容/跳转链接/滚动方向',tg('blue','1个'),'首页','4',tg('green','启用')],o:'<span class="link" onclick="showToast(\'编辑公告栏组件\',\'info\')">编辑</span>'},{c:[tg('primary','活动横幅'),'活动入口banner','活动/图片/跳转/有效期',tg('blue','1个'),'首页/活动页','5',tg('green','启用')],o:'<span class="link" onclick="showToast(\'编辑活动横幅组件\',\'info\')">编辑</span>'},{c:[tg('primary','商品推荐'),'商品列表展示','商品来源/展示数量/排序/样式',tg('blue','2个'),'首页/分类页','6',tg('green','启用')],o:'<span class="link" onclick="showToast(\'管理商品推荐模板\',\'info\')">模板管理</span> <span class="link" onclick="showToast(\'编辑商品推荐组件\',\'info\')">编辑</span>'}])+'</section><section class="card" style="margin-top:16px"><div class="card-header"><div class="card-title">组件数据来源说明</div></div>'+dt(['组件','配置示例','数据来源','更新方式'],[{c:[tg('primary','轮播图'),'图片URL+跳转链接+排序+自动播放间隔(3s)','运营手动上传 / 关联活动','手动更新']},{c:[tg('primary','商品推荐'),'商品来源(热租/新品/分类)+展示数量(4/6/8)+排序','商品中心实时数据','自动同步']},{c:[tg('primary','活动横幅'),'关联活动ID+展示图片+有效期','营销活动管理','活动状态驱动']},{c:[tg('primary','公告栏'),'文字内容+跳转链接+滚动方向(左/右)','运营手动配置','手动更新']},{c:[tg('primary','分类导航'),'分类列表+图标+排序','商品中心分类数据','自动同步']},{c:[tg('primary','搜索栏'),'占位文字+热搜词列表+样式(圆角/方形)','运营配置热词','手动更新']}])+'</section>';};
 
 // ===== 资管中心 =====
 
-pages['am-dashboard'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">资管中心概览</div></div>'+sc([{v:'12,580',k:'设备总数',c:'primary'},{v:'3,860',k:'在库设备',c:'green'},{v:'7,200',k:'在租设备',c:'blue'},{v:'156',k:'待处置设备',c:'orange'},{v:'¥380万',k:'总残值',c:'info'}])+'</section><section class="card" style="margin-top:16px"><div class="card-header"><div class="card-title">设备状态分布</div></div>'+dt(['状态','设备数','占比','平均残值','总残值'],[{c:[tg('green','在库'),tg('primary','3,860'),'30.7%',tg('primary','¥2,100'),tg('primary','¥806万')],o:'<span class="link">查看</span>'},{c:[tg('blue','在租'),tg('primary','7,200'),'57.2%',tg('primary','¥1,650'),tg('primary','¥1,188万')],o:'<span class="link">查看</span>'},{c:[tg('info','物流中'),tg('primary','280'),'2.2%',tg('primary','¥2,100'),tg('primary','¥58.8万')],o:'<span class="link">查看</span>'},{c:[tg('orange','定损中'),tg('primary','120'),'0.9%',tg('primary','¥1,400'),tg('primary','¥16.8万')],o:'<span class="link">查看</span>'},{c:[tg('danger','待处置'),tg('primary','156'),'1.2%',tg('primary','¥800'),tg('primary','¥12.5万')],o:'<span class="link">查看</span>'}])+'</section><section class="card" style="margin-top:16px"><div class="card-header"><div class="card-title">催收与司法概览</div></div>'+dt(['类别','工单数','涉及金额','在租设备数','已归还设备数'],[{c:['催收（M0-M2+）',tg('primary','1,280'),tg('primary','¥186万'),tg('primary','920'),tg('gray','360')],o:'<span class="link">进入工作台</span>'},{c:['司法（M3+）',tg('danger','48'),tg('danger','¥28万'),tg('danger','32'),tg('gray','16')],o:'<span class="link">进入工作台</span>'}])+'</section>';};
+pages['am-dashboard'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">资管中心概览</div></div>'+sc([{v:'12,580',k:'设备总数',c:'primary'},{v:'3,860',k:'在库设备',c:'green'},{v:'7,200',k:'在租设备',c:'blue'},{v:'156',k:'待处置设备',c:'orange'},{v:'¥380万',k:'总残值',c:'info'}])+'</section><section class="card" style="margin-top:16px"><div class="card-header"><div class="card-title">设备状态分布</div></div>'+dt(['状态','设备数','占比','平均残值','总残值'],[{c:[tg('green','在库'),tg('primary','3,860'),'30.7%',tg('primary','¥2,100'),tg('primary','¥806万')],o:'<span class="link">查看</span>'},{c:[tg('blue','在租'),tg('primary','7,200'),'57.2%',tg('primary','¥1,650'),tg('primary','¥1,188万')],o:'<span class="link">查看</span>'},{c:[tg('info','物流中'),tg('primary','280'),'2.2%',tg('primary','¥2,100'),tg('primary','¥58.8万')],o:'<span class="link">查看</span>'},{c:[tg('orange','定损中'),tg('primary','120'),'0.9%',tg('primary','¥1,400'),tg('primary','¥16.8万')],o:'<span class="link">查看</span>'},{c:[tg('danger','待处置'),tg('primary','156'),'1.2%',tg('primary','¥800'),tg('primary','¥12.5万')],o:'<span class="link">查看</span>'}])+'</section><section class="card" style="margin-top:16px"><div class="card-header"><div class="card-title">催收与司法概览</div></div>'+dt(['类别','工单数','涉及金额','在租设备数','已归还设备数'],[{c:['催收（M1-M2）',tg('primary','1,280'),tg('primary','¥186万'),tg('primary','920'),tg('gray','360')],o:'<span class="link">进入工作台</span>'},{c:['司法（M3-M4+）',tg('danger','48'),tg('danger','¥28万'),tg('danger','32'),tg('gray','16')],o:'<span class="link">进入工作台</span>'}])+'</section>';};
 
 pages['device-list'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">设备台账</div></div>'+sc([{v:'12,580',k:'设备总数',c:'primary'},{v:'3,860',k:'在库',c:'green'},{v:'7,200',k:'在租',c:'blue'},{v:'156',k:'待处置',c:'orange'},{v:'¥380万',k:'总残值',c:'info'}])+fb([{t:'i',p:'IMEI / 序列号 / 设备编号',w:'220px'},{t:'s',o:S_DEVICE},{t:'s',o:['全部SPU分类','手机','平板','笔记本','耳机','手表']},{t:'s',o:S_WAREHOUSE}])+ab([{t:'导出Excel',c:'info'}])+dt(['设备编号','SPU名称','SKU规格','IMEI','当前状态','所在仓库/订单','当前残值','累计折旧','入库日期'],[{c:['DV20260701001',tg('primary','iPhone 15 Pro'),tg('info','256G/黑'),tg('primary','356xxx8901'),tg('green','在库'),tg('primary','深圳自营仓'),tg('primary','¥5,800'),tg('orange','¥1,200'),'2026-01-15'],o:'<span class="link">详情</span>'},{c:['DV20260701002',tg('primary','MacBook Air M3'),tg('info','8+256/银'),tg('info','—'),tg('blue','在租'),tg('blue','ORD-202607-001'),tg('primary','¥6,400'),tg('orange','¥1,600'),'2026-02-01'],o:'<span class="link">详情</span>'},{c:['DV20260701003',tg('primary','iPad Air'),tg('info','64G/蓝'),tg('primary','356xxx5678'),tg('orange','定损中'),tg('orange','归还验收'),tg('primary','¥2,100'),tg('orange','¥900'),'2026-03-10'],o:'<span class="link">详情</span>'},{c:['DV20260701004',tg('primary','AirPods Pro 2'),tg('info','—'),tg('info','—'),tg('danger','待处置'),tg('danger','严重损伤'),tg('danger','¥200'),tg('orange','¥800'),'2026-04-01'],o:'<span class="link">详情</span> <span class="link" style="color:var(--danger)">处置</span>'}])+pg(20)+'</section>';};
 
@@ -1481,13 +2255,13 @@ pages['damage-manage'] = function(){return '<section class="card"><div class="ca
 
 pages['device-disposal'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">待处置设备</div></div>'+sc([{v:'156',k:'待处置总数',c:'danger'},{v:'89',k:'轻微/中度（可再入库）',c:'green'},{v:'48',k:'严重（建议维修/汰换）',c:'orange'},{v:'19',k:'全损（报废）',c:'danger'}])+dt(['设备编号','SPU','定损等级','残值','处置建议','定损时间'],[{c:['DV...005',tg('primary','iPhone 15 Pro'),tg('info','轻微损耗'),tg('primary','¥5,200'),tg('green','再入库'),'2026-07-20'],o:'<span class="link">处置→再入库</span>'},{c:['DV...006',tg('primary','MacBook Air'),tg('orange','中度损伤'),tg('primary','¥4,800'),tg('orange','维修后入库'),'2026-07-18'],o:'<span class="link">处置→维修</span>'},{c:['DV...007',tg('primary','iPad Air'),tg('danger','严重损伤'),tg('danger','¥600'),tg('danger','汰换'),'2026-07-15'],o:'<span class="link">处置→汰换</span>'},{c:['DV...008',tg('primary','AirPods Pro 2'),tg('danger','全损'),tg('danger','¥0'),tg('danger','报废'),'2026-07-10'],o:'<span class="link">处置→报废</span>'}])+'</section><section class="card" style="margin-top:16px"><div class="card-header"><div class="card-title">处置记录</div></div>'+dt(['处置编号','设备编号','处置类型','处置原因','处置费用','处置时残值','操作人','处置时间'],[{c:['DSP-001','DV...005',tg('green','再入库'),tg('info','轻微损耗，无维修必要'),'¥0',tg('primary','¥5,200'),tg('primary','仓库管理员'),'2026-07-22'],o:'—'},{c:['DSP-002','DV...009',tg('orange','维修'),tg('info','中度损伤，屏幕划痕'),'¥300',tg('primary','¥4,500'),tg('primary','维修专员'),'2026-07-21'],o:'—'},{c:['DSP-003','DV...010',tg('danger','报废'),tg('info','全损，设备不可用'),'¥0',tg('danger','¥0'),tg('primary','产品经理 老马'),'2026-07-20'],o:'—'}])+'</section>';};
 
-pages['collection-desk'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">催收工作台</div></div>'+sc([{v:'1,280',k:'催收工单总数',c:'primary'},{v:'920',k:'在租逾期',c:'orange'},{v:'360',k:'已归还逾期',c:'blue'},{v:'¥186万',k:'逾期金额',c:'danger'},{v:'68%',k:'催收覆盖率',c:'green'}])+fb([{t:'s',o:S_COLLECTION},{t:'s',o:['全部账龄','M0(1-6天)','M1(7-14天)','M2+(15-29天)','M3+(30+天)']},{t:'s',o:['全部设备状态','设备在租','设备已归还']}])+'</section><section class="card" style="margin-top:16px"><div class="card-header"><div class="card-title">催收工单列表</div></div>'+dt(['工单号','用户','逾期金额','账龄','设备状态','最近触达','效果评估','状态'],[{c:['COL-001',tg('primary','张*明'),tg('danger','¥3,600'),tg('orange','M1(7-14天)'),tg('orange','在租'),tg('info','短信→未读'),tg('gray','未触达'),tg('blue','处理中')],o:'<span class="link">操作</span>'},{c:['COL-002',tg('primary','李*云'),tg('danger','¥1,200'),tg('info','M0(1-6天)'),tg('blue','在租'),tg('green','电话→承诺还款'),tg('green','有效'),tg('blue','处理中')],o:'<span class="link">操作</span>'},{c:['COL-003',tg('primary','王*华'),tg('danger','¥8,500'),tg('danger','M3+(30+天)'),tg('blue','已归还'),tg('info','3次电话未接'),tg('danger','无效'),tg('orange','待转司法')],o:'<span class="link">操作</span> <span class="link" style="color:var(--danger)">转司法</span>'}])+pg(50)+'</section>';};
+pages['collection-desk'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">催收工作台</div></div>'+sc([{v:'1,280',k:'催收工单总数',c:'primary'},{v:'920',k:'在租逾期',c:'orange'},{v:'360',k:'已归还逾期',c:'blue'},{v:'¥186万',k:'逾期金额',c:'danger'},{v:'68%',k:'催收覆盖率',c:'green'}])+fb([{t:'s',o:S_COLLECTION},{t:'s',o:['全部账龄','M1-1(1-3天)','M1-2(4-7天)','M1-3(8-15天)','M1-4(16-30天)','M2(31-60天)','M3(61-90天)','M4+(90+天)']},{t:'s',o:['全部设备状态','设备在租','设备已归还']}])+'</section><section class="card" style="margin-top:16px"><div class="card-header"><div class="card-title">催收工单列表</div></div>'+dt(['工单号','用户','逾期金额','账龄','设备状态','最近触达','效果评估','状态'],[{c:['COL-001',tg('primary','张*明'),tg('danger','¥3,600'),tg('warning','M1-2(4-7天)'),tg('orange','在租'),tg('info','智能外呼→承诺还款'),tg('gray','待跟进'),tg('blue','处理中')],o:'<span class="link">操作</span>'},{c:['COL-002',tg('primary','李*云'),tg('danger','¥1,200'),tg('info','M1-1(1-3天)'),tg('blue','在租'),tg('green','短信→已读'),tg('green','有效'),tg('blue','处理中')],o:'<span class="link">操作</span>'},{c:['COL-003',tg('primary','王*华'),tg('danger','¥8,500'),tg('danger','M4+(90+天)'),tg('blue','已归还'),tg('info','3次电话未接'),tg('danger','无效'),tg('orange','待转司法')],o:'<span class="link">操作</span> <span class="link" style="color:var(--danger)">转司法</span>'}])+pg(50)+'</section>';};
 
-pages['collection-strategy'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">催收策略配置</div></div>'+dt(['账龄','触达渠道','频次','模板','自动/人工','设备条件','状态'],[{c:[tg('info','M0(1-6天)'),tg('blue','短信+站内信'),tg('primary','每2天1次'),tg('info','到期提醒'),'自动',tg('green','不限'),tg('green','启用')],o:'<span class="link">编辑</span>'},{c:[tg('orange','M1(7-14天)'),tg('blue','电话+短信'),tg('primary','每天1次'),tg('orange','逾期提醒'),'人工',tg('orange','设备在租：协商退机/买断'),tg('green','启用')],o:'<span class="link">编辑</span>'},{c:[tg('danger','M2+(15-29天)'),tg('danger','电话+代扣'),tg('primary','每天2次'),tg('danger','严重逾期'),'自动+人工',tg('orange','设备在租：优先协商买断'),tg('green','启用')],o:'<span class="link">编辑</span>'},{c:[tg('danger','M3+(30+天)'),tg('danger','代扣+司法准备'),tg('primary','持续代扣'),tg('danger','转司法通知'),'自动→司法',tg('gray','设备已归还：仅催收欠款'),tg('green','启用')],o:'<span class="link">编辑</span>'}])+'</section>';};
+pages['collection-strategy'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">催收策略配置</div><div style="font-size:13px;color:var(--t3)">账龄口径：无宽限期 · 逾期第1天即入 M1-1 · M1 内分四段催收</div></div>'+dt(['账龄','触达渠道','频次','模板','自动/人工','设备条件','状态'],[{c:[tg('info','预提醒 T-7/T-3/T-1/T-0'),tg('blue','订阅消息+短信'),tg('primary','分节点'),tg('info','到期提醒'),'自动',tg('green','不限'),tg('green','启用')],o:'<span class="link">编辑</span>'},{c:[tg('info','M1-1(1-3天)'),tg('blue','订阅消息+短信'),tg('primary','每天1次'),tg('info','轻度逾期'),'自动',tg('green','不限'),tg('green','启用')],o:'<span class="link">编辑</span>'},{c:[tg('warning','M1-2(4-7天)'),tg('blue','智能外呼'),tg('primary','每天1次'),tg('orange','黄金催收'),'自动→人工',tg('orange','在租：协商退机/买断'),tg('green','启用')],o:'<span class="link">编辑</span>'},{c:[tg('orange','M1-3(8-15天)'),tg('orange','电话+短信'),tg('primary','每天2次'),tg('orange','强化催收'),'人工',tg('orange','在租：优先买断'),tg('green','启用')],o:'<span class="link">编辑</span>'},{c:[tg('danger','M1-4(16-30天)'),tg('danger','电话+代扣'),tg('primary','每天2次'),tg('danger','M1尾部'),'人工',tg('orange','在租：优先买断'),tg('green','启用')],o:'<span class="link">编辑</span>'},{c:[tg('danger','M2(31-60天)'),tg('danger','电话+代扣'),tg('primary','每天2次'),tg('danger','中期催收'),'人工',tg('gray','不限'),tg('green','启用')],o:'<span class="link">编辑</span>'},{c:[tg('danger','M3(61-90天)'),tg('danger','委外+律师函'),tg('primary','持续'),tg('danger','法诉准备'),'委外',tg('gray','设备已归还：仅催收欠款'),tg('green','启用')],o:'<span class="link">编辑</span>'},{c:[tg('danger','M4+(90+天)'),tg('danger','法诉+核销'),tg('primary','持续'),tg('danger','司法通知'),'司法',tg('gray','不限'),tg('green','启用')],o:'<span class="link">编辑</span>'}])+'</section>';};
 
-pages['aging-board'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">逾期账龄看板（资管视角）</div></div>'+sc([{v:'1,280',k:'逾期工单数',c:'primary'},{v:'¥186万',k:'逾期总金额',c:'danger'},{v:'68%',k:'催收覆盖率',c:'green'},{v:'12%',k:'转司法率',c:'orange'}])+'</section><section class="card" style="margin-top:16px"><div class="card-header"><div class="card-title">账龄分布</div></div>'+dt(['账龄','工单数','逾期金额','在租设备数','已归还设备数','催收覆盖率','转化率'],[{c:[tg('info','M0(1-6天)'),tg('primary','480'),tg('primary','¥28万'),tg('primary','320'),tg('gray','160'),tg('green','85%'),tg('green','40%')],o:'<span class="link">明细</span>'},{c:[tg('orange','M1(7-14天)'),tg('primary','360'),tg('primary','¥42万'),tg('primary','260'),tg('gray','100'),tg('green','72%'),tg('green','25%')],o:'<span class="link">明细</span>'},{c:[tg('danger','M2+(15-29天)'),tg('primary','280'),tg('primary','¥56万'),tg('primary','180'),tg('gray','100'),tg('orange','58%'),tg('orange','15%')],o:'<span class="link">明细</span>'},{c:[tg('danger','M3+(30+天)'),tg('primary','160'),tg('primary','¥60万'),tg('danger','160'),tg('gray','0'),tg('danger','32%'),tg('danger','5%')],o:'<span class="link">明细</span> <span class="link" style="color:var(--danger)">转司法</span>'}])+'</section>';};
+pages['aging-board'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">逾期账龄看板（资管视角）</div></div>'+sc([{v:'1,280',k:'逾期工单数',c:'primary'},{v:'¥186万',k:'逾期总金额',c:'danger'},{v:'68%',k:'催收覆盖率',c:'green'},{v:'12%',k:'转司法率',c:'orange'}])+'</section><section class="card" style="margin-top:16px"><div class="card-header"><div class="card-title">账龄分布</div></div>'+dt(['账龄','工单数','逾期金额','在租设备数','已归还设备数','催收覆盖率','转化率'],[{c:[tg('info','M1-1(1-3天)'),tg('primary','180'),tg('primary','¥12万'),tg('primary','130'),tg('gray','50'),tg('green','85%'),tg('green','40%')],o:'<span class="link">明细</span>'},{c:[tg('warning','M1-2(4-7天)'),tg('primary','160'),tg('primary','¥16万'),tg('primary','120'),tg('gray','40'),tg('green','72%'),tg('green','28%')],o:'<span class="link">明细</span>'},{c:[tg('orange','M1-3(8-15天)'),tg('primary','140'),tg('primary','¥20万'),tg('primary','100'),tg('gray','40'),tg('green','65%'),tg('orange','18%')],o:'<span class="link">明细</span>'},{c:[tg('danger','M1-4(16-30天)'),tg('primary','120'),tg('primary','¥22万'),tg('primary','90'),tg('gray','30'),tg('orange','55%'),tg('orange','12%')],o:'<span class="link">明细</span>'},{c:[tg('danger','M2(31-60天)'),tg('primary','280'),tg('primary','¥56万'),tg('primary','180'),tg('gray','100'),tg('orange','48%'),tg('orange','8%')],o:'<span class="link">明细</span>'},{c:[tg('danger','M3(61-90天)'),tg('primary','160'),tg('primary','¥40万'),tg('primary','110'),tg('gray','50'),tg('danger','30%'),tg('danger','4%')],o:'<span class="link">明细</span>'},{c:[tg('danger','M4+(90+天)'),tg('primary','240'),tg('primary','¥20万'),tg('danger','240'),tg('gray','0'),tg('danger','15%'),tg('danger','2%')],o:'<span class="link">明细</span> <span class="link" style="color:var(--danger)">转司法</span>'}])+'</section>';};
 
-pages['judicial-config'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">自动转司法配置</div></div>'+dt(['规则ID','触发条件','账龄要求','金额门槛','自动动作','关联动作','状态'],[{c:['JC-001',tg('danger','逾期90天自动转司法'),tg('danger','M3+(≥30天)'),tg('primary','≥¥500'),'自动创建司法工单+生成设备追溯报告+关闭催收工单',tg('info','生成司法账单'),tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['JC-002',tg('info','恶意违约即时转司法'),tg('danger','不限账龄'),tg('primary','≥¥0'),'人工触发→即时创建司法工单',tg('info','推送消息通知用户'),tg('green','启用')],o:'<span class="link">编辑</span>'}])+'</section><section class="card" style="margin-top:16px"><div class="card-header"><div class="card-title">转司法后联动</div></div><div style="padding:16px;background:var(--bg2);border-radius:8px;font-size:13px;line-height:1.8"><p><strong>转司法时自动执行：</strong></p><p>1. 关闭原催收工单 → 创建司法工单</p><p>2. 生成设备追溯报告（PDF）→ 关联到司法案件</p><p>3. 原逾期账单冻结 → 生成司法账单（起诉金额+诉讼费+保全费）</p><p>4. 已立案后禁止代扣 → 用户需主动还款</p><p>5. 已判决后恢复代扣</p></div></section>';};
+pages['judicial-config'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">自动转司法配置</div></div>'+dt(['规则ID','触发条件','账龄要求','金额门槛','自动动作','关联动作','状态'],[{c:['JC-001',tg('danger','逾期90天自动转司法'),tg('danger','M4+(≥90天)'),tg('primary','≥¥500'),'自动创建司法工单+生成设备追溯报告+关闭催收工单',tg('info','生成司法账单'),tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['JC-002',tg('info','恶意违约即时转司法'),tg('danger','不限账龄'),tg('primary','≥¥0'),'人工触发→即时创建司法工单',tg('info','推送消息通知用户'),tg('green','启用')],o:'<span class="link">编辑</span>'}])+'</section><section class="card" style="margin-top:16px"><div class="card-header"><div class="card-title">转司法后联动</div></div><div style="padding:16px;background:var(--bg2);border-radius:8px;font-size:13px;line-height:1.8"><p><strong>转司法时自动执行：</strong></p><p>1. 关闭原催收工单 → 创建司法工单</p><p>2. 生成设备追溯报告（PDF）→ 关联到司法案件</p><p>3. 原逾期账单冻结 → 生成司法账单（起诉金额+诉讼费+保全费）</p><p>4. 已立案后禁止代扣 → 用户需主动还款</p><p>5. 已判决后恢复代扣</p></div></section>';};
 
 pages['judicial-desk'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">司法工作台</div></div>'+sc([{v:'48',k:'司法案件总数',c:'danger'},{v:'12',k:'待立案',c:'orange'},{v:'20',k:'处理中',c:'blue'},{v:'8',k:'已提交律所',c:'info'},{v:'8',k:'已结案',c:'green'}])+fb([{t:'s',o:S_JUDICIAL},{t:'s',o:['全部律师','张律师','李律师','王律师']}])+'</section><section class="card" style="margin-top:16px"><div class="card-header"><div class="card-title">司法案件列表</div></div>'+dt(['案件号','用户','起诉金额','诉讼费','司法状态','诉讼状态','关联律师','设备追溯'],[{c:['JUD-001',tg('primary','王*华'),tg('danger','¥8,500'),tg('orange','¥500'),tg('danger','处理中'),tg('orange','已立案'),tg('primary','张律师'),tg('green','已生成')],o:'<span class="link">详情</span> <span class="link">追溯报告</span>'},{c:['JUD-002',tg('primary','赵*芳'),tg('danger','¥6,200'),tg('orange','¥500'),tg('orange','待立案'),tg('info','待诉'),tg('primary','李律师'),tg('green','已生成')],o:'<span class="link">详情</span>'},{c:['JUD-003',tg('primary','孙*强'),tg('danger','¥12,000'),tg('orange','¥800'),tg('blue','处理中'),tg('blue','已开庭'),tg('primary','王律师'),tg('green','已生成')],o:'<span class="link">详情</span>'},{c:['JUD-004',tg('primary','周*丽'),tg('green','¥3,200'),tg('gray','¥0'),tg('green','已结案'),tg('green','已撤诉'),tg('primary','张律师'),tg('green','已生成')],o:'<span class="link">详情</span>'}])+pg(48)+'</section>';};
 
@@ -1508,12 +2282,12 @@ pages['msg-dashboard'] = function(){return '<section class="card"><div class="ca
 // ============================================================
 // 消息中心 - 消息模板
 // ============================================================
-pages['msg-template'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">消息模板</div></div>'+fb([{t:'s',o:['全部渠道','短信','站内信','APP推送']},{t:'s',o:['全部场景','下单成功','支付成功','到期提醒','逾期催收','合同签署']},{t:'s',o:['全部状态','草稿','待审核','审核通过','已启用','已停用']}])+ab([{t:'新建模板',c:'primary'}])+dt(['模板名称','渠道','场景','版本','状态','操作人','操作时间'],[{c:['下单成功通知','短信','下单成功','v2.1',tg('green','已启用'),'张运营','2026-07-20'],o:'<span class="link">编辑</span> <span class="link">复制</span>'},{c:['支付成功通知','站内信','支付成功','v1.3',tg('green','已启用'),'张运营','2026-07-18'],o:'<span class="link">编辑</span> <span class="link">复制</span>'},{c:['到期提醒-7天','短信','到期提醒','v3.0',tg('green','已启用'),'李产品','2026-07-15'],o:'<span class="link">编辑</span> <span class="link">复制</span>'},{c:['逾期催收-M0','短信','逾期催收','v1.0',tg('orange','草稿'),'王风控','2026-07-22'],o:'<span class="link">编辑</span> <span class="link">提交审核</span>'},{c:['合同签署通知','APP推送','合同签署','v2.0',tg('blue','待审核'),'李产品','2026-07-21'],o:'<span class="link">审核</span> <span class="link">编辑</span>'},{c:['归还验收通知','站内信','到期提醒','v1.1',tg('red','已停用'),'张运营','2026-06-10'],o:'<span class="link">编辑</span> <span class="link">启用</span>'}])+pg(86)+'</section>';};
+pages['msg-template'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">消息模板</div></div>'+fb([{t:'s',o:['全部渠道','短信','站内信','APP推送']},{t:'s',o:['全部场景','下单成功','支付成功','到期提醒','逾期催收','合同签署']},{t:'s',o:['全部状态','草稿','待审核','审核通过','已启用','已停用']}])+ab([{t:'新建模板',c:'primary'}])+dt(['模板名称','渠道','场景','版本','状态','操作人','操作时间'],[{c:['下单成功通知','短信','下单成功','v2.1',tg('green','已启用'),'张运营','2026-07-20'],o:'<span class="link">编辑</span> <span class="link">复制</span>'},{c:['支付成功通知','站内信','支付成功','v1.3',tg('green','已启用'),'张运营','2026-07-18'],o:'<span class="link">编辑</span> <span class="link">复制</span>'},{c:['到期提醒-7天','短信','到期提醒','v3.0',tg('green','已启用'),'李产品','2026-07-15'],o:'<span class="link">编辑</span> <span class="link">复制</span>'},{c:['逾期催收-M1','短信','逾期催收','v1.0',tg('orange','草稿'),'王风控','2026-07-22'],o:'<span class="link">编辑</span> <span class="link">提交审核</span>'},{c:['合同签署通知','APP推送','合同签署','v2.0',tg('blue','待审核'),'李产品','2026-07-21'],o:'<span class="link">审核</span> <span class="link">编辑</span>'},{c:['归还验收通知','站内信','到期提醒','v1.1',tg('red','已停用'),'张运营','2026-06-10'],o:'<span class="link">编辑</span> <span class="link">启用</span>'}])+pg(86)+'</section>';};
 
 // ============================================================
 // 消息中心 - 触达配置
 // ============================================================
-pages['msg-strategy'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">触达配置</div></div>'+fb([{t:'s',o:['全部场景','下单成功','支付成功','到期提醒','逾期催收','合同签署']},{t:'s',o:['全部状态','已启用','已停用']}])+ab([{t:'新建策略',c:'primary'}])+dt(['策略名称','场景','渠道','频次','状态','操作'],[{c:['下单成功触达','下单成功','短信+站内信','即时发送',tg('green','已启用')],o:'<span class="link">编辑</span> <span class="link">停用</span>'},{c:['支付成功触达','支付成功','站内信','即时发送',tg('green','已启用')],o:'<span class="link">编辑</span> <span class="link">停用</span>'},{c:['到期提醒-7天','到期提醒','短信+站内信','到期前7天/3天/1天',tg('green','已启用')],o:'<span class="link">编辑</span> <span class="link">停用</span>'},{c:['逾期催收-M0','逾期催收','短信','逾期后每2天1次',tg('green','已启用')],o:'<span class="link">编辑</span> <span class="link">停用</span>'},{c:['合同签署提醒','合同签署','APP推送+站内信','签署后1小时未签提醒',tg('orange','已停用')],o:'<span class="link">编辑</span> <span class="link">启用</span>'}])+pg(23)+'</section>';};
+pages['msg-strategy'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">触达配置</div></div>'+fb([{t:'s',o:['全部场景','下单成功','支付成功','到期提醒','逾期催收','合同签署']},{t:'s',o:['全部状态','已启用','已停用']}])+ab([{t:'新建策略',c:'primary'}])+dt(['策略名称','场景','渠道','频次','状态','操作'],[{c:['下单成功触达','下单成功','短信+站内信','即时发送',tg('green','已启用')],o:'<span class="link">编辑</span> <span class="link">停用</span>'},{c:['支付成功触达','支付成功','站内信','即时发送',tg('green','已启用')],o:'<span class="link">编辑</span> <span class="link">停用</span>'},{c:['到期提醒-7天','到期提醒','短信+站内信','到期前7天/3天/1天',tg('green','已启用')],o:'<span class="link">编辑</span> <span class="link">停用</span>'},{c:['逾期催收-M1','逾期催收','订阅消息+短信','逾期后每天1次',tg('green','已启用')],o:'<span class="link">编辑</span> <span class="link">停用</span>'},{c:['合同签署提醒','合同签署','APP推送+站内信','签署后1小时未签提醒',tg('orange','已停用')],o:'<span class="link">编辑</span> <span class="link">启用</span>'}])+pg(23)+'</section>';};
 
 // ============================================================
 // 消息中心 - 发送记录
@@ -1588,12 +2362,12 @@ pages['sys-log'] = function(){return '<section class="card"><div class="card-hea
 // ============================================================
 // 系统中心 - 系统配置
 // ============================================================
-pages['sys-config'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">系统配置</div></div><div class="config-card" style="margin-bottom:16px"><div class="cc-title">业务参数</div>'+dt(['配置编码','名称','当前值','类型','修改人','修改时间'],[{c:['MAX_RENT_PERIOD','最大租期(天)','730','数值','马先生','2026-06-01'],o:'<span class="link">编辑</span>'},{c:['MIN_RENT_PERIOD','最小租期(天)','30','数值','马先生','2026-06-01'],o:'<span class="link">编辑</span>'}])+'</div><div class="config-card" style="margin-bottom:16px"><div class="cc-title">风控参数</div>'+dt(['配置编码','名称','当前值','类型','修改人','修改时间'],[{c:['RISK_TIMEOUT','风控调用超时(ms)','3000','数值','王风控','2026-06-15'],o:'<span class="link">编辑</span>'},{c:['RISK_BREAKER_THRESHOLD','熔断失败率阈值(%)','10','数值','王风控','2026-06-15'],o:'<span class="link">编辑</span>'}])+'</div><div class="config-card" style="margin-bottom:16px"><div class="cc-title">催收参数</div>'+dt(['配置编码','名称','当前值','类型','修改人','修改时间'],[{c:['COLLECTION_M0_DAYS','M0账龄天数','1-6','区间','王风控','2026-05-20'],o:'<span class="link">编辑</span>'},{c:['COLLECTION_JUDICIAL_DAYS','自动转司法天数','90','数值','马先生','2026-05-20'],o:'<span class="link">编辑</span>'}])+'</div><div class="config-card" style="margin-bottom:16px"><div class="cc-title">支付参数</div>'+dt(['配置编码','名称','当前值','类型','修改人','修改时间'],[{c:['DEDUCT_RETRY_TIMES','代扣重试次数','3','数值','李财务','2026-06-10'],o:'<span class="link">编辑</span>'},{c:['REFUND_TIMEOUT','退款超时时间(h)','48','数值','李财务','2026-06-10'],o:'<span class="link">编辑</span>'}])+'</div><div class="config-card"><div class="cc-title">消息参数</div>'+dt(['配置编码','名称','当前值','类型','修改人','修改时间'],[{c:['SMS_BALANCE_ALERT','短信余额预警阈值(¥)','10000','数值','张运营','2026-07-10'],o:'<span class="link">编辑</span>'},{c:['MSG_DEGRADE_SWITCH','短信降级开关','开启','布尔','张运营','2026-07-10'],o:'<span class="link">编辑</span>'},{c:['MSG_FREQ_LIMIT','消息频次限制(条/用户/天)','10','数值','张运营','2026-07-10'],o:'<span class="link">编辑</span>'}])+'</div></section>';};
+pages['sys-config'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">系统配置</div></div><div class="config-card" style="margin-bottom:16px"><div class="cc-title">业务参数</div>'+dt(['配置编码','名称','当前值','类型','修改人','修改时间'],[{c:['MAX_RENT_PERIOD','最大租期(天)','730','数值','马先生','2026-06-01'],o:'<span class="link">编辑</span>'},{c:['MIN_RENT_PERIOD','最小租期(天)','30','数值','马先生','2026-06-01'],o:'<span class="link">编辑</span>'}])+'</div><div class="config-card" style="margin-bottom:16px"><div class="cc-title">风控参数</div>'+dt(['配置编码','名称','当前值','类型','修改人','修改时间'],[{c:['RISK_TIMEOUT','风控调用超时(ms)','3000','数值','王风控','2026-06-15'],o:'<span class="link">编辑</span>'},{c:['RISK_BREAKER_THRESHOLD','熔断失败率阈值(%)','10','数值','王风控','2026-06-15'],o:'<span class="link">编辑</span>'}])+'</div><div class="config-card" style="margin-bottom:16px"><div class="cc-title">催收参数</div>'+dt(['配置编码','名称','当前值','类型','修改人','修改时间'],[{c:['PRE_REMIND_DAYS','预提醒提前天数','7(T-7)','数值','王风控','2026-05-20'],o:'<span class="link">编辑</span>'},{c:['COLLECTION_JUDICIAL_DAYS','自动转司法天数','90','数值','马先生','2026-05-20'],o:'<span class="link">编辑</span>'}])+'</div><div class="config-card" style="margin-bottom:16px"><div class="cc-title">支付参数</div>'+dt(['配置编码','名称','当前值','类型','修改人','修改时间'],[{c:['DEDUCT_RETRY_TIMES','代扣重试次数','3','数值','李财务','2026-06-10'],o:'<span class="link">编辑</span>'},{c:['REFUND_TIMEOUT','退款超时时间(h)','48','数值','李财务','2026-06-10'],o:'<span class="link">编辑</span>'}])+'</div><div class="config-card"><div class="cc-title">消息参数</div>'+dt(['配置编码','名称','当前值','类型','修改人','修改时间'],[{c:['SMS_BALANCE_ALERT','短信余额预警阈值(¥)','10000','数值','张运营','2026-07-10'],o:'<span class="link">编辑</span>'},{c:['MSG_DEGRADE_SWITCH','短信降级开关','开启','布尔','张运营','2026-07-10'],o:'<span class="link">编辑</span>'},{c:['MSG_FREQ_LIMIT','消息频次限制(条/用户/天)','10','数值','张运营','2026-07-10'],o:'<span class="link">编辑</span>'}])+'</div></section>';};
 
 // ============================================================
 // 系统中心 - 数据字典
 // ============================================================
-pages['sys-dict'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">数据字典</div></div>'+ab([{t:'新建字典项',c:'primary'}])+'<div class="config-card" style="margin-bottom:16px"><div class="cc-title">订单状态</div>'+dt(['字典编码','字典值','排序','状态','操作'],[{c:['ORDER_PENDING_PAY','待支付','1',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['ORDER_PENDING_SHIP','待发货','2',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['ORDER_SHIPPED','已发货','3',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['ORDER_RENTING','租赁中','4',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['ORDER_COMPLETED','已完成','5',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['ORDER_CANCELLED','已取消','6',tg('green','启用')],o:'<span class="link">编辑</span>'}])+'</div><div class="config-card" style="margin-bottom:16px"><div class="cc-title">支付状态</div>'+dt(['字典编码','字典值','排序','状态','操作'],[{c:['PAY_PENDING','待支付','1',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['PAY_SUCCESS','已支付','2',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['PAY_FAILED','支付失败','3',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['PAY_REFUNDED','已退款','4',tg('green','启用')],o:'<span class="link">编辑</span>'}])+'</div><div class="config-card" style="margin-bottom:16px"><div class="cc-title">设备状态</div>'+dt(['字典编码','字典值','排序','状态','操作'],[{c:['DEV_IN_STOCK','在库','1',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['DEV_RENTED','在租','2',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['DEV_IN_TRANSIT','物流中','3',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['DEV_PENDING_DISPOSAL','待处置','4',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['DEV_DISPOSED','已处置','5',tg('green','启用')],o:'<span class="link">编辑</span>'}])+'</div><div class="config-card" style="margin-bottom:16px"><div class="cc-title">工单状态</div>'+dt(['字典编码','字典值','排序','状态','操作'],[{c:['TICKET_PENDING','待分配','1',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['TICKET_PROCESSING','处理中','2',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['TICKET_CLOSED','已关闭','3',tg('green','启用')],o:'<span class="link">编辑</span>'}])+'</div><div class="config-card" style="margin-bottom:16px"><div class="cc-title">审批状态</div>'+dt(['字典编码','字典值','排序','状态','操作'],[{c:['APPROVAL_PENDING','待审批','1',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['APPROVAL_APPROVED','审批通过','2',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['APPROVAL_REJECTED','审批驳回','3',tg('green','启用')],o:'<span class="link">编辑</span>'}])+'</div><div class="config-card"><div class="cc-title">催收阶段</div>'+dt(['字典编码','字典值','排序','状态','操作'],[{c:['COLLECTION_M0','M0(1-6天)','1',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['COLLECTION_M1','M1(7-14天)','2',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['COLLECTION_M2','M2+(15-29天)','3',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['COLLECTION_M3','M3+(30+天)','4',tg('green','启用')],o:'<span class="link">编辑</span>'}])+'</div></section>';};
+pages['sys-dict'] = function(){return '<section class="card"><div class="card-header"><div class="card-title">数据字典</div></div>'+ab([{t:'新建字典项',c:'primary'}])+'<div class="config-card" style="margin-bottom:16px"><div class="cc-title">订单状态</div>'+dt(['字典编码','字典值','排序','状态','操作'],[{c:['ORDER_PENDING_PAY','待支付','1',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['ORDER_PENDING_SHIP','待发货','2',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['ORDER_SHIPPED','已发货','3',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['ORDER_RENTING','租赁中','4',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['ORDER_COMPLETED','已完成','5',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['ORDER_CANCELLED','已取消','6',tg('green','启用')],o:'<span class="link">编辑</span>'}])+'</div><div class="config-card" style="margin-bottom:16px"><div class="cc-title">支付状态</div>'+dt(['字典编码','字典值','排序','状态','操作'],[{c:['PAY_PENDING','待支付','1',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['PAY_SUCCESS','已支付','2',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['PAY_FAILED','支付失败','3',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['PAY_REFUNDED','已退款','4',tg('green','启用')],o:'<span class="link">编辑</span>'}])+'</div><div class="config-card" style="margin-bottom:16px"><div class="cc-title">设备状态</div>'+dt(['字典编码','字典值','排序','状态','操作'],[{c:['DEV_IN_STOCK','在库','1',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['DEV_RENTED','在租','2',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['DEV_IN_TRANSIT','物流中','3',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['DEV_PENDING_DISPOSAL','待处置','4',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['DEV_DISPOSED','已处置','5',tg('green','启用')],o:'<span class="link">编辑</span>'}])+'</div><div class="config-card" style="margin-bottom:16px"><div class="cc-title">工单状态</div>'+dt(['字典编码','字典值','排序','状态','操作'],[{c:['TICKET_PENDING','待分配','1',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['TICKET_PROCESSING','处理中','2',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['TICKET_CLOSED','已关闭','3',tg('green','启用')],o:'<span class="link">编辑</span>'}])+'</div><div class="config-card" style="margin-bottom:16px"><div class="cc-title">审批状态</div>'+dt(['字典编码','字典值','排序','状态','操作'],[{c:['APPROVAL_PENDING','待审批','1',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['APPROVAL_APPROVED','审批通过','2',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['APPROVAL_REJECTED','审批驳回','3',tg('green','启用')],o:'<span class="link">编辑</span>'}])+'</div><div class="config-card"><div class="cc-title">催收阶段</div>'+dt(['字典编码','字典值','排序','状态','操作'],[{c:['COLLECTION_M1_1','M1-1(1-3天)','1',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['COLLECTION_M1_2','M1-2(4-7天)','2',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['COLLECTION_M1_3','M1-3(8-15天)','3',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['COLLECTION_M1_4','M1-4(16-30天)','4',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['COLLECTION_M2','M2(31-60天)','5',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['COLLECTION_M3','M3(61-90天)','6',tg('green','启用')],o:'<span class="link">编辑</span>'},{c:['COLLECTION_M4','M4+(90+天)','7',tg('green','启用')],o:'<span class="link">编辑</span>'}])+'</div></section>';};
 
 // ============================================================
 // 系统中心 - 定时任务
